@@ -1,6 +1,6 @@
-# store-app
+# feahterjs-nuxtjs
 
-> Store App
+> Feathers JS + Nuxt JS
 
 ## About
 
