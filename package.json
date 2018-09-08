@@ -1,6 +1,6 @@
 {
-  "name": "store-app",
-  "description": "Store App",
+  "name": "FeathersJS-NuxtJS-App",
+  "description": "A boilerplate using FeathersJS & MongoDB/Mongoose for backend, and NuxtJS for frontend.",
   "version": "0.0.0",
   "homepage": "",
   "main": "src",
