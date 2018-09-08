@@ -8,7 +8,7 @@ FeathersJS: https://feathersjs.com/
   
 > Backend: [FeathersJS](https://feathersjs.com/)  
 > Frontend: [NuxtJS](https://nuxtjs.org/)  
-> Database: [MongoDB (using Mongoose)](https://mongoosejs.com/)
+> Database: [MongoDB](https://www.mongodb.com/) (using [Mongoose](https://mongoosejs.com/))
 
 # Updates
 
