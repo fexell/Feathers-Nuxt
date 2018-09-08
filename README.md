@@ -7,7 +7,7 @@ NuxtJS: https://nuxtjs.org/
 FeathersJS: https://feathersjs.com/  
   
 > Backend: [FeathersJS](https://feathersjs.com/)  
-> Frontend: [NuxtJS](https://nuxtjs.org/)
+> Frontend: [NuxtJS](https://nuxtjs.org/)  
 > Database: [MongoDB (using Mongoose)](https://mongoosejs.com/)
 
 ## About
