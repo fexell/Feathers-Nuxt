@@ -35,7 +35,12 @@ module.exports = {
     
     gzip: {
       
-      threshold: 0
+      threshold: 9
+      
+    },
+    http2: {
+      
+      push: true
       
     },
     bundleRenderer: {
