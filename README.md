@@ -12,8 +12,8 @@ FeathersJS: https://feathersjs.com/
 
 # Updates
 
-> ### 1.1
-> Added a "layouts" folder, which overrides Nuxt's layouts folder, allowing one to add components easier, such as a header or menu component, as example.  
+> #### 1.1
+> - Added a "layouts" folder, which overrides Nuxt's layouts folder, allowing one to add components easier, such as a header or menu component, as example.  
 > Changed the initial .gzip-compression to **9**, and enabled [http/2](https://developers.google.com/web/fundamentals/performance/http2/).
 
 ## About
