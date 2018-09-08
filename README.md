@@ -6,9 +6,9 @@ This project uses the lastest @feathersjs (@feathersjs/cli) and latest NuxtJS. I
 NuxtJS: https://nuxtjs.org/  
 FeathersJS: https://feathersjs.com/  
   
-Backend: FeathersJS  
-Frontend: NuxtJS  
-Database: MongoDB (using Mongoose)
+> Backend: FeathersJS  
+> Frontend: NuxtJS  
+> Database: MongoDB (using Mongoose)
 
 ## About
 
