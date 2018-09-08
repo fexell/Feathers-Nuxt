@@ -1,6 +1,10 @@
-# feahterjs-nuxtjs
+# Feathers JS + Nuxt JS
 
 > Feathers JS + Nuxt JS
+
+This project uses the lastest @feathersjs (@feathersjs/cli) and latest NuxtJS. It's also setup using .gzip-compression (0) and SCSS. Change the gzip threshold in "nuxt.config.js" to desired compression ( https://www.npmjs.com/package/compression ). This lightly based off of the FeathersJS tutorial, found here https://blog.feathersjs.com/ssr-vuejs-app-with-feathers-and-nuxt-bb7dfd3e6397 , but updated to use the latest versions of Feathers and Nuxt.
+NuxtJS: https://nuxtjs.org/
+FeathersJS: https://feathersjs.com/
 
 ## About
 
@@ -14,7 +18,7 @@ Getting up and running is as easy as 1, 2, 3.
 2. Install your dependencies
 
     ```
-    cd path/to/store-app; npm install
+    cd path/to/feahtersjs-nuxtjs-app; npm install
     ```
 
 3. Start your app
