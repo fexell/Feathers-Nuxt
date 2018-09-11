@@ -10,6 +10,15 @@ FeathersJS: https://feathersjs.com/
 > Frontend: [NuxtJS](https://nuxtjs.org/)  
 > Database: [MongoDB](https://www.mongodb.com/) (using [Mongoose](https://mongoosejs.com/))
 
+# Installation
+Clone this git-project either by using Github's client or by running  
+> git clone https://github.com/fexell/FeathersJS-NuxtJS.git  
+  
+Navigate to the folder in your console and run
+> npm i
+or
+> npm --install
+
 # Updates
 
 > - #### 1
