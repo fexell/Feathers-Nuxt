@@ -14,10 +14,9 @@ FeathersJS: https://feathersjs.com/
 Clone this git-project either by using Github's client or by running  
 > git clone https://github.com/fexell/FeathersJS-NuxtJS.git  
   
-Navigate to the folder in your console and run
-> npm i
-or
-> npm --install
+Navigate to the folder in your console and run  
+`npm i`  
+`npm --install`
 
 # Updates
 
