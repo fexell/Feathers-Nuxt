@@ -16,6 +16,7 @@ Clone this git-project either by using Github's client or by running
   
 Navigate to the folder in your console and run  
 `npm i`  
+or  
 `npm --install`
 
 # Updates
