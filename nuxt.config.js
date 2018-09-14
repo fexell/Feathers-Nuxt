@@ -3,56 +3,38 @@ const path = require('path')
 
 module.exports = {
   
-  head: {
-    
-    meta: [
-      {
-        charset: 'utf-8'
-      },
-      {
-        name: 'viewport', content: 'width=device-width, initial-scale=1'
-      },
-      {
-        hid: 'description', name: 'description', content: 'Meta description'
+  build: {
+    extend: ( config, { isDev, isClient } ) => {
+      config.node = {
+        fs: "empty"
       }
-    ]
-    
-  },
-  css: [
-    
-    'css/main.scss'
-    
-  ],
-  loading: {
-    
-    color: '#92D3CE',
-    height: '2px'
-    
-  },
-  srcDir: 'client/',
-  rootDir: path.resolve(__dirname),
-  render: {
-    
-    gzip: {
-      
-      threshold: 9
-      
     },
-    http2: {
-      
-      push: true
-      
-    },
-    bundleRenderer: {
-      
-      shouldPreload: (file, type) => {
-        
-        return ['script', 'style', 'font'].includes(type)
-        
-      }
-      
+    styleResources: {
+      sass: './assets/sass/main.sass'
     }
-    
-  }
+  },
+  dev: ( process.env.NODE_ENV !== 'production' ),
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3030'
+  },
+  head: {
+    title: 'App',
+    titleTemplate: '%s - Nuxt.js',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial=1' },
+      { hid: 'description', name: 'description', content: 'Meta description' }
+    ]
+  },
+  loading: {
+    color: '#141414',
+    height: '2px'
+  },
+  modules: [
+    ['nuxt-sass-resources-loader', [
+      './assets/sass/main.sass'
+    ]]
+  ],
+  srcDir: 'client/'
   
 }

@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.9",
+    "@feathersjs/authentication-client": "^1.0.4",
     "@feathersjs/authentication-jwt": "^2.0.3",
     "@feathersjs/authentication-local": "^1.2.3",
     "@feathersjs/configuration": "^2.0.2",
@@ -36,15 +37,20 @@
     "@feathersjs/express": "^1.2.5",
     "@feathersjs/feathers": "^3.2.1",
     "@feathersjs/socketio": "^3.2.4",
+    "@feathersjs/socketio-client": "^1.1.2",
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "feathers-mongoose": "^6.1.4",
+    "fs": "0.0.1-security",
     "helmet": "^3.13.0",
     "mongoose": "^5.2.13",
     "node-sass": "^4.9.3",
     "nuxt": "^1.4.2",
+    "nuxt-sass-resources-loader": "^2.0.5",
     "sass-loader": "^7.1.0",
     "serve-favicon": "^2.5.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
     "winston": "^3.1.0"
   },
   "devDependencies": {
