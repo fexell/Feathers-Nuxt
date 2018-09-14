@@ -38,6 +38,7 @@
     "@feathersjs/feathers": "^3.2.1",
     "@feathersjs/socketio": "^3.2.4",
     "@feathersjs/socketio-client": "^1.1.2",
+    "bulma": "^0.7.1",
     "compression": "^1.7.3",
     "cors": "^2.8.4",
     "feathers-mongoose": "^6.1.4",
@@ -51,6 +52,7 @@
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
+    "vue-style-loader": "^4.1.2",
     "winston": "^3.1.0"
   },
   "devDependencies": {

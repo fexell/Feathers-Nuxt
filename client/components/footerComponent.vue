@@ -1,4 +1,5 @@
 <template>
+	<!-- This is the "Footer Component". -->
 	<footer id="Footer">
 
 	</footer>

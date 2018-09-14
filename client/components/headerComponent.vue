@@ -1,4 +1,5 @@
 <template>
+	<!-- This is the "Header Component". -->
 	<header id="Header">
 		<div class="Menu-container">
 			<ul class="Menu">
@@ -12,12 +13,12 @@
 <script>
 
 	export default {
-
+		// The name of the component
 		name: 'HeaderComponent',
 		data: () => {
 
 			return {
-
+				// An easier way to add menu items
 				items: ['Home', 'About']
 
 			}

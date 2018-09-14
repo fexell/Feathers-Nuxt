@@ -1,32 +1,32 @@
 <template>
   
-  <div id="App">
+    <div id="App">
 
-    <header-component/>
+        <header-component/>
 
-	<section id="Content">
-		<nuxt/>
-	</section>
+        <section id="Content">
+            <nuxt/>
+        </section>
 
-    <footer-component/>
-    
-  </div>
+        <footer-component/>
+
+    </div>
   
 </template>
 <script>
 
-  import HeaderComponent from '@/components/headerComponent'
-  import FooterComponent from '@/components/footerComponent'
+    import HeaderComponent from '@/components/headerComponent'
+    import FooterComponent from '@/components/footerComponent'
 
-  export default {
-    
-    components: {
+    export default {
 
-      HeaderComponent,
-      FooterComponent
+        components: {
+
+            HeaderComponent,
+            FooterComponent
+
+        }
 
     }
-    
-  }
 
 </script>
