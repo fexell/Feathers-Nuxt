@@ -3,6 +3,7 @@
 // You can read more about the "nuxt.config.js" file in Nuxt's API which
 // can be found here: https://nuxtjs.org/api .
 //
+
 module.exports = {
   
   // Nuxt Build - https://nuxtjs.org/api/configuration-build
@@ -42,6 +43,7 @@ module.exports = {
 
   // Nuxt Plugins (can be custom plugins as well) - https://nuxtjs.org/api/configuration-plugins
   plugins: [
+    '~/plugins/authenticate.js',
     '~/plugins/login.js'
   ],
 

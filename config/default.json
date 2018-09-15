@@ -18,7 +18,7 @@
       "header": {
         "typ": "access"
       },
-      "audience": "https://yourdomain.com",
+      "audience": "http://localhost:3030",
       "subject": "anonymous",
       "issuer": "feathers",
       "algorithm": "HS256",

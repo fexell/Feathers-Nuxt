@@ -15,6 +15,7 @@
 </template>
 <script>
 
+    import Vue from 'vue'
     import HeaderComponent from '@/components/headerComponent'
     import FooterComponent from '@/components/footerComponent'
 
@@ -24,6 +25,16 @@
 
             HeaderComponent,
             FooterComponent
+
+        },
+
+        beforeMount: async () => {
+
+            if( typeof window.localStorage.getItem('feathers-jwt') !== 'undefined' ) {
+
+                await Vue.authClient()
+
+            }
 
         }
 

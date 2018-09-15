@@ -1,6 +1,10 @@
 <template>
 	<div>
-		<button>V-login-user test</button>
+		<form v-login:test>
+			<input v-model="email" type="email" name="email" placeholder="Email" />
+			<input v-model="password" type="password" name="password" placeholder="Password" />
+			<button type="submit" name="submit">Login</button>
+		</form>
 	</div>
 </template>
 <script>
@@ -15,7 +19,8 @@
 
 			return {
 
-
+				email: null,
+				password: null
 
 			}
 
