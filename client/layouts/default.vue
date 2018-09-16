@@ -1,16 +1,18 @@
 <template>
   
-    <div id="App">
+    <main id="App">
 
         <header-component/>
 
-        <section id="Content">
-            <nuxt/>
+        <section id="Content" class="comp--wrapper">
+            <keep-alive>
+                <nuxt/>
+            </keep-alive>
         </section>
 
         <footer-component/>
 
-    </div>
+    </main>
   
 </template>
 <script>
@@ -25,16 +27,6 @@
 
             HeaderComponent,
             FooterComponent
-
-        },
-
-        beforeMount: async () => {
-
-            if( typeof window.localStorage.getItem('feathers-jwt') !== 'undefined' ) {
-
-                await Vue.authClient()
-
-            }
 
         }
 

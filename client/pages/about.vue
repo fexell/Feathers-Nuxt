@@ -3,3 +3,14 @@
 		
 	</div>
 </template>
+<script>
+	
+	export default {
+
+		head: {
+			title: 'About us'
+		}
+
+	}
+
+</script>

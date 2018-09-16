@@ -1,7 +1,7 @@
 <template>
 	<!-- This is the "Header Component". -->
-	<header id="Header">
-		<div class="Menu-container">
+	<header id="Header" class="comp--wrapper">
+		<div class="container">
 			<ul class="Menu">
 				<li class="Item">
 					<nuxt-link to="/">Home</nuxt-link>

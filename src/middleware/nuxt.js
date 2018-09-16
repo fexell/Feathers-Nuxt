@@ -4,6 +4,9 @@ const { Nuxt, Builder } = require('nuxt')
 const isProd = (process.env.NODE_ENV === 'production')
 
 const config = require('../../nuxt.config')
+
+// Change "!isProd" to "isProd" for production ready, which disables
+// errors, Vue Devtools, etc.
 config.dev = !isProd
 const nuxt = new Nuxt(config)
 

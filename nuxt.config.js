@@ -4,8 +4,10 @@
 // can be found here: https://nuxtjs.org/api .
 //
 
+const webpack = require('webpack')
+
 module.exports = {
-  
+
   // Nuxt Build - https://nuxtjs.org/api/configuration-build
   build: {
     
@@ -35,6 +37,8 @@ module.exports = {
     ]
   },
 
+  loader: 'sass-loader',
+
   // Nuxt Loading - https://nuxtjs.org/api/configuration-loading
   loading: {
     color: '#141414',
@@ -43,8 +47,8 @@ module.exports = {
 
   // Nuxt Plugins (can be custom plugins as well) - https://nuxtjs.org/api/configuration-plugins
   plugins: [
-    '~/plugins/authenticate.js',
-    '~/plugins/login.js'
+    '~/plugins/connection.js',
+    '~/plugins/login.js',
   ],
 
   // Nuxt Render - https://nuxtjs.org/api/configuration-render

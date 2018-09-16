@@ -1,13 +1,13 @@
 import Vue from 'vue'
 
-const feathers 		= require('@feathersjs/feathers')
-const rest 			= require('@feathersjs/rest-client')
-const auth 			= require('@feathersjs/authentication-client')
+// const feathers 		= require('@feathersjs/feathers')
+// const rest 			= require('@feathersjs/rest-client')
+// const auth 			= require('@feathersjs/authentication-client')
 
-const superagent 	= require('superagent')
-const localStorage 	= require('localstorage-memory')
+// const superagent 	= require('superagent')
+// const localStorage 	= require('localstorage-memory')
 
-const client 		= feathers()
+// const app 		= feathers()
 
 export const Login = ( el ) => {
 
@@ -19,10 +19,7 @@ export const Login = ( el ) => {
 
 				event.preventDefault()
 
-				client.configure(rest('http://localhost:3030').superagent(superagent))
-				.configure(auth({ storage: window.localStorage }))
-
-				client.authenticate({
+				Vue.app.authenticate({
 
 					strategy: 'local',
 					email: vnode.context.$data.email,
@@ -31,15 +28,15 @@ export const Login = ( el ) => {
 				})
 				.then(response => {
 					console.log('Authenticated!', response)
-					return client.passport.verifyJWT(response.accessToken)
+					return Vue.app.passport.verifyJWT(response.accessToken)
 				})
 				.then(payload => {
 					console.log('JWT Payload', payload)
-					return client.service('users').get(payload.userId)
+					return Vue.app.service('users').get(payload.userId)
 				})
 				.then(user => {
-					client.set('user', user)
-					console.log('User', client.get('user'))
+					Vue.app.set('user', user)
+					console.log('User', Vue.app.get('user'))
 				})
 				.catch((error) => {
 					console.error('Error authenticating!', error)
@@ -49,14 +46,6 @@ export const Login = ( el ) => {
 
 		}
 
-	})
-
-	Vue.mixin({
-		data: () => {
-			return {
-				service: null
-			}
-		}
 	})
 
 }

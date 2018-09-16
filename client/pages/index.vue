@@ -1,13 +1,15 @@
 <template>
-	<div>
-		<form v-login:test>
-			<input v-model="email" type="email" name="email" placeholder="Email" />
-			<input v-model="password" type="password" name="password" placeholder="Password" />
-			<button type="submit" name="submit">Login</button>
-		</form>
+	<div class="container">
+		
+		<keep-alive>
+			<component :is="currentView"></component>
+		</keep-alive>
+
 	</div>
 </template>
 <script>
+
+	import Login from '@/components/forms/login.vue'
 	
 	export default {
 		// This sets the title of the page. To change its template, please see "nuxt.config.js".
@@ -19,10 +21,15 @@
 
 			return {
 
-				email: null,
-				password: null
+				currentView: `Login`
 
 			}
+
+		},
+
+		components: {
+
+			Login
 
 		}
 
