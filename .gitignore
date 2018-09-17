@@ -1,3 +1,5 @@
+.nuxt
+
 # Logs
 logs
 *.log
@@ -23,8 +25,6 @@ build/Release
 # Commenting this out is preferred by some people, see
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
-/.nuxt
-/nuxt
 
 # Users Environment Variables
 .lock-wscript
@@ -112,3 +112,75 @@ $RECYCLE.BIN/
 # Others
 lib/
 data/
+.nuxt/App.js
+.nuxt/client.js
+.nuxt/components/no-ssr.js
+.nuxt/components/nuxt-child.js
+.nuxt/components/nuxt-error.vue
+.nuxt/components/nuxt-link.js
+.nuxt/components/nuxt-loading.vue
+.nuxt/components/nuxt.js
+.nuxt/empty.js
+.nuxt/index.js
+.nuxt/layouts/default.vue
+.nuxt/loading.html
+.nuxt/middleware.js
+.nuxt/router.js
+.nuxt/server.js
+.nuxt/utils.js
+.nuxt/views/app.template.html
+.nuxt/views/error.html
+.nuxt/App.js
+.nuxt/client.js
+.nuxt/components/no-ssr.js
+.nuxt/components/nuxt-child.js
+.nuxt/components/nuxt-error.vue
+.nuxt/components/nuxt-link.js
+.nuxt/components/nuxt-loading.vue
+.nuxt/components/nuxt.js
+.nuxt/empty.js
+.nuxt/index.js
+.nuxt/layouts/default.vue
+.nuxt/loading.html
+.nuxt/middleware.js
+.nuxt/router.js
+.nuxt/server.js
+.nuxt/utils.js
+.nuxt/views/app.template.html
+.nuxt/views/error.html
+.nuxt/App.js
+.nuxt/client.js
+.nuxt/components/no-ssr.js
+.nuxt/components/nuxt-child.js
+.nuxt/components/nuxt-error.vue
+.nuxt/components/nuxt-link.js
+.nuxt/components/nuxt-loading.vue
+.nuxt/components/nuxt.js
+.nuxt/empty.js
+.nuxt/index.js
+.nuxt/layouts/default.vue
+.nuxt/loading.html
+.nuxt/middleware.js
+.nuxt/router.js
+.nuxt/server.js
+.nuxt/utils.js
+.nuxt/views/app.template.html
+.nuxt/views/error.html
+.nuxt/App.js
+.nuxt/client.js
+.nuxt/components/no-ssr.js
+.nuxt/components/nuxt-child.js
+.nuxt/components/nuxt-error.vue
+.nuxt/components/nuxt-link.js
+.nuxt/components/nuxt-loading.vue
+.nuxt/components/nuxt.js
+.nuxt/empty.js
+.nuxt/index.js
+.nuxt/layouts/default.vue
+.nuxt/loading.html
+.nuxt/middleware.js
+.nuxt/router.js
+.nuxt/server.js
+.nuxt/utils.js
+.nuxt/views/app.template.html
+.nuxt/views/error.html
