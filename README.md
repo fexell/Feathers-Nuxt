@@ -1,6 +1,6 @@
-# Feathers JS + Nuxt JS
+# Feathers JS + Nuxt JS - Boilerplate
 
-> Feathers JS + Nuxt JS
+> Feathers JS + Nuxt JS - Boilerplate
   
 This project uses the lastest @feathersjs (@feathersjs/cli) and latest NuxtJS. It's also setup using .gzip-compression (9) and SCSS (which can be changed to .sass). Change the gzip threshold in "nuxt.config.js" to desired compression ( https://www.npmjs.com/package/compression ). This is lightly based off of the FeathersJS tutorial, found here https://blog.feathersjs.com/ssr-vuejs-app-with-feathers-and-nuxt-bb7dfd3e6397 , but updated to use the latest versions of Feathers and Nuxt.  
 NuxtJS: https://nuxtjs.org/  
@@ -12,21 +12,12 @@ FeathersJS: https://feathersjs.com/
 
 # Installation
 Clone this git-project either by using Github's client or by running  
-> git clone https://github.com/fexell/FeathersJS-NuxtJS.git  
+> git clone https://github.com/fexell/Feathers-Nuxt-Boilerplate.git  
   
 Navigate to the folder in your console and run  
 `npm i`  
 or  
 `npm --install`
-
-# Updates
-
-> - #### 1
->   - Initial commit
-
-> - #### 1.1
->   - Added a "layouts" folder, which overrides Nuxt's layouts folder, allowing one to add components easier, such as a header or menu component, as example.  
->   - Changed the initial .gzip-compression to **9**, and enabled [http/2](https://developers.google.com/web/fundamentals/performance/http2/).
 
 ## About
 
