@@ -53,6 +53,7 @@ module.exports = {
   plugins: [
     '~/plugins/connection.js',
     '~/plugins/login.js',
+    '~/plugins/persist.js',
   ],
 
   // Nuxt Render - https://nuxtjs.org/api/configuration-render

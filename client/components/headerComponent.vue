@@ -18,7 +18,7 @@
 	export default {
 		// The name of the component
 		name: 'HeaderComponent',
-		data: () => {
+		data: function() {
 
 			return {
 				// An easier way to add menu items

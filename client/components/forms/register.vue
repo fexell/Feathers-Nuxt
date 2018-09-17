@@ -1,6 +1,6 @@
 <template>
 	<div id="Form">
-		<form id="Login" class="form" v-login>
+		<form id="Register" class="form">
 			<div class="form-item">
 				<input
 				v-model="email"
@@ -16,11 +16,16 @@
 				placeholder="Password" />
 			</div>
 			<div class="form-item">
+				<input
+				v-model="confirmPassword"
+				type="password"
+				name="confirm-password"
+				placeholder="Confirm password" />
+			</div>
+			<div class="form-item">
 				<button
 				type="submit"
-				name="btn-login">
-					Login
-				</button>
+				name="btn-register">Register</button>
 			</div>
 		</form>
 	</div>
@@ -31,14 +36,14 @@
 
 	export default {
 
-		name: 'Login',
-
+		name: 'Register',
 		data: function() {
 
 			return {
 
 				email: '',
-				password: ''
+				password: '',
+				confirmPassword: ''
 
 			}
 

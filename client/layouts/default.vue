@@ -30,7 +30,7 @@
 
         },
 
-        mounted: () => {
+        mounted: function() {
 
             window.addEventListener('beforeunload', () => {
 
