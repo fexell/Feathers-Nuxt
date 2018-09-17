@@ -9,44 +9,72 @@ import Vue from 'vue'
 
 // const app 		= feathers()
 
-export const Login = ( el ) => {
+const Login = {
 
-	Vue.directive('login', {
+	install( Vue, options ) {
 
-		bind: ( el, binding, vnode ) => {
+		Vue.loginUser = ( el, binding, vnode ) => {
 
-			el.addEventListener('submit', (event) => {
+			Vue.app.authenticate({
 
-				event.preventDefault()
+				strategy: 'local',
+				email: vnode.context.$data.email,
+				password: vnode.context.$data.password
 
-				Vue.app.authenticate({
+			})
+			.then((response) => {
 
-					strategy: 'local',
-					email: vnode.context.$data.email,
-					password: vnode.context.$data.password
+				Vue.logger.info(response.accessToken)
+				return Vue.app.passport.verifyJWT(response.accessToken)
 
-				})
-				.then(response => {
-					console.log('Authenticated!', response)
-					return Vue.app.passport.verifyJWT(response.accessToken)
-				})
-				.then(payload => {
-					console.log('JWT Payload', payload)
-					return Vue.app.service('users').get(payload.userId)
-				})
-				.then(user => {
-					Vue.app.set('user', user)
-					console.log('User', Vue.app.get('user'))
-				})
-				.catch((error) => {
-					console.error('Error authenticating!', error)
-				})
+			})
+			.then((payload) => {
+
+				Vue.logger.info('JWT Payload %s', payload)
+				return Vue.app.service('users').get(payload.userId)
+
+			})
+			.then((user) => {
+
+				Vue.app.set('user', user)
+				Vue.logger.info('User %s', Vue.app.get('user'))
+
+			})
+			.catch((error) => {
+
+				Vue.logger.error(error)
 
 			})
 
 		}
 
-	})
+		Vue.directive('login', {
+
+			bind: ( el, binding, vnode ) => {
+
+				el.addEventListener('submit', (event) => {
+
+					event.preventDefault()
+
+					Vue.loginUser( el, binding, vnode )
+
+				})
+
+			}
+
+		})
+
+		Vue.mixin({
+
+			directives: {
+
+				Login
+
+			}
+
+		})
+
+	}
 
 }
 

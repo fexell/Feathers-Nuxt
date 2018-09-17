@@ -28,6 +28,16 @@
             HeaderComponent,
             FooterComponent
 
+        },
+
+        mounted: () => {
+
+            window.addEventListener('beforeunload', () => {
+
+                Vue.disconnect()
+
+            })
+
         }
 
     }

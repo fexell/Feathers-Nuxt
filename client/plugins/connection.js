@@ -1,5 +1,8 @@
 import Vue from 'vue'
 
+var window = window || global
+
+export const app = Vue.app
 const _Connection = {
 
 	install( Vue, options ) {
@@ -23,6 +26,8 @@ const _Connection = {
 			Vue.io = require('socket.io-client')
 			Vue.auth = require('@feathersjs/authentication-client')
 
+			Vue.logger = require('../../src/logger.js')
+
 			Vue.socket = Vue.io('http://localhost:3030')
 			Vue.app = Vue.feathers()
 
@@ -32,28 +37,42 @@ const _Connection = {
 			Vue.prototype.$_feathers = Vue.feathers
 			Vue.prototype.$_socketio = Vue.socketio
 			Vue.prototype.$_io = Vue.io
+			Vue.prototype.$_auth = Vue.auth
+			Vue.prototype.$_logger = Vue.logger
 			Vue.prototype.$_socket = Vue.socket
 			Vue.prototype.$_app = Vue.app
-			Vue.prototype.$_auth = Vue.auth
 
-			console.log(Vue.app)
+			return Vue
 
-			return await Vue.app
+		}
+
+		Vue.disconnect = () => {
+
+			Vue.socket.close()
 
 		}
 
 		Vue.authenticate = async () => {
 
-			Vue.socket.emit('authenticate', {
+			if( !window.localStorage.getItem('feathers-jwt') ) return Vue.logger.error("Couldn't find localstorage data.")
+			else {
 
-				strategy: 'jwt',
-				accessToken: window.localStorage.getItem('feathers-jwt')
+				Vue.socket.emit('authenticate', {
 
-			}, (message, data) => {
+					strategy: 'jwt',
+					accessToken: window.localStorage.getItem('feathers-jwt')
 
-				console.log(data)
+				}, (message, data) => {
 
-			})
+					Vue.logger.log('info', 'Access token: %s', data.accessToken)
+
+					return Vue.app.passport.verifyJWT(data.accessToken)
+					.then(payload => Vue.logger.log('info', 'UserID: %s', payload.userId))
+					.catch(error => Vue.logger.error(error))
+
+				})
+
+			}
 
 		}
 
