@@ -19,15 +19,6 @@ Navigate to the folder in your console and run
 or  
 `npm --install`
 
-# Updates
-
-> - #### 1
->   - Initial commit
-
-> - #### 1.1
->   - Added a "layouts" folder, which overrides Nuxt's layouts folder, allowing one to add components easier, such as a header or menu component, as example.  
->   - Changed the initial .gzip-compression to **9**, and enabled [http/2](https://developers.google.com/web/fundamentals/performance/http2/).
-
 ## About
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
