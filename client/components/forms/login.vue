@@ -17,6 +17,7 @@
 			</div>
 			<div class="form-item">
 				<button
+				id="login"
 				type="submit"
 				name="btn-login">
 					Login

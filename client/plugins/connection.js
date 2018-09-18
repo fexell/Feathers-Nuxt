@@ -2,7 +2,6 @@ import Vue from 'vue'
 
 var window = window || global
 
-export const app = Vue.app
 const _Connection = {
 
 	install( Vue, options ) {
