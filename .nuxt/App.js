@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 
-import '..\\client\\css\\main.scss'
+import '..\\client\\assets\\sass\\main.sass'
 
 
 let layouts = {
@@ -13,7 +13,7 @@ let layouts = {
 let resolvedLayouts = {}
 
 export default {
-  head: {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Meta description"}],"link":[],"style":[],"script":[]},
+  head: {"title":"App","titleTemplate":"%s - Feathers + Nuxt","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial=1"},{"hid":"description","name":"description","content":"Meta description"}],"link":[],"style":[],"script":[]},
   render(h, props) {
     const loadingEl = h('nuxt-loading', { ref: 'loading' })
     const layoutEl = h(this.layout || 'nuxt')

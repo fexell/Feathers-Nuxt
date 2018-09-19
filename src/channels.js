@@ -37,6 +37,10 @@ module.exports = function(app) {
     }
   });
 
+  app.on('join', (data) => {
+    console.log(data)
+  })
+
   // eslint-disable-next-line no-unused-vars
   app.publish((data, hook) => {
     // Here you can add event publishers to channels set up in `channels.js`
@@ -51,14 +55,15 @@ module.exports = function(app) {
   // Here you can also add service specific event publishers
   // e.g. the publish the `users` service `created` event to the `admins` channel
   app.service('users').publish('created', () => app.channel('admins'));
-  app.service('users').publish('created', (message) => {
-    console.log(message)
-    return [
-      app.channel('anonymous'),
-      app.channel(app.channels).filter(connection =>
-        connection.user._id === context.params.user._id
-      )
-    ]
+
+  app.service('users').publish('created', data => {
+
+    return app.channel('anonymous').send({
+
+      data: data
+      
+    })
+
   })
 
   // With the userid and email organization from above you can easily select involved users

@@ -32,11 +32,7 @@
 
         mounted: function() {
 
-            window.addEventListener('beforeunload', () => {
-
-                Vue.disconnect()
-
-            })
+            
 
         }
 

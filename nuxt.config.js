@@ -49,12 +49,14 @@ module.exports = {
     height: '2px'
   },
 
+  modules: [
+    '~/modules/channels'
+  ],
+
   // Nuxt Plugins (can be custom plugins as well) - https://nuxtjs.org/api/configuration-plugins
   plugins: [
-    '~/plugins/connection.js',
-    '~/plugins/emits.js',
+    '~/plugins/socket.js',
     '~/plugins/login.js',
-    '~/plugins/persist.js',
   ],
 
   // Nuxt Render - https://nuxtjs.org/api/configuration-render
