@@ -58,6 +58,7 @@
     "socket.io-client": "^2.1.1",
     "superagent": "^3.8.3",
     "uws": "^10.148.1",
+    "vue-material": "^1.0.0-beta-10.2",
     "vue-socket.io": "^2.1.1-b",
     "vue-style-loader": "^4.1.2",
     "winston": "^3.1.0"

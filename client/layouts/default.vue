@@ -12,6 +12,10 @@
 
         <footer-component/>
 
+        <keep-alive>
+            <error-component/>
+        </keep-alive>
+
     </main>
   
 </template>
@@ -20,13 +24,15 @@
     import Vue from 'vue'
     import HeaderComponent from '@/components/headerComponent'
     import FooterComponent from '@/components/footerComponent'
+    import ErrorComponent from '@/components/errorComponent'
 
     export default {
 
         components: {
 
             HeaderComponent,
-            FooterComponent
+            FooterComponent,
+            ErrorComponent
 
         },
 

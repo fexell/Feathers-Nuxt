@@ -4,6 +4,9 @@
 		<button id="test" @click="emitEvent">Emit</button>
 		<div>{{ response }}</div>
 		<div>{{ errorMessage }}</div>
+		<div v-for="item in items">
+			{{ item.message }}
+		</div>
 	</div>
 </template>
 <script>
@@ -18,7 +21,8 @@
 
 				errorMessage: '',
 				message: 'Default',
-				response: 'Server has not yet responded.'
+				response: 'Server has not yet responded.',
+				items: []
 
 			}
 
@@ -32,7 +36,7 @@
 
 		mounted: function() {
 
-			Vue.app.on('error', (message) => this.errorMessage = message)
+			Vue.app.on('error', (message) => this.items.push({ message: message }))
 			// Vue.Logger('error', 'Testing')
 
 		},
