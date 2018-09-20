@@ -1,6 +1,9 @@
 <template>
 	<div>
-		<button id="test" @click="clickButton">Test</button>
+		<input type="text" v-model="message" />
+		<button id="test" @click="emitEvent">Emit</button>
+		<div>{{ response }}</div>
+		<div>{{ errorMessage }}</div>
 	</div>
 </template>
 <script>
@@ -9,48 +12,43 @@
 
 	export default {
 
-		sockets: {
+		data: function() {
 
-			connect: function() {
+			return {
 
-				console.log('socket connected')
-
-			},
-
-			customEmit: function(val){
-	      		console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
-		    }
-
-		},
-
-		created: function() {
-
-			this.$options.sockets.customEmit = (data) => {
-
-				console.log(data)
+				errorMessage: '',
+				message: 'Default',
+				response: 'Server has not yet responded.'
 
 			}
 
 		},
 
+		created: function() {
+
+			Vue.app.on('hello_world', (data) => console.log(data))
+
+		},
+
 		mounted: function() {
 
-			console.log(this.$socket)
-
-			this.$options.sockets.customEmit = (data) => console.log(data)
-			this.$socket.on('customEmit', data => console.log(data))
-			this.$socket.on('emit_method', data => console.log(data))
+			Vue.app.on('error', (message) => this.errorMessage = message)
+			// Vue.Logger('error', 'Testing')
 
 		},
 
 		methods: {
 
-			clickButton: function(val){
-		        // $socket is socket.io-client instance
-		        this.$socket.emit('customEmit', val);
-		    }
+			emitEvent: function() {
 
-		}
+				Vue.app.emit('hello_world', this.message)
+				Vue.Logger('error', 'There was an error.')
+
+			}
+
+		},
+
+
 
 	}
 

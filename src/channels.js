@@ -37,8 +37,10 @@ module.exports = function(app) {
     }
   });
 
-  app.on('join', (data) => {
+  app.on('hello_world', (data) => {
+    
     console.log(data)
+
   })
 
   // eslint-disable-next-line no-unused-vars
