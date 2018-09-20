@@ -10,7 +10,7 @@ Vue.socketio = socketio
 Vue.io = io
 
 Vue.app = feathers()
-Vue.socket = io('http://localhost:3030')
+Vue.socket = io('http://localhost:3030', { path: 'http://localhost', forceNew: false })
 
 Vue.app.configure(socketio(Vue.socket))
 

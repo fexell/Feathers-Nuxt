@@ -1,40 +1,54 @@
 <template>
 	<div>
-		<button id="test" @click="test">Test</button>
+		<button id="test" @click="clickButton">Test</button>
 	</div>
 </template>
 <script>
 	
 	import Vue from 'vue'
 
-	Vue.app.service('users').on('created', message => console.log(message))
-
 	export default {
+
+		sockets: {
+
+			connect: function() {
+
+				console.log('socket connected')
+
+			},
+
+			customEmit: function(val){
+	      		console.log('this method was fired by the socket server. eg: io.emit("customEmit", data)')
+		    }
+
+		},
 
 		created: function() {
 
-			const feathers = Vue.feathers
-			const socketio = Vue.socketio
-			const io = Vue.io
+			this.$options.sockets.customEmit = (data) => {
 
-			const app = feathers()
-			const socket = Vue.io('http://localhost:3030', { path: 'http://localhost', forceNew: false })
+				console.log(data)
 
-			app.configure(socketio(socket))
+			}
 
-			app.service('users').on('created', data => console.log(data))
+		},
 
-			console.log(socket)
+		mounted: function() {
+
+			console.log(this.$socket)
+
+			this.$options.sockets.customEmit = (data) => console.log(data)
+			this.$socket.on('customEmit', data => console.log(data))
+			this.$socket.on('emit_method', data => console.log(data))
 
 		},
 
 		methods: {
 
-			test: function() {
-
-				console.log(Vue)
-
-			},
+			clickButton: function(val){
+		        // $socket is socket.io-client instance
+		        this.$socket.emit('customEmit', val);
+		    }
 
 		}
 
