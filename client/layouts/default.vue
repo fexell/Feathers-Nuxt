@@ -12,10 +12,6 @@
 
         <footer-component/>
 
-        <keep-alive>
-            <error-component/>
-        </keep-alive>
-
     </main>
   
 </template>
@@ -24,21 +20,29 @@
     import Vue from 'vue'
     import HeaderComponent from '@/components/headerComponent'
     import FooterComponent from '@/components/footerComponent'
-    import ErrorComponent from '@/components/errorComponent'
 
     export default {
 
         components: {
 
             HeaderComponent,
-            FooterComponent,
-            ErrorComponent
+            FooterComponent
 
         },
 
         mounted: function() {
 
-            
+            Vue.app.on('info', (message) => {
+
+                this.info({ title: 'Info', message: message, type: 'info' })
+
+            })
+
+            Vue.app.on('warn', (message) => {
+
+                this.warn({ title: 'Warning', message: message, type: 'warn' })
+
+            })
 
         }
 

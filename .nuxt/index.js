@@ -12,8 +12,11 @@ import { setContext, getLocation, getRouteData } from './utils'
 
 
 /* Plugins */
-import nuxt_plugin_socket_4695eaee from 'nuxt_plugin_socket_4695eaee' // Source: ..\\client\\plugins\\socket.js
+import nuxt_plugin_connection_671fcaba from 'nuxt_plugin_connection_671fcaba' // Source: ..\\client\\plugins\\connection.js
+import nuxt_plugin_material_28652e3a from 'nuxt_plugin_material_28652e3a' // Source: ..\\client\\plugins\\material.js
+import nuxt_plugin_logger_057b83b1 from 'nuxt_plugin_logger_057b83b1' // Source: ..\\client\\plugins\\logger.js
 import nuxt_plugin_login_6ba76b64 from 'nuxt_plugin_login_6ba76b64' // Source: ..\\client\\plugins\\login.js
+import nuxt_plugin_notifications_15a88b85 from 'nuxt_plugin_notifications_15a88b85' // Source: ..\\client\\plugins\\notifications.js (ssr: false)
 
 
 // Component: <no-ssr>
@@ -135,9 +138,14 @@ async function createApp (ssrContext) {
 
   // Plugin execution
   
-  if (typeof nuxt_plugin_socket_4695eaee === 'function') await nuxt_plugin_socket_4695eaee(app.context, inject)
+  if (typeof nuxt_plugin_connection_671fcaba === 'function') await nuxt_plugin_connection_671fcaba(app.context, inject)
+  if (typeof nuxt_plugin_material_28652e3a === 'function') await nuxt_plugin_material_28652e3a(app.context, inject)
+  if (typeof nuxt_plugin_logger_057b83b1 === 'function') await nuxt_plugin_logger_057b83b1(app.context, inject)
   if (typeof nuxt_plugin_login_6ba76b64 === 'function') await nuxt_plugin_login_6ba76b64(app.context, inject)
   
+  if (process.browser) { 
+    if (typeof nuxt_plugin_notifications_15a88b85 === 'function') await nuxt_plugin_notifications_15a88b85(app.context, inject)
+  }
 
   // If server-side, wait for async component to be resolved first
   if (process.server && ssrContext && ssrContext.url) {

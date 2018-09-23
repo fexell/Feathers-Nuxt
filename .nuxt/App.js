@@ -13,7 +13,7 @@ let layouts = {
 let resolvedLayouts = {}
 
 export default {
-  head: {"title":"App","titleTemplate":"%s - Feathers + Nuxt","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial=1"},{"hid":"description","name":"description","content":"Meta description"}],"link":[],"style":[],"script":[]},
+  head: {"title":"App","titleTemplate":"%s - Feathers + Nuxt","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1.0005"},{"hid":"description","name":"description","content":"Meta description"}],"link":["\u002F\u002Ffonts.googleapis.com\u002Ficon?family=Material+Icons"],"style":[],"script":[]},
   render(h, props) {
     const loadingEl = h('nuxt-loading', { ref: 'loading' })
     const layoutEl = h(this.layout || 'nuxt')

@@ -67,15 +67,6 @@ const _Logger = {
 
 					break
 
-				// Log default = info
-				default:
-					logger.info(message, bind)
-
-					// Emit the information message
-					Vue.app.emit('info', message)
-
-					break
-
 			}
 
 		}

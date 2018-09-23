@@ -36,8 +36,11 @@ module.exports = {
     titleTemplate: '%s - Feathers + Nuxt',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0005' },
       { hid: 'description', name: 'description', content: 'Meta description' }
+    ],
+    link: [
+      '//fonts.googleapis.com/icon?family=Material+Icons'
     ]
   },
 
@@ -59,6 +62,8 @@ module.exports = {
     '~/plugins/material.js',
     '~/plugins/logger.js',
     '~/plugins/login.js',
+
+    { src: '~/plugins/notifications.js', ssr: false },
   ],
 
   // Nuxt Render - https://nuxtjs.org/api/configuration-render

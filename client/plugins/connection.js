@@ -1,9 +1,7 @@
 import Vue from 'vue'
-import VueSocketIO from 'vue-socket.io'
 import feathers from '@feathersjs/feathers'
 import socketio from '@feathersjs/socketio-client'
 import io from 'socket.io-client'
-import logger from '../../src/logger'
 
 
 
