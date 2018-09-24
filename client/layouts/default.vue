@@ -32,15 +32,29 @@
 
         mounted: function() {
 
-            Vue.app.on('info', (message) => {
+            Vue.Relogin()
 
-                this.info({ title: 'Info', message: message, type: 'info' })
+            Vue.app.on('error', (message) => {
+
+                this.error({ title: 'Error', message: message, type: 'error' })
 
             })
 
             Vue.app.on('warn', (message) => {
 
                 this.warn({ title: 'Warning', message: message, type: 'warn' })
+
+            })
+
+            Vue.app.on('info', (message) => {
+
+                this.info({ title: 'Info', message: message, type: 'info' })
+
+            })
+
+            Vue.app.on('success', (message) => {
+
+                this.success({ title: 'Success', message: message, type: 'success' })
 
             })
 

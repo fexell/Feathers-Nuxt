@@ -1,10 +1,13 @@
 <template>
 	<div>
 		<input type="text" v-model="message" />
-		<button id="test" @click="emitEvent">Emit</button>
-		<button @click="notification">Notification with emit</button>
+		<button id="test" @click="emitEvent">Emit</button> This triggers the Logger function. Check console and you'll see a mirrored message.
 		<div>{{ response }}</div>
 		<div>{{ errorMessage }}</div>
+		<button @click="error">Error</button>
+		<button @click="warn">Warning</button>
+		<button @click="info">Information</button>
+		<button @click="success">Success</button>
 	</div>
 </template>
 <script>
@@ -26,32 +29,35 @@
 
 		},
 
-		created: function() {
-
-			Vue.app.on('info', (message) => console.log(message))
-
-		},
-
-		mounted: function() {
-
-			Vue.app.on('error', (message) => this.items.push({ message: message }))
-
-		},
-
 		methods: {
 
 			emitEvent: function() {
 
-				Vue.app.emit('hello_world', this.message)
-				Vue.Logger('error', 'There was an error.')
-				this.error({ message: 'Testing' })
+				Vue.Logger('info', this.message)
 
 			},
 
-			notification: function() {
+			error: function() {
 
-				Vue.app.emit('info', 'Here is an info notification emit-event.')
-				//Vue.Logger('info', 'Here is an information emit-event.')
+				Vue.app.emit('error', 'Well, here is an error notification.')
+
+			},
+
+			warn: function() {
+
+				Vue.app.emit('warn', 'Well, here is a warning notification.')
+
+			},
+
+			info: function() {
+
+				Vue.app.emit('info', 'Well, here is an information notification.')
+
+			},
+
+			success: function() {
+
+				Vue.app.emit('success', 'Well, here is a success message.')
 
 			}
 

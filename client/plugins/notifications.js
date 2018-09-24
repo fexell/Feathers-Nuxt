@@ -28,7 +28,7 @@ const _Notifications = {
 
                     type: 'error',
                     title: 'Error',
-                    message: 'Hello there'
+                    message: 'This is an error notification.'
 
                 },
 
@@ -36,7 +36,7 @@ const _Notifications = {
 
                     type: 'warn',
                     title: 'Warning',
-                    message: 'This is a warning.'
+                    message: 'This is a warning notification.'
 
                 },
 
@@ -44,7 +44,15 @@ const _Notifications = {
 
                     type: 'info',
                     title: 'Information',
-                    message: 'This is an info message.'
+                    message: 'This is an info notification.'
+
+                },
+
+                success: {
+
+                    type: 'success',
+                    title: 'Success',
+                    message: 'This is a success notification.'
 
                 }
 

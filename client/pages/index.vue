@@ -7,8 +7,8 @@
 				<keep-alive>
 					<component :is="currentView"></component>
 				</keep-alive>
-				<a href="#" v-on:click="currentView = 'Register'">Register</a>
-				<a href="#" v-on:click="currentView = 'Login'">Login</a>
+				<a href="#" v-on:click="currentView = 'Register'" v-if="currentView == 'Login'">Register</a>
+				<a href="#" v-on:click="currentView = 'Login'" v-else>Login</a>
 			</div>
 			<div v-bind:class="{ isLoggedIn: isLoggedIn }">
 				
@@ -27,12 +27,8 @@
 	
 	export default {
 		// This sets the title of the page. To change its template, please see "nuxt.config.js".
-		head: {
 
-			title: 'Home',
-
-		},
-
+		title: 'Home',
 		data: function() {
 
 			return {

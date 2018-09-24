@@ -1,26 +1,34 @@
 <template>
 	<div id="Form">
-		<form id="Register" class="form">
+		<form id="Register" class="form" v-register>
 			<div class="form-item">
 				<input
 				v-model="email"
 				type="email"
 				name="email"
-				placeholder="Email" />
+				pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/"
+				placeholder="Email"
+				required />
 			</div>
 			<div class="form-item">
 				<input
 				v-model="password"
 				type="password"
 				name="password"
-				placeholder="Password" />
+				min="6"
+				max="64"
+				placeholder="Password"
+				required />
 			</div>
 			<div class="form-item">
 				<input
 				v-model="confirmPassword"
 				type="password"
 				name="confirm-password"
-				placeholder="Confirm password" />
+				min="6"
+				max="64"
+				placeholder="Confirm password"
+				required />
 			</div>
 			<div class="form-item">
 				<button
@@ -41,9 +49,9 @@
 
 			return {
 
-				email: '',
-				password: '',
-				confirmPassword: ''
+				email: null,
+				password: null,
+				confirmPassword: null
 
 			}
 
