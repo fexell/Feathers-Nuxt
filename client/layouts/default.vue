@@ -23,6 +23,16 @@
 
     export default {
 
+        data: function() {
+
+            return {
+
+                authenticated: false
+
+            }
+
+        },
+
         components: {
 
             HeaderComponent,

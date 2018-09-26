@@ -60,7 +60,6 @@ module.exports = {
   plugins: [
     '~/plugins/connection.js',
     '~/plugins/authentication.js',
-    '~/plugins/validate.js',
     '~/plugins/material.js',
     '~/plugins/logger.js',
     '~/plugins/register.js',

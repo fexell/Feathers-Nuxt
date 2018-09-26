@@ -8,6 +8,7 @@
 		<button @click="warn">Warning</button>
 		<button @click="info">Information</button>
 		<button @click="success">Success</button>
+		{{ authenticated }}
 	</div>
 </template>
 <script>
@@ -23,9 +24,20 @@
 				errorMessage: '',
 				message: 'Default',
 				response: 'Server has not yet responded.',
-				items: []
+				items: [],
+				authenticated: false
 
 			}
+
+		},
+
+		mounted: function() {
+
+			Vue.app.on('authentication successful', () => {
+
+            	this.authenticated = true
+
+            })
 
 		},
 

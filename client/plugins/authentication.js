@@ -12,21 +12,23 @@ const _Authentication = () => {
             if( !authToken ) return Vue.app.emit('error', 'No authentication token to read from.')
             else {
 
-                const verify = Vue.app.passport.verifyJWT( authToken )
-
+                const verify = Vue.app.passport.payloadIsValid( authToken )
+                
                 if( !verify ) return Vue.app.emit('error', 'This is not a valid authentication token.')
                 else {
 
-                    Vue.app.service('users').emit('authenticate', {
+                    Vue.socket.emit('authenticate', {
 
                         strategy: 'jwt',
                         accessToken: authToken
 
                     }, function(message, data) {
-                        
-                        Vue.token = data.accessToken
 
-                        return Vue.app.emit('success', 'You have are now logged in.')
+                        if( !data || !(Vue.app.passport.payloadIsValid( data.accessToken )) ) return Vue.app.emit('error', 'Not a valid authentication token.')
+                        else {
+                            Vue.app.emit('authentication successful')
+                            Vue.app.emit('success', 'You have are now logged in.')
+                        }
 
                     })
 
