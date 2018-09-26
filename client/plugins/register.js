@@ -18,7 +18,7 @@ const _Register = () => {
 
                     console.log(el)
 
-                    if( !data ) return Vue.app.emit('error', 'You cannot leave ' + binding + ' field empty.')
+                    //if( !data ) return Vue.app.emit('error', 'You cannot leave ' + binding + ' field empty.')
 
                 })
 

@@ -3,6 +3,7 @@
 		<form id="Register" class="form" v-register>
 			<div class="form-item">
 				<input
+				v-validate-email
 				v-model="email"
 				type="email"
 				name="email"
@@ -12,11 +13,13 @@
 			</div>
 			<div class="form-item">
 				<input
+				v-validate-password
 				v-model="password"
 				type="password"
 				name="password"
 				min="6"
 				max="64"
+				pattern="/(\S(?<=)){6,64}(?<![^\0-~]|[\127])/i"
 				placeholder="Password"
 				required />
 			</div>
@@ -27,6 +30,7 @@
 				name="confirm-password"
 				min="6"
 				max="64"
+				pattern="/(\S(?<=)){6,64}(?<![^\0-~]|[\127])/i"
 				placeholder="Confirm password"
 				required />
 			</div>
@@ -49,9 +53,9 @@
 
 			return {
 
-				email: null,
-				password: null,
-				confirmPassword: null
+				email: '',
+				password: '',
+				confirmPassword: ''
 
 			}
 
