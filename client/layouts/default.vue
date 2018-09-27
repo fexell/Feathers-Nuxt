@@ -9,7 +9,7 @@
                 <nuxt/>
             </keep-alive>
         </section>
-
+        {{ token }}
         <footer-component/>
 
     </main>
@@ -23,16 +23,6 @@
 
     export default {
 
-        data: function() {
-
-            return {
-
-                authenticated: false
-
-            }
-
-        },
-
         components: {
 
             HeaderComponent,
@@ -40,9 +30,15 @@
 
         },
 
-        mounted: function() {
+        beforeMount: function() {
 
-            Vue.Relogin()
+            Vue.authenticate()
+
+            this.token = Vue.app.passport.payloadIsValid( localStorage.getItem('feathers-jwt') )
+
+        },
+
+        mounted: function() {
 
             Vue.app.on('error', (message) => {
 

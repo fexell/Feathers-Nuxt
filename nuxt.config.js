@@ -59,12 +59,12 @@ module.exports = {
   // Nuxt Plugins (can be custom plugins as well) - https://nuxtjs.org/api/configuration-plugins
   plugins: [
     '~/plugins/connection.js',
-    '~/plugins/authentication.js',
     '~/plugins/material.js',
     '~/plugins/logger.js',
     '~/plugins/register.js',
     '~/plugins/login.js',
 
+    { src: '~/plugins/authentication.js', ssr: false },
     { src: '~/plugins/notifications.js', ssr: false },
   ],
 

@@ -1,16 +1,11 @@
 <template>
-	<div class="container" v-if="!authenticated">
+	<div class="container">
 
 		<keep-alive>
 			<component :is="currentView"></component>
 		</keep-alive>
 		<a href="#" v-on:click="currentView = 'Register'" v-if="currentView == 'Login'">Register</a>
 		<a href="#" v-on:click="currentView = 'Login'" v-else>Login</a>
-
-	</div>
-	<div class="container" v-else>
-
-		<h1>You are logged in. Yay!</h1>
 
 	</div>
 </template>
@@ -29,30 +24,9 @@
 
 			return {
 
-				authenticated: false,
 				currentView: 'Login'
 
 			}
-
-		},
-
-		watch: {
-
-			authenticated: function() {
-
-
-
-			}
-
-		},
-
-		mounted: function() {
-
-			Vue.app.on('authentication successful', () => {
-
-            	this.authenticated = true
-
-            })
 
 		},
 

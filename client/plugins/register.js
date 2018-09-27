@@ -8,7 +8,7 @@ const _Register = () => {
     const emailTest = (email) => { return emailRegex.test(email) }
 
     // Password Regex
-    const passwordRegex = /(\S+){6,64}/
+    const passwordRegex = /(\S+)(?!=[\ -~]){6,64}/
     // All characters should be allowed when creating a password. However, there are certain ASCII characters
     // that should be blocked. These are usually ASCII characters that cannot be "printed", as in, printed to paper, such as a TAB,
     // DEL, etc. /(\S(?<=)){6,64}(?<![^\0-~]|[\127])/ matches all characters, with a minimum of 6 characters, and maximum

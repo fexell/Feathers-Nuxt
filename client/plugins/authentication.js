@@ -3,42 +3,31 @@ import Vue from 'vue'
 
 const _Authentication = () => {
 
-    Vue.Relogin = () => {
+    Vue.authenticate = async () => {
 
-        Vue.nextTick(function() {
+        const token = window.localStorage.getItem('feathers-jwt')
 
-            const authToken = window.localStorage.getItem('feathers-jwt')
+        if( !token ) {
 
-            if( !authToken ) return Vue.app.emit('error', 'No authentication token to read from.')
-            else {
+            return console.error('Could not find the access token.')
 
-                const verify = Vue.app.passport.payloadIsValid( authToken )
-                
-                if( !verify ) return Vue.app.emit('error', 'This is not a valid authentication token.')
-                else {
+        } else {
 
-                    Vue.socket.emit('authenticate', {
+            const payload = Vue.app.passport.verifyJWT( token ).then((data) => console.log(data)).catch((error) => console.log(error))
 
-                        strategy: 'jwt',
-                        accessToken: authToken
-
-                    }, function(message, data) {
-
-                        if( !data || !(Vue.app.passport.payloadIsValid( data.accessToken )) ) return Vue.app.emit('error', 'Not a valid authentication token.')
-                        else {
-                            Vue.app.emit('authentication successful')
-                            Vue.app.emit('success', 'You have are now logged in.')
-                        }
-
-                    })
-
-                }
-
-            }
-
-        })
+        }
 
     }
+
+    Vue.mixin({
+
+        mounted: function() {
+
+            
+
+        }
+
+    })
 
 }
 
