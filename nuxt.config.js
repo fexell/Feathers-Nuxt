@@ -64,7 +64,6 @@ module.exports = {
     '~/plugins/register.js',
     '~/plugins/login.js',
 
-    { src: '~/plugins/authentication.js', ssr: false },
     { src: '~/plugins/notifications.js', ssr: false },
   ],
 

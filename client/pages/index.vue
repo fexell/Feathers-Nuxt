@@ -6,7 +6,7 @@
 		</keep-alive>
 		<a href="#" v-on:click="currentView = 'Register'" v-if="currentView == 'Login'">Register</a>
 		<a href="#" v-on:click="currentView = 'Login'" v-else>Login</a>
-
+		
 	</div>
 </template>
 <script>
@@ -27,6 +27,12 @@
 				currentView: 'Login'
 
 			}
+
+		},
+
+		mounted: function() {
+
+
 
 		},
 

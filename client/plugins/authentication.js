@@ -19,16 +19,6 @@ const _Authentication = () => {
 
     }
 
-    Vue.mixin({
-
-        mounted: function() {
-
-            
-
-        }
-
-    })
-
 }
 
 Vue.use(_Authentication)

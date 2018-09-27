@@ -17,7 +17,6 @@ import nuxt_plugin_material_28652e3a from 'nuxt_plugin_material_28652e3a' // Sou
 import nuxt_plugin_logger_057b83b1 from 'nuxt_plugin_logger_057b83b1' // Source: ..\\client\\plugins\\logger.js
 import nuxt_plugin_register_41f4233e from 'nuxt_plugin_register_41f4233e' // Source: ..\\client\\plugins\\register.js
 import nuxt_plugin_login_6ba76b64 from 'nuxt_plugin_login_6ba76b64' // Source: ..\\client\\plugins\\login.js
-import nuxt_plugin_authentication_d7e6b86e from 'nuxt_plugin_authentication_d7e6b86e' // Source: ..\\client\\plugins\\authentication.js (ssr: false)
 import nuxt_plugin_notifications_15a88b85 from 'nuxt_plugin_notifications_15a88b85' // Source: ..\\client\\plugins\\notifications.js (ssr: false)
 
 
@@ -147,7 +146,6 @@ async function createApp (ssrContext) {
   if (typeof nuxt_plugin_login_6ba76b64 === 'function') await nuxt_plugin_login_6ba76b64(app.context, inject)
   
   if (process.browser) { 
-    if (typeof nuxt_plugin_authentication_d7e6b86e === 'function') await nuxt_plugin_authentication_d7e6b86e(app.context, inject)
     if (typeof nuxt_plugin_notifications_15a88b85 === 'function') await nuxt_plugin_notifications_15a88b85(app.context, inject)
   }
 

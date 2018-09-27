@@ -6,10 +6,9 @@
 
         <section id="Content" class="comp--wrapper">
             <keep-alive>
-                <nuxt/>
+                <nuxt v-update-authentication />
             </keep-alive>
         </section>
-        {{ token }}
         <footer-component/>
 
     </main>
@@ -30,15 +29,7 @@
 
         },
 
-        beforeMount: function() {
-
-            Vue.authenticate()
-
-            this.token = Vue.app.passport.payloadIsValid( localStorage.getItem('feathers-jwt') )
-
-        },
-
-        mounted: function() {
+        created: function() {
 
             Vue.app.on('error', (message) => {
 
@@ -59,6 +50,18 @@
             })
 
             Vue.app.on('success', (message) => {
+
+                this.success({ title: 'Success', message: message, type: 'success' })
+
+            })
+
+            Vue.app.on('authentication failed', (message) => {
+
+                this.error({ title: 'Error', message: message, type: 'error' })
+
+            })
+
+            Vue.app.on('authentication success', (message) => {
 
                 this.success({ title: 'Success', message: message, type: 'success' })
 
