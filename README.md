@@ -9,6 +9,7 @@ This is a boilerplate using Feathers JS and Nuxt JS. Everything is already setup
 <li>Login</li>
 <li>Sign up/Register</li>
 <li>Automatic authentication</li>
+<li>Password and Email validation (not email validation)</li>
 </ol>
 
 <h2>Installation</h2>
