@@ -1,5 +1,6 @@
 <template>
 	<div id="Form">
+		<h2>Register</h2>
 		<form id="Register" class="form" v-register>
 			<div class="form-item">
 				<input

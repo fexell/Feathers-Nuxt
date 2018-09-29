@@ -1,6 +1,7 @@
 <template>
 	<div id="Form">
-		<form id="Login" class="form" v-login>
+		<h2>Login</h2>
+		<form id="Login" class="form" @submit.prevent="Login(email, password)">
 			<div class="form-item">
 				<input
 				v-model="email"
@@ -29,6 +30,7 @@
 <script>
 	
 	import Vue from 'vue'
+	import Vuex from 'vuex'
 
 	export default {
 

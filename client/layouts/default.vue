@@ -1,14 +1,15 @@
 <template>
   
-    <main id="App">
+    <main id="App" v-update-authentication>
 
         <header-component/>
 
         <section id="Content" class="comp--wrapper">
             <keep-alive>
-                <nuxt v-update-authentication />
+                <nuxt />
             </keep-alive>
         </section>
+        
         <footer-component/>
 
     </main>
@@ -55,17 +56,13 @@
 
             })
 
-            Vue.app.on('authentication failed', (message) => {
+        },
 
-                this.error({ title: 'Error', message: message, type: 'error' })
+        beforeMount: function() {
 
-            })
-
-            Vue.app.on('authentication success', (message) => {
-
-                this.success({ title: 'Success', message: message, type: 'success' })
-
-            })
+            const authToken = localStorage.getItem('feathers-jwt')
+            
+            this.$store.commit('isLoggedIn', authToken)
 
         }
 

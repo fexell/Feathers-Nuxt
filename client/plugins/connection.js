@@ -4,6 +4,8 @@ import socketio from '@feathersjs/socketio-client'
 import io from 'socket.io-client'
 import auth from '@feathersjs/authentication-client'
 
+import Vuex from 'vuex'
+
 const _Connection = () => {
 
 	// Connect to Feathers socket and bind some of Feathers functions/packages to the Vue instance
@@ -26,7 +28,7 @@ const _Connection = () => {
 	Vue.Authenticate = async () => {
 
 		const authToken = global.localStorage.getItem('feathers-jwt')
-		const verify = await Vue.app.passport.payloadIsValid( authToken )
+		const verify = Vue.app.passport.payloadIsValid( authToken )
 		
 		if( authToken && verify ) {
 
@@ -37,7 +39,9 @@ const _Connection = () => {
 
 				Vue.prototype.$verified = true
 
-				return Vue.Toast({ title: 'Success', message: 'You have been logged in automatically.', type: 'success' })
+				sessionStorage.setItem('userId', data.userId)
+
+				return Vue.Toast({ title: 'Success', message: 'Authentication was successful.', type: 'success' })
 
 			})
 			.catch((error) => {
@@ -46,7 +50,10 @@ const _Connection = () => {
 
 				Vue.prototype.$verified = false
 
-				return Vue.Toast({ title: 'Error', message: 'Authentication by reading from localstorage failed.', type: 'error' })
+				localStorage.removeItem('feathers-jwt')
+				sessionStorage.removeItem('userId')
+
+				return Vue.Toast({ title: 'Error', message: error.message || 'Authentication by reading from localstorage failed.', type: 'error' })
 
 			})
 
@@ -60,9 +67,23 @@ const _Connection = () => {
 	// resulting in badly executed code. This happens because a global Vue plugin is called at every request from a component.
 	Vue.directive('update-authentication', {
 
-		bind: function() {
+		inserted: function() {
 
 			Vue.Authenticate()
+
+		}
+
+	})
+
+	Vue.mixin({
+
+		computed: {
+
+			isLoggedIn() {
+
+				return this.$store.getters.isLoggedIn
+
+			}
 
 		}
 
@@ -71,6 +92,7 @@ const _Connection = () => {
 	// Bind the connection to Vue's prototype (and this.$_connection),
 	// and run the connection asap.
 	Vue.prototype.$_connection 			= Vue.Connection()
+	// Vue.prototype.$_vuex				= Vue._Vuex()
 
 }
 
