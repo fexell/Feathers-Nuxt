@@ -24,4 +24,4 @@ Run (with NPM):<br />
 <br />
 <br />
 
-Check the documentation for more information about how to use this boilerplate.
+Check the [documentation](https://gitlab.com/fexell/featherjs-nuxtjs-boilerplate/wikis/Documentation) for more information about how to use this boilerplate.
