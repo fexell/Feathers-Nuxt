@@ -4,17 +4,21 @@
 		<form id="Login" class="form" @submit.prevent="Login(email, password)">
 			<div class="form-item">
 				<input
+				:class="{ valid: emailRegex.test( email ), invalid: !emailRegex.test( email ) }"
 				v-model="email"
 				type="email"
 				name="email"
-				placeholder="Email" />
+				placeholder="Email"
+				required />
 			</div>
 			<div class="form-item">
 				<input
+				:class="{ valid: passwordRegex.test( password ), invalid: !passwordRegex.test( password ) }"
 				v-model="password"
 				type="password"
 				name="password"
-				placeholder="Password" />
+				placeholder="Password"
+				required />
 			</div>
 			<div class="form-item">
 				<button

@@ -4,20 +4,18 @@ import socketio from '@feathersjs/socketio-client'
 import io from 'socket.io-client'
 import auth from '@feathersjs/authentication-client'
 
-import Vuex from 'vuex'
-
 const _Connection = () => {
 
-	// Connect to Feathers socket and bind some of Feathers functions/packages to the Vue instance
+	// Connect to Feathers socket (not a new socket) and bind some of Feathers functions/packages to the Vue instance
 	Vue.Connection = () => {
 
-		Vue.feathers 		= feathers
-		Vue.socketio 		= socketio
-		Vue.io 				= io
-		Vue.auth			= auth
+		Vue.feathers 		= feathers // This binds "feathers" to the Vue instance.
+		Vue.socketio 		= socketio // This binds "feathers socketio" to the Vue instance.
+		Vue.io 				= io // This binds "socket.io-client" to the Vue instance.
+		Vue.auth			= auth // This binds "feathers/authentication-client" to the Vue instance.
 
-		Vue.socket 			= Vue.io('http://localhost:3030')
-		Vue.app 			= Vue.feathers()
+		Vue.socket 			= Vue.io('http://localhost:3030') // This creates a global socket, on the Vue instance. Usage example: Vue.socket.emit('create', 'users'...)
+		Vue.app 			= Vue.feathers() // This binds the actual important part of feathers to the Vue instance. Usage example: Vue.app.emit(), Vue.app.service('users'), ...
 
 		Vue.app.configure(Vue.socketio(Vue.socket))
 		Vue.app.configure(Vue.auth({ service: 'users' }))
@@ -30,29 +28,37 @@ const _Connection = () => {
 		const authToken = global.localStorage.getItem('feathers-jwt')
 		const verify = Vue.app.passport.payloadIsValid( authToken )
 		
+		// If authentication token "feathers-jwt" exists and is verifiable
 		if( authToken && verify ) {
 
+			// Start the authentication
 			return Vue.app.passport.verifyJWT( authToken )
 			.then((data) => {
 
 				console.log( data )
 
+				// Creates a this.$verified option, which can be good for quick verification on the client side.
 				Vue.prototype.$verified = true
 
+				// Let's create a session from the 'userId', just because we can, and might need it later.
 				sessionStorage.setItem('userId', data.userId)
 
+				// Emit a success notification.
 				return Vue.Toast({ title: 'Success', message: 'Authentication was successful.', type: 'success' })
 
 			})
+			// In case authentication fails
 			.catch((error) => {
 
 				console.error( error )
 
 				Vue.prototype.$verified = false
 
+				// Remove all storaged items.
 				localStorage.removeItem('feathers-jwt')
 				sessionStorage.removeItem('userId')
 
+				// Emit an error notification.
 				return Vue.Toast({ title: 'Error', message: error.message || 'Authentication by reading from localstorage failed.', type: 'error' })
 
 			})
@@ -61,15 +67,12 @@ const _Connection = () => {
 
 	}
 
-	// Bind it to an element - v-update-authentication. This one is already included in the <nuxt/> tag,
-	// reauthenticating every time <nuxt/> view updates.
-	// Binding it to any lifecycle hook would make it update too many times,
-	// resulting in badly executed code. This happens because a global Vue plugin is called at every request from a component.
+	// A vue directive to update the authentication on each page reload/refresh
 	Vue.directive('update-authentication', {
 
 		inserted: function() {
 
-			Vue.Authenticate()
+			Vue.Authenticate() // Check ~/plugins/authentication.js for more info
 
 		}
 
@@ -77,10 +80,23 @@ const _Connection = () => {
 
 	Vue.mixin({
 
+		data: function() {
+
+			return {
+
+				// Let's create global prop for both email- and password-regex.
+				emailRegex: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+				passwordRegex: /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})(?<!([^ -~]))$/m
+
+			}
+
+		},
+
 		computed: {
 
 			isLoggedIn() {
 
+				// Are we logged in or not?
 				return this.$store.getters.isLoggedIn
 
 			}
@@ -92,7 +108,6 @@ const _Connection = () => {
 	// Bind the connection to Vue's prototype (and this.$_connection),
 	// and run the connection asap.
 	Vue.prototype.$_connection 			= Vue.Connection()
-	// Vue.prototype.$_vuex				= Vue._Vuex()
 
 }
 

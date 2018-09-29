@@ -6,8 +6,26 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const users = new mongooseClient.Schema({
   
-    email: {type: String, unique: true},
-    password: { type: String },
+    email: {
+      type: String,
+      lowercase: true,
+      unique: true,
+      validate: {
+
+        validator: function( v ) {
+
+          return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test( v )
+
+        },
+
+        message: props => `${ props.value } is not a valid email.`
+
+      }
+    },
+
+    password: {
+      type: String
+    },
   
   
   }, {

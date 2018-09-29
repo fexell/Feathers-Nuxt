@@ -19,7 +19,7 @@ module.exports = {
 
   // Nuxt CSS - https://nuxtjs.org/api/configuration-css
   css: [
-    '@/assets/sass/main.sass'
+    '~/assets/sass/main.sass'
   ],
 
   // Nuxt Dev - https://nuxtjs.org/api/configuration-dev
@@ -38,9 +38,6 @@ module.exports = {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0005' },
       { hid: 'description', name: 'description', content: 'Meta description' }
-    ],
-    link: [
-      '//fonts.googleapis.com/icon?family=Material+Icons'
     ]
   },
 

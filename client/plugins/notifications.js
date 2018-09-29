@@ -4,22 +4,20 @@ import VueNotifications from 'vue-notifications'
 import iziToast from 'izitoast'
 import 'izitoast/dist/css/iziToast.min.css'
 
-//import Noty from 'noty'
-//import 'noty/lib/noty.css'
-
 const _Notifications = {
 
+    // Check https://se-panfilov.github.io/vue-notifications/#/ for more info about options and alternatives to iziToast
     install( Vue, options) {
 
         Vue.Toast = ({ title, message, type, timeout, cb }) => {
 
             if( type === VueNotifications.types.warn ) type = 'warning'
-            //return new Noty({ progressBar: true, layout: 'bottomRight', text: message, timeout: 5000, type }).show()
 
             return iziToast[type]({ title, message, timeout: 5000, icon: 'material-icons' })
 
         }
 
+        // Setup the notifications mixin
         Vue.mixin({
 
             notifications: {

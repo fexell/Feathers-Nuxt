@@ -37,12 +37,6 @@ module.exports = function(app) {
     }
   });
 
-  app.on('hello_world', (data) => {
-    
-    console.log(data)
-
-  })
-
   // eslint-disable-next-line no-unused-vars
   app.publish((data, hook) => {
     // Here you can add event publishers to channels set up in `channels.js`

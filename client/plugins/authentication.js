@@ -1,6 +1,8 @@
 
 import Vue from 'vue'
 
+// This plugin is pretty self-explanatory. It's just a plugin for authentication.
+
 const _Authentication = () => {
 
     Vue.authenticate = async () => {

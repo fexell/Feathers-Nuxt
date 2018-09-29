@@ -30,6 +30,7 @@
 
         },
 
+        // Listen to all errors, warnings, info and success events.
         created: function() {
 
             Vue.app.on('error', (message) => {
@@ -58,11 +59,12 @@
 
         },
 
+        // Send vuex the localStorage "feathers-jwt"
         beforeMount: function() {
 
             const authToken = localStorage.getItem('feathers-jwt')
             
-            this.$store.commit('isLoggedIn', authToken)
+            if( authToken ) this.$store.commit('isLoggedIn', authToken)
 
         }
 

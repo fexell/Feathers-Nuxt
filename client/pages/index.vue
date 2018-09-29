@@ -1,7 +1,12 @@
 <template>
 	<div class="container">
 
-		<p>{{ isLoggedIn }}</p>
+		<div id="IsLoggedOut" v-show="!isLoggedIn">
+			<h1>Welcome, please log in or register.</h1>
+		</div>
+		<div id="IsLoggedIn" v-show="isLoggedIn">
+			<h1>Welcome, you are now logged in!</h1>
+		</div>
 		
 	</div>
 </template>
@@ -15,7 +20,12 @@
 	export default {
 		// This sets the title of the page. To change its template, please see "nuxt.config.js".
 
-		title: 'Home',
+		head: {
+
+			title: 'Home'
+
+		},
+
 		data: function() {
 
 			return {

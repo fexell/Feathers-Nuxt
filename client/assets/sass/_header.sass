@@ -1,4 +1,7 @@
 
+$main: 'rgb(246, 88, 70)'
+$shadow: 'rgb(196,70,56)'
+
 $Menu: "header > .container > .Menu"
 $Li: "header > .container > .Menu li"
 $A: "header > .container > .Menu li a"
@@ -10,7 +13,7 @@ header
     width: 100%
     padding: 15px 0
 
-    background-color: #27AE60
+    background-color: #{ $main }
 
 header > .container
     padding: 0 15px
@@ -30,18 +33,15 @@ header > .container
     min-width: 320px
     padding: 15px 25px
     border:
-        left: 2px solid #239B56
-        right: 2px solid #239B56
-        bottom: 5px solid #239B56
-    border-radius: 2px
+        bottom: 5px solid #{ $shadow }
+    border-radius: 3px
 
-    top: 250px
-    left: 50%
+    top: 25px
+    right: 15px
 
-    background-color: #27AE60
+    background-color: #{ $main }
 
     box-shadow: 0 5px 5px -5px #212121
-    transform: translateX(-50%)
     transition: all 500ms ease
 
 

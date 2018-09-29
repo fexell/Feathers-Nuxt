@@ -8,9 +8,29 @@ const Login = () => {
 		// Return a promise to access the accesstoken in the "correct way"
 		return new Promise(resolve => {
 
-			// Just a bit of simple validation
+			const email_regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+			const email_test = email_regex.test( email )
+
+			const password_regex = /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})(?<!([^ -~]))$/m
+			const password_test = password_regex.test( password )
+
+			// Just a bit of simple <validation>
+
+			// Nothing should be left empty
 			if( !email || !password ) return Vue.Logger('error', "You need to fill out both email and password to log in.")
-			else if( Vue.app.passport.payloadIsValid( window.localStorage.getItem('feathers-jwt') ) === false ) return Vue.Logger('error', "You are already logged in.")
+
+			// Check email
+			else if( !email_test ) return Vue.Logger('error', "Invalid email.")
+
+			// Check password
+			else if( !password_test ) {
+
+				Vue.Logger('error', "Invalid password")
+				Vue.Logger('error', 'Password needs to be between 6 - 64 characters, contain one upper- and lowercase letter, a number and a symbol.')
+
+				return
+
+			}
 
 			// Start the authentication
 			Vue.app.authenticate({
