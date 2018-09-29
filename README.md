@@ -7,7 +7,7 @@ This is a boilerplate using Feathers JS and Nuxt JS. Everything is already setup
 <li>Nuxt JS</li>
 <li>Vuex</li>
 <li>Login</li>
-<li>Register</li>
+<li>Sign up/Register</li>
 <li>Automatic authentication</li>
 </ol>
 
