@@ -1,14 +1,14 @@
 <h1> Feathers JS + Nuxt JS Boilerplate </h1>
   
 <h2>Information</h2>
-This is a boilerplate using Feathers JS and Nuxt JS. Everything is already setup:
+This is a boilerplate using Feathers JS and Nuxt JS. Everything is already setup:<br /><br />
 <ol>
-    <li>Feathers JS</li>
-    <li>Nuxt JS</li>
-    <li>Vuex</li>
-    <li>Login</li>
-    <li>Register</li>
-    <li>Automatic authentication</li>
+<li>Feathers JS</li>
+<li>Nuxt JS</li>
+<li>Vuex</li>
+<li>Login</li>
+<li>Register</li>
+<li>Automatic authentication</li>
 </ol>
 
 <h2>Installation</h2>
