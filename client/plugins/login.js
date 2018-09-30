@@ -59,7 +59,7 @@ const Login = () => {
 
 				Vue.app.set('user', user)
 
-				Vue.app.emit('success', 'You are now logged in, ' + user.email)
+				Vue.app.emit('success', 'You are now logged in, ' + user.username)
 
 			})
 			.catch((error) => {

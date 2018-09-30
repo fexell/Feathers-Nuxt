@@ -22,6 +22,7 @@
 			</div>
 			<div class="form-item">
 				<button
+				v-bind:disabled="!emailRegex.test( email )"
 				id="login"
 				type="submit"
 				name="btn-login">

@@ -45,7 +45,7 @@ module.exports = {
 
   // Nuxt Loading - https://nuxtjs.org/api/configuration-loading
   loading: {
-    color: '#F8F9F9',
+    color: '#222222',
     height: '2px'
   },
 

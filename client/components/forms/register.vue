@@ -1,7 +1,16 @@
 <template>
 	<div id="Form">
 		<h2>Register</h2>
-		<form id="Register" class="form" @submit.prevent="Register(email, password, confirm)">
+		<form id="Register" class="form" @submit.prevent="Register(username, email, password, confirm)">
+			<div class="form-item">
+				<input
+				:class="{ valid: usernameRegex.test( username ), invalid: !usernameRegex.test( username ) }"
+				v-model="username"
+				type="text"
+				name="username"
+				placeholder="Username"
+				required />
+			</div>
 			<div class="form-item">
 				<input
 				:class="{ valid: emailRegex.test( email ), invalid: !emailRegex.test( email ) }"
@@ -53,6 +62,7 @@
 
 			return {
 
+				username: '',
 				email: '',
 				password: '',
 				confirm: ''

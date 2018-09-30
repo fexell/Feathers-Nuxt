@@ -3,9 +3,12 @@ import Vue from 'vue'
 
 const _Register = () => {
 
+    const usernameRegex = /^[-\w\.\$@\*\!]{5,30}$/i
+    const usernameTest = ( username ) => { return usernameRegex.test( username ) }
+
     // Email Regex
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    const emailTest = (email) => { return emailRegex.test(email) }
+    const emailTest = ( email ) => { return emailRegex.test( email ) }
 
     // Password Regex
     const passwordRegex = /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})(?<!([^ -~]))$/m
@@ -21,7 +24,7 @@ const _Register = () => {
     // - Contains at least 1 symbol, example: !"#¤%&/()=?
     //
     // Password validation is also checked on Feathers, in the 'users.service.js'
-    const passwordTest = (password) => { return passwordRegex.test(password) }
+    const passwordTest = ( password ) => { return passwordRegex.test( password ) }
 
     Vue.mixin({
 
@@ -29,12 +32,14 @@ const _Register = () => {
 
             // Register method. Usage: <form @submit.prevent="Register(email, password)"></form>.
             // Email and password represents data props.
-            Register: ( email, password, confirm ) => {
+            Register: ( username, email, password, confirm ) => {
 
                 // Simple validation
 
                 // If email or password is empty.
-                if ( !email || !password ) return Vue.Logger('error', 'You cannot leave a field empty.')
+                if ( !username || !email || !password ) return Vue.Logger('error', 'You cannot leave a field empty.')
+
+                else if( !usernameTest( username ) ) return Vue.Logger('error', 'Username can only be between 5 - 30 letters in length.')
 
                 // If email doesn't pass our email regex.
                 else if( !emailTest( email ) ) return Vue.Logger('error', 'Invalid email.')
@@ -54,6 +59,7 @@ const _Register = () => {
                     // Emit create to feathers
                     Vue.socket.emit('create', 'users', {
 
+                        username: username,
                         email: email,
                         password: password
 

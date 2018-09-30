@@ -85,6 +85,7 @@ const _Connection = () => {
 			return {
 
 				// Let's create global prop for both email- and password-regex.
+				usernameRegex: /^[-\w\.\$@\*\!]{5,30}$/,
 				emailRegex: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
 				passwordRegex: /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})(?<!([^ -~]))$/m
 
