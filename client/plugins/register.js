@@ -30,15 +30,16 @@ const _Register = () => {
 
         methods: {
 
-            // Register method. Usage: <form @submit.prevent="Register(email, password)"></form>.
+            // Register method. Usage: <form @submit.prevent="Register(username, email, password, confirm)"></form>.
             // Email and password represents data props.
             Register: ( username, email, password, confirm ) => {
 
                 // Simple validation
 
-                // If email or password is empty.
+                // If username, email or password is empty.
                 if ( !username || !email || !password ) return Vue.Logger('error', 'You cannot leave a field empty.')
 
+                // If username doesn't pass our regex.
                 else if( !usernameTest( username ) ) return Vue.Logger('error', 'Username can only be between 5 - 30 letters in length.')
 
                 // If email doesn't pass our email regex.

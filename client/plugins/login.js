@@ -8,70 +8,51 @@ const Login = () => {
 		// Return a promise to access the accesstoken in the "correct way"
 		return new Promise(resolve => {
 
-			const email_regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-			const email_test = email_regex.test( email )
+			Vue.$_Stream.Login( email, password )
+			.then((message) => {
 
-			const password_regex = /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})(?<!([^ -~]))$/m
-			const password_test = password_regex.test( password )
+				// Start the authentication
+				Vue.app.authenticate({
 
-			// Just a bit of simple <validation>
+					strategy: 'local',
+					email: email,
+					password: password
 
-			// Nothing should be left empty
-			if( !email || !password ) return Vue.Logger('error', "You need to fill out both email and password to log in.")
+				})
+				.then((response) => {
 
-			// Check email
-			else if( !email_test ) return Vue.Logger('error', "Invalid email.")
+					window.localStorage.setItem('feathers-jwt', response.accessToken)
 
-			// Check password
-			else if( !password_test ) {
+					// Resolve promise
+					resolve( response.accessToken )
 
-				Vue.Logger('error', "Invalid password")
-				Vue.Logger('error', 'Password needs to be between 6 - 64 characters, contain one upper- and lowercase letter, a number and a symbol.')
+					return Vue.app.passport.verifyJWT(response.accessToken)
 
-				return
+				})
+				.then((payload) => {
 
-			}
+					return Vue.app.service('users').get(payload.userId)
 
-			// Start the authentication
-			Vue.app.authenticate({
+				})
+				.then((user) => {
 
-				strategy: 'local',
-				email: email,
-				password: password
+					Vue.app.set('user', user)
 
-			})
-			.then((response) => {
+					Vue.app.emit('success', 'You are now logged in, ' + user.username)
 
-				window.localStorage.setItem('feathers-jwt', response.accessToken)
+				})
+				.catch((error) => {
 
-				// Resolve promise
-				resolve( response.accessToken )
+					Vue.Logger('error', error.message)
 
-				return Vue.app.passport.verifyJWT(response.accessToken)
-
-			})
-			.then((payload) => {
-
-				return Vue.app.service('users').get(payload.userId)
-
-			})
-			.then((user) => {
-
-				Vue.app.set('user', user)
-
-				Vue.app.emit('success', 'You are now logged in, ' + user.username)
+				})
 
 			})
 			.catch((error) => {
 
-				Vue.Logger('error', error.message)
+				Vue.Logger('error', error)
 
 			})
-
-		}, reject => {
-
-			// In case something went horribly wrong
-			return reject('Something went wrong. Error code: 1')
 
 		})
 
@@ -85,13 +66,13 @@ const Login = () => {
 			Login: function( email, password ) {
 
 				Vue.Login( email, password )
-				.then((response) => {
+				.then( response => {
 
 					// On response, commit to vuex
 					return this.$store.commit('login', response)
 
 				})
-				.catch((error) => {
+				.catch( error => {
 
 					return Vue.Logger('error', error)
 

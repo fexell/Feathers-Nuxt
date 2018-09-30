@@ -4,7 +4,7 @@
 		<form id="Login" class="form" @submit.prevent="Login(email, password)">
 			<div class="form-item">
 				<input
-				:class="{ valid: emailRegex.test( email ), invalid: !emailRegex.test( email ) }"
+				:class="{ valid: validation.email( email ), invalid: !validation.email( email ) }"
 				v-model="email"
 				type="email"
 				name="email"
@@ -13,7 +13,7 @@
 			</div>
 			<div class="form-item">
 				<input
-				:class="{ valid: passwordRegex.test( password ), invalid: !passwordRegex.test( password ) }"
+				:class="{ valid: validation.password( password ), invalid: !validation.password( password ) }"
 				v-model="password"
 				type="password"
 				name="password"
@@ -22,7 +22,6 @@
 			</div>
 			<div class="form-item">
 				<button
-				v-bind:disabled="!emailRegex.test( email )"
 				id="login"
 				type="submit"
 				name="btn-login">

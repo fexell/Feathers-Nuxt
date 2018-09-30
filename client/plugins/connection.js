@@ -35,8 +35,6 @@ const _Connection = () => {
 			return Vue.app.passport.verifyJWT( authToken )
 			.then((data) => {
 
-				console.log( data )
-
 				// Creates a this.$verified option, which can be good for quick verification on the client side.
 				Vue.prototype.$verified = true
 
@@ -79,19 +77,6 @@ const _Connection = () => {
 	})
 
 	Vue.mixin({
-
-		data: function() {
-
-			return {
-
-				// Let's create global prop for both email- and password-regex.
-				usernameRegex: /^[-\w\.\$@\*\!]{5,30}$/,
-				emailRegex: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
-				passwordRegex: /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})(?<!([^ -~]))$/m
-
-			}
-
-		},
 
 		computed: {
 

@@ -4,7 +4,7 @@
 		<form id="Register" class="form" @submit.prevent="Register(username, email, password, confirm)">
 			<div class="form-item">
 				<input
-				:class="{ valid: usernameRegex.test( username ), invalid: !usernameRegex.test( username ) }"
+				:class="{ valid: regex.username.test( username ), invalid: !regex.username.test( username ) }"
 				v-model="username"
 				type="text"
 				name="username"
@@ -13,7 +13,7 @@
 			</div>
 			<div class="form-item">
 				<input
-				:class="{ valid: emailRegex.test( email ), invalid: !emailRegex.test( email ) }"
+				:class="{ valid: regex.email.test( email ), invalid: !regex.email.test( email ) }"
 				v-model="email"
 				type="email"
 				name="email"
@@ -22,7 +22,7 @@
 			</div>
 			<div class="form-item">
 				<input
-				:class="{ valid: passwordRegex.test( password ), invalid: !passwordRegex.test( password ) }"
+				:class="{ valid: regex.password.test( password ), invalid: !regex.password.test( password ) }"
 				v-model="password"
 				type="password"
 				name="password"

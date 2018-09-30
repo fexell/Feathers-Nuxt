@@ -6,6 +6,9 @@
 		</div>
 		<div id="IsLoggedIn" v-show="isLoggedIn">
 			<h1>Welcome, you are now logged in!</h1>
+			<p>
+				<b>Username:</b><span>{{  }}</span>
+			</p>
 		</div>
 		
 	</div>

@@ -55,6 +55,7 @@ module.exports = {
 
   // Nuxt Plugins (can be custom plugins as well) - https://nuxtjs.org/api/configuration-plugins
   plugins: [
+    '~/plugins/global.js',
     '~/plugins/connection.js',
     '~/plugins/material.js',
     '~/plugins/logger.js',
