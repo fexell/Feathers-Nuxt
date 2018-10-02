@@ -1,10 +1,14 @@
 <template>
 	<div id="Form">
 		<h2>Register</h2>
-		<form id="Register" class="form" v-register>
+		<!--
+			:class="{ valid: validation.username( username ), invalid: !validation.username( username ) }"
+			:class="{ valid: validation.email( email ), invalid: !validation.email( email ) }"
+		-->
+		<form id="Register" class="form" @submit.prevent="Register(username, email, password, confirm)">
 			<div class="form-item">
 				<input
-				:class="{ valid: regex.username.test( username ), invalid: !regex.username.test( username ) }"
+				v-validate:username
 				v-model="username"
 				type="text"
 				name="username"
@@ -13,7 +17,7 @@
 			</div>
 			<div class="form-item">
 				<input
-				:class="{ valid: regex.email.test( email ), invalid: !regex.email.test( email ) }"
+				v-validate:email
 				v-model="email"
 				type="email"
 				name="email"
@@ -22,7 +26,7 @@
 			</div>
 			<div class="form-item">
 				<input
-				:class="{ valid: regex.password.test( password ), invalid: !regex.password.test( password ) }"
+				:class="{ valid: validation.password( password ), invalid: !validation.password( password ) }"
 				v-model="password"
 				type="password"
 				name="password"

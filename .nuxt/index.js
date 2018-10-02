@@ -12,8 +12,7 @@ import { setContext, getLocation, getRouteData } from './utils'
 import { createStore } from './store.js'
 
 /* Plugins */
-import nuxt_plugin_global_f21f4e84 from 'nuxt_plugin_global_f21f4e84' // Source: ..\\client\\plugins\\global.js
-import nuxt_plugin_connection_671fcaba from 'nuxt_plugin_connection_671fcaba' // Source: ..\\client\\plugins\\connection.js
+import nuxt_plugin_default_9a631fe8 from 'nuxt_plugin_default_9a631fe8' // Source: ..\\client\\plugins\\default.js
 import nuxt_plugin_material_28652e3a from 'nuxt_plugin_material_28652e3a' // Source: ..\\client\\plugins\\material.js
 import nuxt_plugin_logger_057b83b1 from 'nuxt_plugin_logger_057b83b1' // Source: ..\\client\\plugins\\logger.js
 import nuxt_plugin_register_41f4233e from 'nuxt_plugin_register_41f4233e' // Source: ..\\client\\plugins\\register.js
@@ -157,8 +156,7 @@ async function createApp (ssrContext) {
 
   // Plugin execution
   
-  if (typeof nuxt_plugin_global_f21f4e84 === 'function') await nuxt_plugin_global_f21f4e84(app.context, inject)
-  if (typeof nuxt_plugin_connection_671fcaba === 'function') await nuxt_plugin_connection_671fcaba(app.context, inject)
+  if (typeof nuxt_plugin_default_9a631fe8 === 'function') await nuxt_plugin_default_9a631fe8(app.context, inject)
   if (typeof nuxt_plugin_material_28652e3a === 'function') await nuxt_plugin_material_28652e3a(app.context, inject)
   if (typeof nuxt_plugin_logger_057b83b1 === 'function') await nuxt_plugin_logger_057b83b1(app.context, inject)
   if (typeof nuxt_plugin_register_41f4233e === 'function') await nuxt_plugin_register_41f4233e(app.context, inject)

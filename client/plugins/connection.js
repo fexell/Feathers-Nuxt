@@ -4,7 +4,7 @@ import socketio from '@feathersjs/socketio-client'
 import io from 'socket.io-client'
 import auth from '@feathersjs/authentication-client'
 
-const _Connection = () => {
+export const _Connection = () => {
 
 	// Connect to Feathers socket (not a new socket) and bind some of Feathers functions/packages to the Vue instance
 	Vue.Connection = () => {
@@ -22,80 +22,6 @@ const _Connection = () => {
 
 	}
 
-	// Authenticate a user based on the JWT from localStorage
-	Vue.Authenticate = async () => {
-
-		const authToken = global.localStorage.getItem('feathers-jwt')
-		const verify = Vue.app.passport.payloadIsValid( authToken )
-		
-		// If authentication token "feathers-jwt" exists and is verifiable
-		if( authToken && verify ) {
-
-			// Start the authentication
-			return Vue.app.passport.verifyJWT( authToken )
-			.then((data) => {
-
-				// Creates a this.$verified option, which can be good for quick verification on the client side.
-				Vue.prototype.$verified = true
-
-				// Let's create a session from the 'userId', just because we can, and might need it later.
-				sessionStorage.setItem('userId', data.userId)
-
-				// Emit a success notification.
-				return Vue.Toast({ title: 'Success', message: 'Authentication was successful.', type: 'success' })
-
-			})
-			// In case authentication fails
-			.catch((error) => {
-
-				console.error( error )
-
-				Vue.prototype.$verified = false
-
-				// Remove all storaged items.
-				localStorage.removeItem('feathers-jwt')
-				sessionStorage.removeItem('userId')
-
-				// Emit an error notification.
-				return Vue.Toast({ title: 'Error', message: error.message || 'Authentication by reading from localstorage failed.', type: 'error' })
-
-			})
-
-		}
-
-	}
-
-	// A vue directive to update the authentication on each page reload/refresh
-	Vue.directive('update-authentication', {
-
-		inserted: function() {
-
-			Vue.Authenticate() // Check ~/plugins/authentication.js for more info
-
-		}
-
-	})
-
-	Vue.mixin({
-
-		computed: {
-
-			isLoggedIn() {
-
-				// Are we logged in or not?
-				return this.$store.getters.isLoggedIn
-
-			}
-
-		}
-
-	})
-
-	// Bind the connection to Vue's prototype (and this.$_connection),
-	// and run the connection asap.
-	Vue.prototype.$_connection 			= Vue.Connection()
-
 }
 
-// Use our connection plugin
-Vue.use(_Connection)
+export default _Connection()

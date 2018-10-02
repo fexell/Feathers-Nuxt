@@ -11,10 +11,10 @@ const _Register = () => {
     const emailTest = ( email ) => { return emailRegex.test( email ) }
 
     // Password Regex
-    const passwordRegex = /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})(?<!([^ -~]))$/m
+    const passwordRegex = /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})$/m
     // All characters should be allowed when creating a password. However, there are certain ASCII characters
     // that should be blocked. These are usually ASCII characters that cannot be "printed", as in, printed to paper, such as a TAB,
-    // DEL, etc. /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})(?<!([^ -~]))$/m
+    // DEL, etc. /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})$/m
     // matches all characters, with a minimum of 6 characters, and maximum
     // of 64 characters and does a NEGATIVE LOOKBEHIND for any inavlid/illegal ASCII characters.
     //
