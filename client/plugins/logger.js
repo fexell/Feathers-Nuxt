@@ -2,78 +2,74 @@ import Vue from 'vue'
 import logger from '../../src/logger'
 
 // Start of the const _Logger for Vue to use
-const _Logger = {
+const _Logger = () => {
 
-	install( Vue, options ) {
+	// Bind Logger to the Vue instance
+	Vue.Logger = async (type, message, bind) => {
 
-		// Bind Logger to the Vue instance
-		Vue.Logger = async (type, message, bind) => {
+		bind = bind || null
 
-			bind = bind || null
+		switch(type) {
 
-			switch(type) {
+			// Log errors
+			case 'error':
+				logger.error(message, bind)
 
-				// Log errors
-				case 'error':
-					logger.error(message, bind)
+				// Emit the error, including message
+				Vue.app.emit('error', message)
+				
+				break
 
-					// Emit the error, including message
-					Vue.app.emit('error', message)
-					
-					break
+			// Log warnings
+			case 'warn':
+				logger.warn(message, bind)
 
-				// Log warnings
-				case 'warn':
-					logger.warn(message, bind)
+				// Emit the warning, including message
+				Vue.app.emit('warn', message)
 
-					// Emit the warning, including message
-					Vue.app.emit('warn', message)
+				break
 
-					break
+			// Log information
+			case 'info':
+				logger.info(message, bind)
 
-				// Log information
-				case 'info':
-					logger.info(message, bind)
+				// Emit the information, including message
+				Vue.app.emit('info', message)
 
-					// Emit the information, including message
-					Vue.app.emit('info', message)
+				break
 
-					break
+			// Log verbosely
+			case 'verbose':
+				logger.verbose(message, bind)
 
-				// Log verbosely
-				case 'verbose':
-					logger.verbose(message, bind)
+				// Emit the verbose, including message
+				Vue.app.emit('verbose', message)
 
-					// Emit the verbose, including message
-					Vue.app.emit('verbose', message)
+				break
 
-					break
+			// Log debug message
+			case 'debug':
+				logger.debug(message, bind)
 
-				// Log debug message
-				case 'debug':
-					logger.debug(message, bind)
+				// Emit the debug message
+				Vue.app.emit('debug', message)
 
-					// Emit the debug message
-					Vue.app.emit('debug', message)
+				break
 
-					break
+			// Log silly
+			case 'silly':
+				logger.silly(message, bind)
 
-				// Log silly
-				case 'silly':
-					logger.silly(message, bind)
+				// Emit the silly message
+				Vue.app.emit('silly', message)
 
-					// Emit the silly message
-					Vue.app.emit('silly', message)
-
-					break
-
-			}
+				break
 
 		}
 
-		Vue.prototype.$_logger = Vue.Logger
-
 	}
+
+	Vue.prototype.$_logger = Vue.Logger
 
 }
 

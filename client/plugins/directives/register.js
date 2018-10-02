@@ -17,6 +17,9 @@ export const _Register = () => {
 
                     const input = inputs[ key ]
 
+                    console.log(key)
+                    console.log(input)
+
                 }
 
             })

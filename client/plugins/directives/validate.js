@@ -18,7 +18,7 @@ export const _Validate = () => {
 
             // What are we validating?
             // v-validate:username, v-validate:email, v-validate:password
-            const arg = binding.arg
+            const arg               = binding.arg
 
             // Make the class "toggle"/replace into a function
             const toggleValid = ( regex ) => {
@@ -54,6 +54,24 @@ export const _Validate = () => {
                     toggleValid( Vue.$_Test.password( el.value ) )
 
                     break
+
+                }
+
+                // Validate against a target
+                case 'target': {
+
+                    const mod           = binding.modifiers
+
+                    for( const property in mod ) {
+
+                        const exp           = binding.expression
+                        const target        = vnode.context[ property ]
+
+                        if( exp ) toggleValid( Vue.$_Test[ exp ]( el.value ) && el.value === target )
+                        else if( !exp && typeof Vue.$_Test[ property ] !== 'undefined' ) toggleValid( Vue.$_Test[ property ]( el.value ) && el.value === target )
+                        else return console.error('error', 'Could not find a valid modifier. You provided: "' + property + '". This includes unable to find a modifier in our default ones. If you want to add default modifiers, please see the documentation.')
+
+                    }
 
                 }
 

@@ -26,7 +26,7 @@
 			</div>
 			<div class="form-item">
 				<input
-				:class="{ valid: validation.password( password ), invalid: !validation.password( password ) }"
+				v-validate:password
 				v-model="password"
 				type="password"
 				name="password"
@@ -37,11 +37,10 @@
 			</div>
 			<div class="form-item">
 				<input
-				:class="{ valid: password === confirm && password.length >= 6, invalid: password !== confirm && password.length >= 6 }"
+				v-validate:target.bla
 				v-model="confirm"
-				v-bind:data-password="password"
 				type="password"
-				name="confirm-password"
+				name="confirm"
 				min="6"
 				max="64"
 				placeholder="Confirm password"
