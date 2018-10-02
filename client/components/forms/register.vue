@@ -1,7 +1,7 @@
 <template>
 	<div id="Form">
 		<h2>Register</h2>
-		<form id="Register" class="form" @submit.prevent="Register(username, email, password, confirm)">
+		<form id="Register" class="form" v-register>
 			<div class="form-item">
 				<input
 				:class="{ valid: regex.username.test( username ), invalid: !regex.username.test( username ) }"

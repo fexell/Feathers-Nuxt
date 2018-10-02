@@ -32,12 +32,34 @@ const _Global = () => {
 
     })
 
+    Vue.directive('register', {
+
+        bind: ( el, binding, vnode ) => {
+
+            el.addEventListener('submit', e => {
+
+                e.preventDefault()
+
+                const inputs = el.querySelectorAll('input')
+
+                for( const key in inputs ) {
+
+                    const input = inputs[ key ]
+
+                }
+
+            })
+
+        }
+
+    })
+
     // Default messages
     Vue.$_DefaultMessages = {
 
         error: {
 
-            empty: 'Something turned up empty.',
+            empty: { default: 'You cannot leave a field empty.', specific: ( data ) => 'You cannot leave ' + data + ' empty.'  },
             email: { empty: 'You cannot leave email empty.', invalid: 'Invalid email. Please retype it, or, provide an actual email.' },
             username: { empty: 'You cannot leave username empty.', invalid: 'Invalid username. Please, provide a valid username.' },
             password: { empty: 'You cannot leave password empty.', invalid: 'Invalid password. Your password does not match our <a href="#modal">criteria</a> for a valid password.' }
@@ -120,6 +142,12 @@ const _Global = () => {
 
                     const index = data
                     const value = data[ key ]
+
+                    let result, password, confirm
+
+                    if( !value ) reject(Vue.$_DefaultMessages.error.empty.specific( index ))
+                    else if( /password/i.test( index ) ) password = value
+                    else if( /confirm/i.test( index ) ) result = password === value ? true : false
 
                 }
 
