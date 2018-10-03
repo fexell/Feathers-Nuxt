@@ -5,13 +5,15 @@
 			:class="{ valid: validation.username( username ), invalid: !validation.username( username ) }"
 			:class="{ valid: validation.email( email ), invalid: !validation.email( email ) }"
 		-->
-		<form id="Register" class="form" @submit.prevent="Register(username, email, password, confirm)">
+		<form id="Register" class="form" v-register.username.email.password>
 			<div class="form-item">
 				<input
 				v-validate:username
 				v-model="username"
 				type="text"
 				name="username"
+				min="5"
+				max="30"
 				placeholder="Username"
 				required />
 			</div>
@@ -37,7 +39,7 @@
 			</div>
 			<div class="form-item">
 				<input
-				v-validate:target.bla
+				v-validate:target.password
 				v-model="confirm"
 				type="password"
 				name="confirm"
@@ -52,10 +54,11 @@
 				name="btn-register">Register</button>
 			</div>
 		</form>
+		{{ validate.confirm }}
 	</div>
 </template>
 <script>
-	
+
 	import Vue from 'vue'
 
 	export default {
@@ -68,7 +71,14 @@
 				username: '',
 				email: '',
 				password: '',
-				confirm: ''
+				confirm: '',
+				validate: {
+
+					username: Vue.$_Regex.username,
+					email: Vue.$_Regex.email,
+					password: Vue.$_Regex.password
+
+				}
 
 			}
 
@@ -78,7 +88,7 @@
 
 			confirmPassword: function( val, oldVal ) {
 
-				
+
 
 			}
 

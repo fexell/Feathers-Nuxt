@@ -74,7 +74,7 @@ export const _Validate = () => {
                         else if( !exp && typeof Vue.$_Test[ property ] !== 'undefined' ) toggleValid( Vue.$_Test[ property ]( el.value ) && el.value === target )
 
                         // Otherwise show a console.error that the modifier is not valid
-                        else return console.error('error', 'Could not find a valid modifier. You provided: "' + property + '". This includes unable to find a modifier in our default ones. If you want to add default modifiers, please see the documentation.')
+                        else return console.error('Could not find a valid modifier. You provided: "' + property + '". This includes unable to find a modifier in our default ones. If you want to add default modifiers, please see the documentation.')
 
                     }
 

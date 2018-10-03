@@ -9,18 +9,45 @@ export const _Register = () => {
 
             el.addEventListener('submit', e => {
 
-                e.preventDefault()
+				e.preventDefault()
 
-                const inputs = el.querySelectorAll('input')
+				let obj = {}
 
-                for( const key in inputs ) {
+				const inputs			= el.querySelectorAll('input')
+				const exp				= binding.expression
+				const validateData		= vnode.context.$data.validate
 
-                    const input = inputs[ key ]
+				console.log( typeof validateData )
 
-                    console.log(key)
-                    console.log(input)
+                for( const key in binding.modifiers ) {
 
-                }
+					obj[ key ] = vnode.context[ key ]
+
+					if( typeof validateData !== 'undefined' ) {
+
+						for( const i in validateData ) {
+
+							if( key === i ) {
+
+								const test = validateData[ i ].test( vnode.context[ key ] ) ? console.log('True') : Vue.Logger('error', 'Invalid' + i)
+
+							}
+
+						}
+
+					}
+
+					if( !obj[ key ] ) return console.error('Could not find vnode context of ' + key + '.')
+
+				}
+
+				if( obj ) Vue.socket.emit('create', 'users', obj, (error, message) => {
+
+					if( error ) return Vue.Logger('error', error.message.replace(/^\w+\:$/i, ''))
+
+					Vue.app.emit('success', 'User <span style="color:#7fb3d5;">' + message.username + '</span> has been successfully created. You can now log in!')
+
+				})
 
             })
 

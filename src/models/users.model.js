@@ -5,10 +5,21 @@
 module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const users = new mongooseClient.Schema({
-  
+
     username: {
 
-      type: String,
+			type: String,
+			validate: {
+
+				validator: function( v ) {
+
+					return /^[-\w\.\$@\*\!]{5,30}$/.test( v )
+
+				},
+
+				message: props => `${ props.value } is not a valid username.`
+
+			}
 
     },
 
@@ -32,8 +43,8 @@ module.exports = function (app) {
     password: {
       type: String
     },
-  
-  
+
+
   }, {
     timestamps: true
   });
