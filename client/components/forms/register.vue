@@ -54,7 +54,6 @@
 				name="btn-register">Register</button>
 			</div>
 		</form>
-		{{ validate.confirm }}
 	</div>
 </template>
 <script>
@@ -72,11 +71,16 @@
 				email: '',
 				password: '',
 				confirm: '',
-				validate: {
+				validate: function() {
 
-					username: Vue.$_Regex.username,
-					email: Vue.$_Regex.email,
-					password: Vue.$_Regex.password
+					return {
+
+						username: Vue.$_Test.username( this.username ),
+						email: Vue.$_Test.email( this.email ),
+						password: Vue.$_Test.password( this.password ),
+						confirm: Vue.$_Test.password( this.confirm ) && this.password === this.confirm
+
+					}
 
 				}
 
@@ -84,13 +88,9 @@
 
 		},
 
-		watch: {
+		mounted: function() {
 
-			confirmPassword: function( val, oldVal ) {
-
-
-
-			}
+			console.log(this.validate.confirm)
 
 		}
 

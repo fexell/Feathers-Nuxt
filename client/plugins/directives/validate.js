@@ -23,8 +23,16 @@ export const _Validate = () => {
             // Make the class "toggle"/replace into a function
             const toggleValid = ( regex ) => {
 
-                const bool = regex ? el.classList.replace('invalid', 'valid') : el.classList.replace('valid', 'invalid')
-            
+				if( regex ) {
+
+					el.classList.replace('invalid', 'valid')
+
+				} else {
+
+					el.classList.replace('valid', 'invalid')
+
+				}
+
             }
 
             // Switch case bad on Vue "arg"
@@ -47,7 +55,7 @@ export const _Validate = () => {
                     break
 
                 }
-                
+
                 // If it's password
                 case 'password': {
 
