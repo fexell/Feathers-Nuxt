@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import logger from '../../src/logger'
+import logger from '../../../src/logger'
 
 // Start of the const _Logger for Vue to use
 const _Logger = () => {
@@ -73,4 +73,4 @@ const _Logger = () => {
 
 }
 
-Vue.use(_Logger)
+export default _Logger()

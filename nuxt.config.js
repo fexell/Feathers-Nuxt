@@ -57,7 +57,6 @@ module.exports = {
   plugins: [
     '~/plugins/default.js',
     '~/plugins/material.js',
-    '~/plugins/logger.js',
     '~/plugins/register.js',
     '~/plugins/login.js',
 

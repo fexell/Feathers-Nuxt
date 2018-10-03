@@ -1,7 +1,7 @@
 <template>
 	<div id="Form">
 		<h2>Login</h2>
-		<form id="Login" class="form" @submit.prevent="Login(email, password)">
+		<form id="Login" class="form" v-login.email.password>
 			<div class="form-item">
 				<input
 				:class="{ valid: validation.email( email ), invalid: !validation.email( email ) }"
