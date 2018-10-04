@@ -16,60 +16,73 @@ const persist = new VuexPersist({
 
 })
 
-const store = () => {
+export const store = () => {
 
-	return new Vuex.Store({
+		return new Vuex.Store({
 
-		state: {
+			state: function() {
 
-            // Get the localStorage value
-            isLoggedIn: JSON.parse(localStorage.getItem('feathers-jwt'))
+				return {
 
-        },
+					// Get the localStorage value
+					userId: '',
+					username: '',
+					email: '',
+					accessToken: JSON.parse(localStorage.getItem('feathers-jwt'))
 
-        mutations: {
+				}
 
-            // Is the user logged in?
-            isLoggedIn( state, token ) {
+			},
 
-                state.isLoggedIn = token
+			mutations: {
 
-            },
+				// Is the user logged in?
+				accessToken( state, token ) {
 
-            // Login the user and change the token to the user's "feathers-jwt" key
-            login( state, token ) {
+					state.accessToken = token
 
-                return state.isLoggedIn = token
+				},
 
-            },
+				// Login the user and change the token to the user's "feathers-jwt" key
+				Login( state, data ) {
 
-            // On logout clear the localStorage
-            logout( state, response ) {
+					return () => {
 
-                return state.isLoggedIn = localStorage.clear()
+						for( const key in data ) {
 
-            }
+							state[ key ] = data[ key ]
 
-        },
+						}
 
-        getters: {
+					}
 
-            isLoggedIn: state => {
+				},
 
-                // Get the "isLoggedIn" state
-                return state.isLoggedIn
+				// On logout clear the localStorage
+				logout( state, response ) {
 
-            }
+					return state.accessToken = localStorage.clear()
 
-        },
+				}
 
-        // Use the VuePersist plugin
-        plugins: [ persist.plugin ]
+			},
 
-    })
+			getters: {
+
+				accessToken: state => {
+
+					// Get the "accessToken" state
+					return state.accessToken
+
+				}
+
+			},
+
+			// Use the VuePersist plugin
+			plugins: [ persist.plugin ]
+
+	})
 
 }
-
-Vue.use(store)
 
 export default store

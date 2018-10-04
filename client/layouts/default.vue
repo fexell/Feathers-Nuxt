@@ -1,5 +1,5 @@
 <template>
-  
+
     <main id="App" v-update-authentication>
 
         <header-component/>
@@ -9,17 +9,20 @@
                 <nuxt />
             </keep-alive>
         </section>
-        
+
         <footer-component/>
 
     </main>
-  
+
 </template>
 <script>
 
-    import Vue from 'vue'
+	import Vue from 'vue'
+	import Vuex from 'vuex'
     import HeaderComponent from '@/components/headerComponent'
-    import FooterComponent from '@/components/footerComponent'
+	import FooterComponent from '@/components/footerComponent'
+
+	Vue.use(Vuex)
 
     export default {
 
@@ -62,11 +65,17 @@
         // Send vuex the localStorage "feathers-jwt"
         beforeMount: function() {
 
-            const authToken = localStorage.getItem('feathers-jwt')
-            
-            if( authToken ) this.$store.commit('isLoggedIn', authToken)
+            const accessToken = localStorage.getItem('feathers-jwt')
 
-        }
+            if( accessToken ) this.$store.commit('accessToken', accessToken)
+
+		},
+
+		mounted: function() {
+
+			console.log(this.store)
+
+		}
 
     }
 

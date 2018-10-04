@@ -22,7 +22,7 @@ export const _Register = () => {
 				const validateData		= vnode.context.$data.validate()
 
 				// A validate function to check values are valid (returns a Promise)
-				const validate			= function() {
+				const validate			= () => {
 
 					return new Promise(( resolve, reject ) => {
 
@@ -57,7 +57,7 @@ export const _Register = () => {
 
 						// Replace, for example, "email:" with empty string
 						if( error ) return Vue.Logger('error', error.message.replace(/^\w+\:$/i, ''))
-						
+
 						Vue.app.emit('success', 'User <span style="color:#7fb3d5;">' + message.username + '</span> has been successfully created. You can now log in!')
 
 					})

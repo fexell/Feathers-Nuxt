@@ -4,7 +4,7 @@
 		<form id="Login" class="form" v-login.email.password>
 			<div class="form-item">
 				<input
-				:class="{ valid: validation.email( email ), invalid: !validation.email( email ) }"
+				v-validate:email
 				v-model="email"
 				type="email"
 				name="email"
@@ -13,7 +13,7 @@
 			</div>
 			<div class="form-item">
 				<input
-				:class="{ valid: validation.password( password ), invalid: !validation.password( password ) }"
+				v-validate:password
 				v-model="password"
 				type="password"
 				name="password"
@@ -32,7 +32,7 @@
 	</div>
 </template>
 <script>
-	
+
 	import Vue from 'vue'
 	import Vuex from 'vuex'
 
@@ -45,15 +45,25 @@
 			return {
 
 				email: '',
-				password: ''
+				password: '',
+				validate: () => {
+
+					return {
+
+						email: Vue.$_Test.email( this.email ),
+						password: Vue.$_Test.password( this.password )
+
+					}
+
+				}
 
 			}
 
 		},
 
-		methods: {
+		mounted: function() {
 
-
+			console.log( Vue )
 
 		}
 
