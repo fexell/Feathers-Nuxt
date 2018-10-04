@@ -8,7 +8,7 @@ export const _Login = () => {
 
         bind: ( el, binding, vnode ) => {
 
-            el.addEventListener('submit', e => {
+            el.addEventListener('submit', ( e ) => {
 
                 e.preventDefault()
 
@@ -43,8 +43,6 @@ export const _Login = () => {
 					if( !obj[ key ] ) return console.error('Could not find vnode context of ' + key + '.')
 
 				}
-
-				console.log( obj )
 
 				validate()
 				.then(() => {

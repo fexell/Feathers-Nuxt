@@ -20,7 +20,7 @@
 	import Vue from 'vue'
 	import Vuex from 'vuex'
     import HeaderComponent from '@/components/headerComponent'
-	import FooterComponent from '@/components/footerComponent'
+    import FooterComponent from '@/components/footerComponent'
 
 	Vue.use(Vuex)
 
@@ -68,13 +68,6 @@
             const accessToken = localStorage.getItem('feathers-jwt')
 
             if( accessToken ) this.$store.commit('accessToken', accessToken)
-
-		},
-
-		mounted: function() {
-
-			console.log(Vue.$Store.state.accessToken)
-			Vue.app.get('user')
 
 		}
 

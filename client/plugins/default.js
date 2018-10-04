@@ -36,6 +36,7 @@ const _Register             = require('./directives/register')
 const _Validate             = require('./directives/validate')
 
 // 2.2) Methods
+const _Storage              = require('./methods/storage')
 const _Logger               = require('./methods/logger')
 const _Authentication       = require('./methods/authentication')
 const _Messages             = require('./methods/messages')
@@ -58,6 +59,7 @@ const _Defaults             = require('./prototypes/defaults')
 Vue.use(_Connection)
 
 // 2.2) Methods
+Vue.use(_Storage) // Storage
 Vue.use(_Logger) // Logger method
 Vue.use(_Regex) // Regex methods and functions
 Vue.use(_Messages) // Messages objects

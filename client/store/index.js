@@ -2,6 +2,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VuexPersist from 'vuex-persist'
+import createPersistedState from 'vuex-persistedstate'
+import * as Cookies from 'js-cookie'
 
 // This is absolutely needed - otherwise localStorage will return undefined
 import localStorage from 'localstorage-memory'
@@ -20,13 +22,13 @@ export const _Store = () => {
 
 		return new Vuex.Store({
 
-			state:{
+			state: {
 
 				// Get the localStorage value
 				userId: '',
 				username: '',
 				email: '',
-				accessToken: JSON.parse(localStorage.getItem('feathers-jwt'))
+				accessToken: localStorage.getItem('feathers-jwt')
 
 			},
 
@@ -42,15 +44,21 @@ export const _Store = () => {
 				// Login the user and change the token to the user's "feathers-jwt" key
 				Login( state, data ) {
 
-					for( const key in data ) {
+					for( let key in data ) {
 
 						state[ key ] = data[ key ]
 
+						sessionStorage.setItem( key, data[ key ] )
+
 					}
 
-					console.log( state['username'] )
-
 					window.localStorage.setItem('feathers-jwt', state.accessToken)
+
+				},
+
+				RefreshToken( state, data ) {
+
+					return state.accessToken = data
 
 				},
 
@@ -63,30 +71,12 @@ export const _Store = () => {
 
 			},
 
-			actions: {
-
-
-
-			},
-
 			getters: {
 
 				accessToken: state => {
 
 					// Get the "accessToken" state
 					return state.accessToken
-
-				},
-
-				userId: state => {
-
-					return state.userId
-
-				},
-
-				username: state => {
-
-					return state.username
 
 				},
 
@@ -99,7 +89,30 @@ export const _Store = () => {
 			},
 
 			// Use the VuePersist plugin
-			plugins: [ persist.plugin ]
+			plugins: [
+
+				persist.plugin,
+				createPersistedState({
+
+					key: 'user',
+					storage: {
+
+						getItem: key => Cookies.get( key ),
+						setItem: ( key, value ) => Cookies.set( key, value, { expires: 3, secure: false } ),
+						removeItem: key => Cookies.remove( key )
+
+					},
+					reducer: state => ({
+
+						email: state.email,
+						userId: state.userId,
+						username: state.username
+
+					})
+
+				})
+
+			]
 
 	})
 

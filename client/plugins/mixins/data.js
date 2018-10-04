@@ -25,18 +25,27 @@ export const _Data = () => {
                     email: ( email ) => Vue.$_Test.email( email ),
                     password: ( password ) => Vue.$_Test.password( password )
 
-				},
-
-				user: {
-
-					username: Vue.$Store.getters.username,
-					email: Vue.$Store.getters.email,
-
 				}
 
             }
 
-		}
+        },
+        
+        computed: {
+
+            userId: function() {
+
+                return this.$store.state.userId
+
+            },
+
+            username: function() {
+
+                return this.$store.state.username
+
+            }
+
+        }
 
     })
 
