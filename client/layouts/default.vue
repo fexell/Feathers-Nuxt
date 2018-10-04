@@ -73,7 +73,8 @@
 
 		mounted: function() {
 
-			console.log(this.store)
+			console.log(Vue.$Store.state.accessToken)
+			Vue.app.get('user')
 
 		}
 

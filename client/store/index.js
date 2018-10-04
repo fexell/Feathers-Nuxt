@@ -16,21 +16,17 @@ const persist = new VuexPersist({
 
 })
 
-export const store = () => {
+export const _Store = () => {
 
 		return new Vuex.Store({
 
-			state: function() {
+			state:{
 
-				return {
-
-					// Get the localStorage value
-					userId: '',
-					username: '',
-					email: '',
-					accessToken: JSON.parse(localStorage.getItem('feathers-jwt'))
-
-				}
+				// Get the localStorage value
+				userId: '',
+				username: '',
+				email: '',
+				accessToken: JSON.parse(localStorage.getItem('feathers-jwt'))
 
 			},
 
@@ -46,15 +42,15 @@ export const store = () => {
 				// Login the user and change the token to the user's "feathers-jwt" key
 				Login( state, data ) {
 
-					return () => {
+					for( const key in data ) {
 
-						for( const key in data ) {
-
-							state[ key ] = data[ key ]
-
-						}
+						state[ key ] = data[ key ]
 
 					}
+
+					console.log( state['username'] )
+
+					window.localStorage.setItem('feathers-jwt', state.accessToken)
 
 				},
 
@@ -67,12 +63,36 @@ export const store = () => {
 
 			},
 
+			actions: {
+
+
+
+			},
+
 			getters: {
 
 				accessToken: state => {
 
 					// Get the "accessToken" state
 					return state.accessToken
+
+				},
+
+				userId: state => {
+
+					return state.userId
+
+				},
+
+				username: state => {
+
+					return state.username
+
+				},
+
+				email: state => {
+
+					return state.email
 
 				}
 
@@ -85,4 +105,6 @@ export const store = () => {
 
 }
 
-export default store
+Vue.$Store = _Store()
+
+export default _Store

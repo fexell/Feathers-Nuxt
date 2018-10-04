@@ -1,5 +1,6 @@
 
 import Vue from 'vue'
+import Vuex from 'vuex'
 
 export const _Login = () => {
 
@@ -63,10 +64,6 @@ export const _Login = () => {
 						Vue.Logger('success', payload)
 
 						userObj['userId']		= payload.userId
-						userObj['username']		= payload.username
-						userObj['email']		= payload.email
-
-						this.store.commit('Login', userObj)
 
 						return Vue.app.service('users').get( payload.userId )
 
@@ -74,6 +71,11 @@ export const _Login = () => {
 					.then(user => {
 
 						Vue.app.set('user', user)
+
+						userObj['username']		= user.username
+						userObj['email']		= user.email
+
+						Vue.$Store.commit('Login', userObj)
 
 						Vue.Logger('success', 'User' + Vue.app.get('user'))
 

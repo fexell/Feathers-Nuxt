@@ -8,7 +8,7 @@ export const _Authentication = () => {
 
 		const authToken = global.localStorage.getItem('feathers-jwt')
 		const verify = Vue.app.passport.payloadIsValid( authToken )
-		
+
 		// If authentication token "feathers-jwt" exists and is verifiable
 		if( authToken && verify ) {
 
@@ -21,6 +21,8 @@ export const _Authentication = () => {
 
 				// Let's create a session from the 'userId', just because we can, and might need it later.
 				sessionStorage.setItem('userId', data.userId)
+
+				Vue.$Store.commit('Login', { accessToken: authToken })
 
 				// Emit a success notification.
 				return Vue.Toast({ title: 'Success', message: 'Authentication was successful.', type: 'success' })

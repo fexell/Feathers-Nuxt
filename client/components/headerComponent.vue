@@ -11,7 +11,7 @@
 				</li>
 				<!-- Logged Out container -->
 				<!-- Show only if logged out -->
-				<div id="Logged--Out" v-show="!isLoggedIn">
+				<div id="Logged--Out" v-show="!accessToken">
 					<div class="Forms">
 						<transition name="fade" mode="out-in">
 							<component :is="currentView" class="fade"></component> <!-- Dynamic component -->
@@ -28,7 +28,7 @@
 				</div>
 				<!-- Logged in container -->
 				<!-- Show only if logged in -->
-				<div id="Logged--In" v-show="isLoggedIn">
+				<div id="Logged--In" v-show="accessToken">
 					<div class="Auth-items">
 						<li class="Item">
 							<a href="#" v-on:click="Logout">Logout</a>
