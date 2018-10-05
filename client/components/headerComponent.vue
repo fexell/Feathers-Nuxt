@@ -31,7 +31,7 @@
 				<div id="Logged--In" v-show="accessToken">
 					<div class="Auth-items">
 						<li class="Item">
-							<a href="#" v-on:click="Logout">Logout</a>
+							<a href="#" v-logout>Logout</a>
 						</li>
 					</div>
 				</div>

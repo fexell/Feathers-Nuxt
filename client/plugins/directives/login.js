@@ -75,7 +75,7 @@ export const _Login = () => {
 
 						Vue.$Store.commit('Login', userObj)
 
-						Vue.Logger('success', 'User' + Vue.app.get('user'))
+						Vue.app.emit('success', 'You are now logged in, ' + user.username + '!')
 
 					})
 					.catch((error) => {

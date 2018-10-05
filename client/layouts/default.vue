@@ -20,7 +20,8 @@
 	import Vue from 'vue'
 	import Vuex from 'vuex'
     import HeaderComponent from '@/components/headerComponent'
-    import FooterComponent from '@/components/footerComponent'
+	import FooterComponent from '@/components/footerComponent'
+	import * as Cookies from 'js-cookie'
 
 	Vue.use(Vuex)
 
@@ -31,7 +32,7 @@
             HeaderComponent,
             FooterComponent
 
-        },
+		},
 
         // Listen to all errors, warnings, info and success events.
         created: function() {
@@ -67,7 +68,7 @@
 
             const accessToken = localStorage.getItem('feathers-jwt')
 
-            if( accessToken ) this.$store.commit('accessToken', accessToken)
+			if( accessToken ) this.$store.commit('accessToken', accessToken)
 
 		}
 

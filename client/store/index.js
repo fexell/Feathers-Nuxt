@@ -1,7 +1,5 @@
-
 import Vue from 'vue'
 import Vuex from 'vuex'
-import VuexPersist from 'vuex-persist'
 import createPersistedState from 'vuex-persistedstate'
 import * as Cookies from 'js-cookie'
 
@@ -9,14 +7,6 @@ import * as Cookies from 'js-cookie'
 import localStorage from 'localstorage-memory'
 
 Vue.use(Vuex)
-
-// Persist storage, set the key and storage
-const persist = new VuexPersist({
-
-    key: 'feathers-jwt',
-    storage: localStorage
-
-})
 
 export const _Store = () => {
 
@@ -56,16 +46,31 @@ export const _Store = () => {
 
 				},
 
-				RefreshToken( state, data ) {
-
-					return state.accessToken = data
-
-				},
-
 				// On logout clear the localStorage
-				logout( state, response ) {
+				Logout( state ) {
 
-					return state.accessToken = localStorage.clear()
+					// Remove all stored information
+					window.localStorage.clear()
+					sessionStorage.clear()
+					Cookies.remove('UserData')
+
+					// Unset all state data
+					for( const key in state ) {
+
+						state[ key ] = null
+
+					}
+
+				}
+
+			},
+
+			actions: {
+
+				// Run the Logout mutation
+				Logout: ( context ) => {
+
+					context.commit('Logout')
 
 				}
 
@@ -91,12 +96,15 @@ export const _Store = () => {
 			// Use the VuePersist plugin
 			plugins: [
 
-				persist.plugin,
 				createPersistedState({
 
-					key: 'user',
+					// The name of the cookie
+					key: 'UserData',
+
+					// Storage type (= cookie)
 					storage: {
 
+						// Set a cookie with the user information
 						getItem: key => Cookies.get( key ),
 						setItem: ( key, value ) => Cookies.set( key, value, { expires: 3, secure: false } ),
 						removeItem: key => Cookies.remove( key )
@@ -104,6 +112,7 @@ export const _Store = () => {
 					},
 					reducer: state => ({
 
+						// Exclude the accessToken from the cookie, for safety reasons
 						email: state.email,
 						userId: state.userId,
 						username: state.username
@@ -118,6 +127,8 @@ export const _Store = () => {
 
 }
 
+// Store the $Store in the Vue instance, to be able to use it in plugins
 Vue.$Store = _Store()
 
+// Export the _Store
 export default _Store

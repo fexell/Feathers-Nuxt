@@ -13,9 +13,6 @@ import { createStore } from './store.js'
 
 /* Plugins */
 import nuxt_plugin_default_9a631fe8 from 'nuxt_plugin_default_9a631fe8' // Source: ..\\client\\plugins\\default.js
-import nuxt_plugin_material_28652e3a from 'nuxt_plugin_material_28652e3a' // Source: ..\\client\\plugins\\material.js
-import nuxt_plugin_register_41f4233e from 'nuxt_plugin_register_41f4233e' // Source: ..\\client\\plugins\\register.js
-import nuxt_plugin_login_6ba76b64 from 'nuxt_plugin_login_6ba76b64' // Source: ..\\client\\plugins\\login.js
 import nuxt_plugin_notifications_15a88b85 from 'nuxt_plugin_notifications_15a88b85' // Source: ..\\client\\plugins\\notifications.js (ssr: false)
 
 
@@ -156,9 +153,6 @@ async function createApp (ssrContext) {
   // Plugin execution
   
   if (typeof nuxt_plugin_default_9a631fe8 === 'function') await nuxt_plugin_default_9a631fe8(app.context, inject)
-  if (typeof nuxt_plugin_material_28652e3a === 'function') await nuxt_plugin_material_28652e3a(app.context, inject)
-  if (typeof nuxt_plugin_register_41f4233e === 'function') await nuxt_plugin_register_41f4233e(app.context, inject)
-  if (typeof nuxt_plugin_login_6ba76b64 === 'function') await nuxt_plugin_login_6ba76b64(app.context, inject)
   
   if (process.browser) { 
     if (typeof nuxt_plugin_notifications_15a88b85 === 'function') await nuxt_plugin_notifications_15a88b85(app.context, inject)

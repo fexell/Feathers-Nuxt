@@ -30,18 +30,18 @@ export const _Data = () => {
             }
 
         },
-        
+
         computed: {
 
             userId: function() {
 
-                return this.$store.state.userId
+                return Vue.$Store.state.userId
 
             },
 
             username: function() {
 
-                return this.$store.state.username
+                return Vue.$Store.state.username
 
             }
 

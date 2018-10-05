@@ -46,7 +46,7 @@ module.exports = {
   // Nuxt Loading - https://nuxtjs.org/api/configuration-loading
   loading: {
     color: '#222222',
-    height: '2px'
+    height: '5px'
   },
 
   modules: [
@@ -56,9 +56,6 @@ module.exports = {
   // Nuxt Plugins (can be custom plugins as well) - https://nuxtjs.org/api/configuration-plugins
   plugins: [
     '~/plugins/default.js',
-    '~/plugins/material.js',
-    '~/plugins/register.js',
-    '~/plugins/login.js',
 
     { src: '~/plugins/notifications.js', ssr: false },
   ],
@@ -82,5 +79,5 @@ module.exports = {
 
   // Nuxt srcDir - https://nuxtjs.org/api/configuration-srcdir
   srcDir: 'client/'
-  
+
 }
