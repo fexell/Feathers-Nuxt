@@ -4,13 +4,16 @@ form
     flex:
         flow: column nowrap
 
+form button
+	text-align: left
+
 form input,
 form button
     width: 100%
     border: none
     border-radius: 2px
     margin: 5px 0
-    padding: 15px
+    padding: 15px 15px 15px 45px
     background-color: #FDFEFE
 
     box-shadow: 0 5px 0 #D0D3D4
@@ -31,3 +34,19 @@ input.invalid
 
 input.valid
     border-left: 5px solid #52BE80
+
+form .form-item
+	position: relative
+
+form .form-item .icon
+	position: absolute
+	top: 7px
+	left: 17px
+
+form .form-item .icon i
+	color: #CCD1D1
+	transition: color 250ms ease
+
+form .form-item:hover i,
+form .form-item input:focus + .icon i
+	color: #515A5A

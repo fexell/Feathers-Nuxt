@@ -61,9 +61,6 @@ export const _Authentication = () => {
 				// Set the user
 				Vue.app.set('user', user)
 
-				// Emit an success event which triggers the notification
-				Vue.app.emit('success', 'You are now logged in, ' + user.username + '!')
-
 			})
 			// In case authentication fails
 			.catch((error) => {

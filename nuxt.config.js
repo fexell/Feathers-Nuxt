@@ -49,10 +49,6 @@ module.exports = {
     height: '5px'
   },
 
-  modules: [
-    '~/modules/channels'
-  ],
-
   // Nuxt Plugins (can be custom plugins as well) - https://nuxtjs.org/api/configuration-plugins
   plugins: [
     '~/plugins/default.js',

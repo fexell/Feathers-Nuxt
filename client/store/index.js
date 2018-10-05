@@ -42,7 +42,11 @@ export const _Store = () => {
 
 					}
 
+					// Store the access token in localStorage
 					window.localStorage.setItem('feathers-jwt', state.accessToken)
+
+					// Show a success notification that they are now logged in
+					Vue.app.emit('success', Vue.$_Messages.success.login.withUsername( state.username ))
 
 				},
 
@@ -60,6 +64,8 @@ export const _Store = () => {
 						state[ key ] = null
 
 					}
+
+					Vue.app.emit('success', 'You are now logged out!')
 
 				}
 

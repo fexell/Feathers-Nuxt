@@ -90,9 +90,6 @@ export const _Login = () => {
 						// Commit the Login to Vuex
 						Vue.$Store.commit('Login', userObj)
 
-						// Show a success notification that they are now logged in
-						Vue.app.emit('success', 'You are now logged in, ' + user.username + '!')
-
 					})
 					.catch((error) => {
 

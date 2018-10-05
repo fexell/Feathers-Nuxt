@@ -10,6 +10,9 @@
 				name="email"
 				placeholder="Email"
 				required />
+				<div class="icon">
+					<i class="material-icons">person</i>
+				</div>
 			</div>
 			<div class="form-item">
 				<input
@@ -19,6 +22,9 @@
 				name="password"
 				placeholder="Password"
 				required />
+				<div class="icon">
+					<i class="material-icons">lock</i>
+				</div>
 			</div>
 			<div class="form-item">
 				<button
@@ -27,6 +33,9 @@
 				name="btn-login">
 					Login
 				</button>
+				<div class="icon">
+					<i class="material-icons">subdirectory_arrow_right</i>
+				</div>
 			</div>
 		</form>
 	</div>
@@ -63,7 +72,7 @@
 
 		mounted: function() {
 
-			
+
 
 		}
 
