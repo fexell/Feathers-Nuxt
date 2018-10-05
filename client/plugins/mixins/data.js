@@ -19,6 +19,7 @@ export const _Data = () => {
 
                 },
 
+				// Validation prop-functions
                 validation: {
 
                     username: ( username ) => Vue.$_Test.username( username ),
@@ -31,6 +32,7 @@ export const _Data = () => {
 
         },
 
+		// Store some of the Vuex information and make them globally available
         computed: {
 
             userId: function() {

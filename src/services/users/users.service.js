@@ -7,7 +7,7 @@ module.exports = function (app) {
   const Model = createModel(app);
   const paginate = app.get('paginate');
 
-  const passwordRegex = /^((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64})(?<!([^ -~]))$/m
+  const passwordRegex = /^((?![^ -~])((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64}))$/m
 
   const options = {
     Model,
