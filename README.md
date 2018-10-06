@@ -8,7 +8,7 @@ This is a boilerplate using Feathers JS and Nuxt JS. Everything is already setup
 <li>Vuex</li>
 <li>Login</li>
 <li>Sign up/Register</li>
-<li>Automatic authentication</li>
+<li>Automatic re-authentication</li>
 <li>Password and Email validation (<b>NOT</b> email validation/email verification)</li>
 </ol>
 
