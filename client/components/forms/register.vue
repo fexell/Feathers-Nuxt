@@ -1,10 +1,6 @@
 <template>
 	<div id="Form">
-		<h2>Register</h2>
-		<!--
-			:class="{ valid: validation.username( username ), invalid: !validation.username( username ) }"
-			:class="{ valid: validation.email( email ), invalid: !validation.email( email ) }"
-		-->
+		<h4>Register</h4>
 		<form id="Register" class="form" v-register.username.email.password>
 			<div class="form-item">
 				<input
@@ -16,6 +12,9 @@
 				max="30"
 				placeholder="Username"
 				required />
+				<div class="icon">
+					<i class="material-icons">person</i>
+				</div>
 			</div>
 			<div class="form-item">
 				<input
@@ -25,6 +24,9 @@
 				name="email"
 				placeholder="Email"
 				required />
+				<div class="icon">
+					<i class="material-icons">email</i>
+				</div>
 			</div>
 			<div class="form-item">
 				<input
@@ -36,6 +38,9 @@
 				max="64"
 				placeholder="Password"
 				required />
+				<div class="icon">
+					<i class="material-icons">lock</i>
+				</div>
 			</div>
 			<div class="form-item">
 				<input
@@ -47,11 +52,17 @@
 				max="64"
 				placeholder="Confirm password"
 				required />
+				<div class="icon">
+					<i class="material-icons">lock</i>
+				</div>
 			</div>
 			<div class="form-item">
 				<button
 				type="submit"
 				name="btn-register">Register</button>
+				<div class="icon">
+					<i class="material-icons">subdirectory_arrow_right</i>
+				</div>
 			</div>
 		</form>
 	</div>
@@ -63,6 +74,7 @@
 	export default {
 
 		name: 'Register',
+		
 		data: function() {
 
 			return {

@@ -68,7 +68,7 @@
 
             const accessToken = localStorage.getItem('feathers-jwt')
 
-			if( accessToken ) this.$store.commit('accessToken', accessToken)
+            if( accessToken ) this.$store.commit('accessToken', accessToken)
 
 		}
 

@@ -17,12 +17,14 @@
 							<component :is="currentView" class="fade"></component> <!-- Dynamic component -->
 						</transition>
 						<div class="Actions">
-							<li class="Item" v-if="currentView === 'Register'">
-								<a href="#" v-on:click="currentView = 'Login'">Login</a>
-							</li>
-							<li class="Item" v-else>
-								<a href="#" v-on:click="currentView = 'Register'">Register</a>
-							</li>
+							<ul>
+								<li class="Item" v-if="currentView === 'Register'">
+									<a href="#" v-on:click="currentView = 'Login'"><i class="material-icons">lock_open</i></a>
+								</li>
+								<li class="Item" v-else>
+									<a href="#" v-on:click="currentView = 'Register'"><i class="material-icons">person_add</i></a>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>

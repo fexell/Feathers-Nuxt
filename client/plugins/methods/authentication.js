@@ -2,6 +2,8 @@
 import Vue from 'vue'
 import * as Cookies from 'js-cookie'
 
+const crypto = require('crypto')
+
 export const _Authentication = () => {
 
     // Authenticate a user based on the JWT from localStorage

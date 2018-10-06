@@ -6,8 +6,8 @@
 html,
 body
 	font:
-		family: 'Lato'
-		size: 18px
+		family: 'Source Sans Pro', sans-serif
+		size: 19px
 	line-height: 1.628
 	word-break: break-all
 	white-space: nowrap
@@ -16,10 +16,15 @@ body
 html,
 body,
 button,
-p
+strong,
+p,
+b
 	margin: 0
 	padding: 0
 	outline: 0
+	letter-spacing: 0.28pt
+
+	text-rendering: geometricPrecision
 
 a
 	text-decoration: none
@@ -31,10 +36,44 @@ main#App,
 		flow: column nowrap
 
 .container
-	max-width: 80%
+	max-width: 95%
 	margin:
 		left: auto
 		right: auto
+
+h1
+	font:
+		size: 40pt
+
+h2
+	font:
+		size: 35pt
+
+h3
+	font:
+		size: 30pt
+
+h4
+	font:
+		size: 25pt
+
+h5
+	font:
+		size: 20pt
+
+h6
+	font:
+		size: 15pt
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+	font:
+		family: 'Abril Fatface', cursive
+	letter-spacing: 1.684pt
 
 h1,
 h2,
@@ -56,3 +95,6 @@ form input,
 form button,
 form textarea
 	outline: 0
+
+.center
+	text-align: center

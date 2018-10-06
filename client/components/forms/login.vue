@@ -1,6 +1,6 @@
 <template>
 	<div id="Form">
-		<h2>Login</h2>
+		<h4>Login</h4>
 		<form id="Login" class="form" v-login.email.password>
 			<div class="form-item">
 				<input
@@ -67,12 +67,6 @@
 				}
 
 			}
-
-		},
-
-		mounted: function() {
-
-
 
 		}
 

@@ -112,7 +112,7 @@ export const _Store = () => {
 
 						// Set a cookie with the user information
 						getItem: key => Cookies.get( key ),
-						setItem: ( key, value ) => Cookies.set( key, value, { expires: 3, secure: false } ),
+						setItem: ( key, value ) => Cookies.set( key, value, { expires: 3, secure: false, samesite: 'lax' } ),
 						removeItem: key => Cookies.remove( key )
 
 					},

@@ -19,7 +19,7 @@ module.exports = {
 
   // Nuxt CSS - https://nuxtjs.org/api/configuration-css
   css: [
-    '~/assets/sass/main.sass'
+    './assets/sass/main.sass'
   ],
 
   // Nuxt Dev - https://nuxtjs.org/api/configuration-dev
@@ -37,7 +37,13 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0005' },
-      { hid: 'description', name: 'description', content: 'Meta description' }
+      { hid: 'description', name: 'description', content: 'Meta description' },
+    ],
+  },
+
+  metaInfo: {
+    link: [
+      { rel: 'stylesheet', href: './assets/sass/main.sass' },
     ]
   },
 
@@ -46,7 +52,7 @@ module.exports = {
   // Nuxt Loading - https://nuxtjs.org/api/configuration-loading
   loading: {
     color: '#222222',
-    height: '5px'
+    height: '4px'
   },
 
   // Nuxt Plugins (can be custom plugins as well) - https://nuxtjs.org/api/configuration-plugins

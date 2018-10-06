@@ -2,11 +2,11 @@
 	<div class="container">
 
 		<div id="IsLoggedOut" v-show="!accessToken">
-			<h1>Welcome, please log in or register.</h1>
+			<h1 class="center">Welcome, please log in or register.</h1>
 		</div>
 		<div id="IsLoggedIn" v-show="accessToken">
-			<h1>Welcome, you are now logged in!</h1>
-			<p>
+			<h1 class="center">Welcome, you are now logged in!</h1>
+			<p class="center">
 				<b>Username:</b><span> {{ username }}</span>
 			</p>
 		</div>
