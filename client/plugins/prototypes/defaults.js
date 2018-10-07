@@ -1,6 +1,5 @@
 
 import Vue from 'vue'
-import Store from '../../store/index'
 
 export const _Defaults = ( Vue, options ) => {
 
