@@ -27,7 +27,7 @@
     "build": "nuxt build",
     "dev": "cross-env NODE_ENV=dev && nodemon src/",
     "prestart": "npm run build",
-    "start": "cross-env NODE_ENV=production && node src/",
+    "start": "node src/",
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
