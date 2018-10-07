@@ -30,7 +30,7 @@ a private repo where I push updates more frequently, and this is the reason why 
 </ol>
 <br />
 
-<i><b>* :</b> Updates/New features not yet push to this repo.</i>
+<i><b>* :</b> Updates/New features not yet pushed to this repo.</i>
 
 <hr />
 <h2>Installation</h2>
