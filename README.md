@@ -22,6 +22,7 @@ a private repo where I push updates more frequently, and this is the reason why 
 <hr />
 <h2>Updates</h2>
 <i>Updates and announcements will be displayed here, as in information on what I'm currently working on for the boilerplate.</i>
+<br />
 <ol>
 <li>Better <code>form</code> handling <strong>(*)</strong>.</li>
 </ol>
