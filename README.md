@@ -1,5 +1,6 @@
 <h1> Feathers JS + Nuxt JS Boilerplate </h1>
   
+<img src="https://i.imgur.com/HjbuHE2.png" />
 <h2>Information</h2>
 This is a boilerplate using Feathers JS and Nuxt JS. Everything is already setup:<br /><br />
 <ol>
