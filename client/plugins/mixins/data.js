@@ -17,16 +17,7 @@ export const _Data = () => {
                     email: Vue.$_Regex.email,
                     password: Vue.$_Regex.password
 
-                },
-
-				// Validation prop-functions
-                validation: {
-
-                    username: ( username ) => Vue.$_Test.username( username ),
-                    email: ( email ) => Vue.$_Test.email( email ),
-                    password: ( password ) => Vue.$_Test.password( password )
-
-				}
+                }
 
             }
 
@@ -41,7 +32,7 @@ export const _Data = () => {
 
             },
 
-            username: function() {
+            Username: function() {
 
                 return Vue.$Store.state.username
 

@@ -30,6 +30,7 @@ import Vue from 'vue'
 
 // 1.05) Connection
 const _Connection           = require('./connection') // The most important plugin of this boilerplate. Connects to the FeathersJS side of the application
+const _Forms                = require('./forms')
 
 // 1.1) Directives
 const _Authenticate         = require('./directives/authenticate') // v-update-authentication, which calls the authentication method in methods/authentication
@@ -37,7 +38,6 @@ const _Login                = require('./directives/login') // v-login
 const _Logout				= require('./directives/logout') // v-logout
 const _Register             = require('./directives/register') // v-register
 const _Validate             = require('./directives/validate') // v-validate
-const _Form                 = require('./directives/form')
 
 // 1.2) Methods
 const _Storage              = require('./methods/storage')
@@ -64,6 +64,7 @@ const _Material				= require('./general/material')
 
 // 2.1) Connection
 Vue.use(_Connection)
+Vue.use(_Forms)
 
 // 2.2) Methods
 Vue.use(_Storage) // Storage
@@ -78,7 +79,6 @@ Vue.use(_Login) // v-login
 Vue.use(_Logout) // v-logout
 Vue.use(_Register) // v-register
 Vue.use(_Validate) // v-validate
-Vue.use(_Form)
 
 // 2.4) Mixins
 Vue.use(_Data) // Global Vue data props

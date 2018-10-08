@@ -5,8 +5,8 @@ $shadow: 'rgb(196,70,56)'
 $Menu: "header > .container > .Menu"
 $Li: "header > .container > .Menu li"
 $A: "header > .container > .Menu li a"
-$LoggedOut: "header > .container > .Menu > #Logged--Out"
-$Forms: "header > .container > .Menu > #Logged--Out > .Forms"
+$LoggedOut: "header > .container > #Logged--Out"
+$Forms: "header > .container > #Logged--Out > .Forms"
 
 header
     position: fixed
@@ -19,31 +19,36 @@ header
     background-color: #{ $main }
 
 header > .container
+    height: 100%
     padding: 0 15px
     justify-content: center
     align-items: center
 
 #{ $Menu }
     display: flex
+    flex: 4 0
     flex:
         flow: column nowrap
     list-style-type: none
 
 #{ $LoggedOut }
-    position: absolute
+    position: relative
     display: flex
+    flex: 1 0
     flex-flow: column nowrap
     min-width: 100%
     padding: 15px 25px
     border-radius: 3px
 
-    left: 0
-    bottom: 25px
-
     background-color: #{ $main }
 
     transition: all 500ms ease
 
+#{ $LoggedOut } ul
+    list-style-type: none
+
+#{ $LoggedOut } ul li a
+    color: #FDFEFE
 
 #{ $Forms }
 
@@ -63,7 +68,6 @@ header > .container
 
 #{ $Li },
 #{ $A }
-    float: left
     display: block
     text-align: center
 

@@ -98,12 +98,6 @@
 
 			}
 
-		},
-
-		mounted: function() {
-
-			console.log(this.validate.confirm)
-
 		}
 
 	}

@@ -6,6 +6,10 @@ form
 
 form button
 	text-align: left
+    color: #CCD1D1
+
+form button:hover
+    color: #515A5A
 
 form input,
 form button
@@ -20,28 +24,29 @@ form button
 
     transition: all 250ms ease
 
+form input::placeholder
+    color: #CCD1D1
+    transition: all 250ms ease
+
 form input:hover,
 form button:hover
     background-color: #F0F3F4
+
+form input:hover::placeholder
+    color: #515A5A
 
 form input:focus,
 form button:focus
     background-color: #FDFEFE
     box-shadow: 0 5px 0 #bbbdbe
 
-input.invalid
-	border-left: 5px solid #CD6155
-
-input.valid
-	border-left: 5px solid #52BE80
-
 form .form-item
 	position: relative
 
 form .form-item .icon
 	position: absolute
-	top: 7px
-	left: 17px
+	top: 9px
+	left: 15px
 
 form .form-item .icon i
 	color: #CCD1D1
@@ -50,3 +55,11 @@ form .form-item .icon i
 form .form-item:hover i,
 form .form-item input:focus + .icon i
 	color: #515A5A
+
+input.invalid
+    border-left: 5px solid #CD6155
+    color: #CD6155
+
+input.valid
+    border-left: 5px solid #52BE80
+    color: #52BE80

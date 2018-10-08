@@ -5,9 +5,7 @@
         <header-component/>
 
         <section id="Content" class="comp--wrapper">
-            <keep-alive>
-                <nuxt />
-            </keep-alive>
+            <nuxt />
         </section>
 
         <footer-component/>
@@ -70,7 +68,7 @@
 
             if( accessToken ) this.$store.commit('accessToken', accessToken)
 
-		}
+        }
 
     }
 

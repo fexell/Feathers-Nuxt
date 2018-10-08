@@ -18,6 +18,8 @@
 				v-model="password"
 				type="password"
 				name="password"
+				min="6"
+				max="64"
 				placeholder="Password"
 				required />
 				<div class="icon">

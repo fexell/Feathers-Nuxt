@@ -7,7 +7,7 @@
 		<div id="IsLoggedIn" v-show="accessToken">
 			<h1 class="center">Welcome, you are now logged in!</h1>
 			<p class="center">
-				<b>Username:</b><span> {{ username }}</span>
+				<b>Username:</b><span> {{ Username }}</span>
 			</p>
 		</div>
 
