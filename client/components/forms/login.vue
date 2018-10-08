@@ -1,7 +1,7 @@
 <template>
 	<div id="Form">
 		<h4>Login</h4>
-		<form id="Login" class="form" v-form:post.email.password>
+		<form id="Login" class="form" v-form:login.email.password>
 			<div class="form-item">
 				<input
 				v-model="email"

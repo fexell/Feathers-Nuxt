@@ -51,7 +51,18 @@ export const _Form = () => {
             obj.elements.attrs          = new Array()
             obj.elements.inputs         = inputs
             obj.elements.bindings       = { args: args, mods: mods }
-            obj.elements.validation     = vnode.context.$data.validation()
+			obj.elements.validation     = vnode.context.$data.validation()
+
+			const isValid				= ( bool ) => {
+
+				return new Promise( ( resolve, reject ) => {
+
+					if( !bool ) reject()
+					else resolve()
+
+				})
+
+			}
 
             const data                  = (( data ) => {
 
@@ -99,11 +110,21 @@ export const _Form = () => {
 
                 obj.elements.filter( key ).then(( element ) => {
 
-                    const toggleValid = obj.elements.validation[ key ] ? element.classList.replace('invalid', 'valid') : element.classList.replace('valid', 'invalid')
+					const result		= obj.elements.validation[ key ] ? element.classList.replace('invalid', 'valid') : element.classList.replace('valid', 'invalid')
 
                 })
 
-            }
+			}
+
+			el.addEventListener('submit', () => {
+
+				for( const key in obj.elements.validation ) {
+
+					console.log( 'key: ' + key + ', value: ' + vnode.context.$data[ key ] )
+
+				}
+
+			})
 
             console.log( obj )
 
