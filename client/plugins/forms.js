@@ -3,11 +3,13 @@ import Vue from 'vue'
 export const _Forms = () => {
 
     let obj         = new Object()
-        obj.forms   = new Object
+        obj.forms   = new Object()
 
     Vue.directive('form', {
 
         inserted: ( el, binding, vnode ) => {
+
+            console.log( vnode )
 
             el.addEventListener('submit', ( e ) => {
 
@@ -27,7 +29,7 @@ export const _Forms = () => {
 
         update: ( el, binding, vnode ) => {
 
-            obj.forms.elements      = el.querySelectorAll('input')
+            obj.forms.elements      = vnode.context.$el.querySelectorAll('input')
             obj.forms.el            = el
             obj.forms.mods          = binding.modifiers
             obj.forms.args          = binding.arg
@@ -45,30 +47,38 @@ export const _Forms = () => {
                 return arr
 
             })( this.attrs )
-            obj.forms.list          = (( list ) => {
 
-                list                = []
+            obj.forms.list          = ( arr = [] ) => { obj.forms.elements.forEach(( el, i ) => {
 
-                for( const key in obj.forms.mods ) {
+                    arr.push({
 
-                    list.push({
-                        el: el.querySelector('[name="' + key + '"]') || el.querySelector('[type="' + key + '"]') || el.querySelector('[class*="' + key + '"]'),
-                        vname: key,
-                        value: obj.forms.data[ key ],
-                        valid: obj.forms.validation[ key ]
+                        el: el,
+                        value: el.value,
+                        vname: el.name,
+                        valid: obj.forms.validation[ el.name ]
+
                     })
 
-                }
+                    return arr
 
-                return list
+                })
 
-            })( this.list )
-
-            for( const key of obj.forms.list ) {
-
-                const toggleValid   = key.valid ? key.el.classList.add('valid') || key.el.classList.replace('invalid', 'valid') : key.el.classList.add('invalid') || key.el.classList.replace('valid', 'invalid')
+                return Object.create({ ...arr })
 
             }
+
+            obj.forms.list          = obj.forms.list()
+
+            console.log( obj.forms.list )
+
+            //for( const key of obj.forms.list ) {
+
+                //const toggleValid   = key.valid ? key.el.classList.add('valid') || key.el.classList.replace('invalid', 'valid') : key.el.classList.add('invalid') || key.el.classList.replace('valid', 'invalid')
+
+            //}
+
+            console.log( vnode )
+            console.log( obj )
 
         }
 
