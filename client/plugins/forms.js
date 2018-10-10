@@ -2,33 +2,16 @@ import Vue from 'vue'
 
 export const _Forms = () => {
 
+    // The main objects to add data to
     let obj         = new Object()
         obj.forms   = new Object()
 
     Vue.directive('form', {
 
+        // Once inserted...
         inserted: ( el, binding, vnode ) => {
 
-            console.log( vnode )
-
-            el.addEventListener('submit', ( e ) => {
-
-                e.preventDefault()
-
-                for( const key of obj.forms.list ) {
-
-                    console.log( key.valid )
-
-                    if( !key.valid ) return Vue.app.emit('error', 'Invalid ' + key.vname)
-
-                }
-
-            })
-
-        },
-
-        update: ( el, binding, vnode ) => {
-
+            // Add keys and values to the main object
             obj.forms.elements      = vnode.context.$el.querySelectorAll('input')
             obj.forms.el            = el
             obj.forms.mods          = binding.modifiers
@@ -36,48 +19,73 @@ export const _Forms = () => {
             obj.forms.data          = vnode.context.$data
             obj.forms.validation    = vnode.context.$data.validation()
 
-            obj.forms.attrs         = (( arr = new Array() ) => {
+            // Create an input data object for easier management
+            obj.forms.inputData     = (() => {
 
-                for( const element of obj.forms.elements ) {
+                let o               = new Object()
 
-                    arr.push( element.attributes )
+                obj.forms.elements.forEach(( el, i ) => {
 
-                }
+                    o[ i ]          = {
 
-                return arr
+                        el: el, // The input element
+                        value: el.value, // The input value
+                        vname: (( vname = new Array() ) => { for( const key in obj.forms.mods ) { vname.push( key ) } return vname[ i ] })(), // Get the vnode name
+                        valid: (( valid = new Array() ) => { for( const key in obj.forms.mods ) { valid.push( obj.forms.validation[ key ] ) } return valid[ i ] })() // Get the validation boolean
 
-            })( this.attrs )
+                    }
 
-            obj.forms.list          = ( arr = [] ) => { obj.forms.elements.forEach(( el, i ) => {
-
-                    arr.push({
-
-                        el: el,
-                        value: el.value,
-                        vname: el.name,
-                        valid: obj.forms.validation[ el.name ]
-
-                    })
-
-                    return arr
+                    return o[ i ]
 
                 })
 
-                return Object.create({ ...arr })
+                // Return the object as a promise
+                return new Promise(( resolve ) => {
 
-            }
+                    resolve( o )
 
-            obj.forms.list          = obj.forms.list()
+                })
 
-            console.log( obj.forms.list )
+            })() // Run this function right away
 
-            //for( const key of obj.forms.list ) {
+            // When submitting the form
+            el.addEventListener('submit', ( e ) => {
 
-                //const toggleValid   = key.valid ? key.el.classList.add('valid') || key.el.classList.replace('invalid', 'valid') : key.el.classList.add('invalid') || key.el.classList.replace('valid', 'invalid')
+                e.preventDefault()
 
-            //}
+            })
 
-            console.log( vnode )
+            console.log( obj )
+
+            // Return the obj so we can access its data in this entire plugin
+            return obj
+
+        },
+
+        // When something updates in the form
+        update: ( el, binding, vnode ) => {
+
+            // Run our promise
+            obj.forms.inputData.then(data => {
+
+                // For each object in inputData
+                for( const key in data ) {
+
+                    // Only update the input value and valid boolean, since everything else is already set and should stay the same
+                    Object.assign( data[ key ], {
+
+                        value: vnode.context.$data[ data[ key ].vname ],
+                        valid: vnode.context.$data.validation()[ data[ key ].vname ]
+
+                    })
+
+                    // Toggle the 'valid' or 'invalid' class on our inputs (this is only to give a visual representation to the user/visitor)
+                    const toggleValid = data[ key ].valid ? data[ key ].el.classList.add('valid') || data[ key ].el.classList.replace('invalid', 'valid') : data[ key ].el.classList.add('invalid') || data[ key ].el.classList.replace('valid', 'invalid')
+
+                }
+
+            })
+
             console.log( obj )
 
         }
