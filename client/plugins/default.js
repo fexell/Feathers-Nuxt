@@ -38,6 +38,7 @@ const _Login                = require('./directives/login') // v-login
 const _Logout				= require('./directives/logout') // v-logout
 const _Register             = require('./directives/register') // v-register
 const _Validate             = require('./directives/validate') // v-validate
+const _Protected            = require('./directives/protected')
 
 // 1.2) Methods
 const _Storage              = require('./methods/storage')
@@ -79,6 +80,7 @@ Vue.use(_Login) // v-login
 Vue.use(_Logout) // v-logout
 Vue.use(_Register) // v-register
 Vue.use(_Validate) // v-validate
+Vue.use(_Protected) // v-protected
 
 // 2.4) Mixins
 Vue.use(_Data) // Global Vue data props

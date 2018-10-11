@@ -1,10 +1,9 @@
 <template>
 	<div id="Form">
 		<h4>Register</h4>
-		<form id="Register" class="form" v-register.username.email.password>
+		<form id="Register" class="form" v-form:signup.username.email.password.confirm>
 			<div class="form-item">
 				<input
-				v-validate:username
 				v-model="username"
 				type="text"
 				name="username"
@@ -18,7 +17,6 @@
 			</div>
 			<div class="form-item">
 				<input
-				v-validate:email
 				v-model="email"
 				type="email"
 				name="email"
@@ -30,7 +28,6 @@
 			</div>
 			<div class="form-item">
 				<input
-				v-validate:password
 				v-model="password"
 				type="password"
 				name="password"
@@ -44,7 +41,6 @@
 			</div>
 			<div class="form-item">
 				<input
-				v-validate:target.password
 				v-model="confirm"
 				type="password"
 				name="confirm"
@@ -53,7 +49,7 @@
 				placeholder="Confirm password"
 				required />
 				<div class="icon">
-					<i class="material-icons">lock</i>
+					<i class="material-icons">refresh</i>
 				</div>
 			</div>
 			<div class="form-item">
@@ -83,7 +79,7 @@
 				email: '',
 				password: '',
 				confirm: '',
-				validate: function() {
+				validation: function() {
 
 					return {
 

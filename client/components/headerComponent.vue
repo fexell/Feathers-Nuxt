@@ -8,6 +8,9 @@
 				</li>
 				<li class="Item" v-for="(item, key) in items" v-bind:key="key">
 					<nuxt-link v-bind:to="item.toLowerCase()">{{ item }}</nuxt-link>
+					<div v-if="accessToken">
+						<nuxt-link to="/profile">Profile</nuxt-link>
+					</div>
 				</li>
 			</ul>
 			<!-- Logged Out container -->
@@ -71,5 +74,8 @@ export default {
 	.fade-enter,
 	.fade-leave
 		opacity: 0
+	
+	.fade-enter
+		transform: translateX(-100%)
 
 </style>

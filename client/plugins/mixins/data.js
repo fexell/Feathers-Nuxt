@@ -26,7 +26,7 @@ export const _Data = () => {
 		// Store some of the Vuex information and make them globally available
         computed: {
 
-            userId: function() {
+            UserId: function() {
 
                 return Vue.$Store.state.userId
 
@@ -36,7 +36,13 @@ export const _Data = () => {
 
                 return Vue.$Store.state.username
 
-            }
+            },
+
+            Email: function() {
+
+                return Vue.$Store.state.email
+
+            },
 
         }
 

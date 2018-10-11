@@ -9,6 +9,13 @@
 			<p class="center">
 				<b>Username:</b><span> {{ Username }}</span>
 			</p>
+			<form v-form:find.username>
+				<input
+				v-model="username"
+				type="text"
+				/>
+				<button type="submit">Submit</button>
+			</form>
 		</div>
 
 	</div>
@@ -33,7 +40,17 @@
 
 			return {
 
-				currentView: 'Login'
+				username: '',
+				currentView: 'Login',
+				validation: function() {
+
+					return {
+
+						username: /(\w+){3,}/i.test( this.username )
+
+					}
+
+				}
 
 			}
 

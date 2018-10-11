@@ -65,6 +65,8 @@ export const _Store = () => {
 
 					}
 
+					$nuxt._router.replace('/')
+
 					Vue.app.emit('success', 'You are now logged out!')
 
 				}

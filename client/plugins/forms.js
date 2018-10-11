@@ -6,45 +6,70 @@ export const _Forms = () => {
 	let obj = new Object()
 	obj.forms = new Object()
 
-	const Login = (user) => {
+	const Login = ( user ) => {
 
 		let userObj = new Object()
 
 		Vue.app.authenticate({
 
-				strategy: 'local',
-				...user
+			strategy: 'local',
+			...user
 
-			})
-			.then(response => {
+		})
+		.then(response => {
 
-				userObj.accessToken = response.accessToken
+			userObj.accessToken = response.accessToken
 
-				return Vue.app.passport.verifyJWT(userObj.accessToken)
+			return Vue.app.passport.verifyJWT(userObj.accessToken)
 
-			})
-			.then(payload => {
+		})
+		.then(payload => {
 
-				userObj.userId = payload.userId
+			userObj.userId = payload.userId
 
-				return Vue.app.service('users').get(payload.userId)
+			return Vue.app.service('users').get(payload.userId)
 
-			})
-			.then(user => {
+		})
+		.then(user => {
 
-				Vue.app.set('user', user)
+			Vue.app.set('user', user)
 
-				userObj.username = user.username
-				userObj.email = user.email
+			userObj.username = user.username
+			userObj.email = user.email
 
-				Vue.$Store.commit('Login', userObj)
+			Vue.$Store.commit('Login', userObj)
 
-			})
-			.catch(error => {
+		})
+		.catch(error => {
 
-				Vue.Logger('error', error)
+			Vue.Logger('error', error)
 
-			})
+		})
+
+	}
+
+	const Signup = ( user ) => {
+
+		Vue.socket.emit('create', 'users', user, (error, message) => {
+
+			// Replace, for example, "email:" with empty string
+			if( error ) return Vue.Logger('error', error.message.replace(/\w+\:/i, ''))
+
+			Vue.app.emit('success', 'User <span style="color:#7fb3d5;">' + message.username + '</span> has been successfully created. You can now log in!')
+
+		})
+
+	}
+
+	const Find = ( target, query ) => {
+
+		Vue.socket.emit('find', target, query, ( error, data ) => {
+
+			if( error ) return Vue.Logger('error', error.message.replace(/\w+\:/i, ''))
+
+			console.log( data )
+
+		})
 
 	}
 
@@ -72,18 +97,8 @@ export const _Forms = () => {
 
 						el: el, // The input element
 						value: el.value, // The input value
-						vname: ((vname = new Array()) => {
-							for (const key in obj.forms.mods) {
-								vname.push(key)
-							}
-							return vname[i]
-						})(), // Get the vnode name
-						valid: ((valid = new Array()) => {
-							for (const key in obj.forms.mods) {
-								valid.push(obj.forms.validation[key])
-							}
-							return valid[i]
-						})() // Get the validation boolean
+						vname: ((vname = new Array()) => { for (const key in obj.forms.mods) { vname.push(key) } return vname[i] })(), // Get the vnode name
+						valid: ((valid = new Array()) => { for (const key in obj.forms.mods) { valid.push(obj.forms.validation[key]) } return valid[i] })() // Get the validation boolean
 
 					}
 
@@ -105,18 +120,48 @@ export const _Forms = () => {
 
 				e.preventDefault()
 
+				for( const key in obj.forms.validation ) {
+
+					if( !obj.forms.validation[ key ] ) return Vue.app.emit('error', 'Invalid ' + key + '.')
+
+				}
+
 				switch (obj.forms.args) {
 
 					case 'login': {
 
-							Login({
+						Login({
 
-								email: obj.forms.data.email,
-								password: obj.forms.data.password
+							email: obj.forms.data.email,
+							password: obj.forms.data.password
 
-							})
+						})
 
-							break
+						break
+
+					}
+
+					case 'signup': {
+
+						Signup({
+
+							username: obj.forms.data.username,
+							email: obj.forms.data.email,
+							password: obj.forms.data.password
+
+						})
+
+						break
+
+					}
+
+					case 'find': {
+
+						console.log( obj.forms.data.username )
+
+						Find('users', { username: obj.forms.data.username })
+
+						break
 
 					}
 
@@ -133,6 +178,8 @@ export const _Forms = () => {
 
 		// When something updates in the form
 		update: (el, binding, vnode) => {
+
+			obj.forms.validation = vnode.context.$data.validation()
 
 			// Run our promise
 			obj.forms.inputData.then(data => {
