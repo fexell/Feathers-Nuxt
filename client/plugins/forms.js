@@ -52,7 +52,7 @@ export const _Forms = () => {
                 for( const key in obj.forms.mods ) {
 
                     list.push({
-                        el: el.querySelector('[name="' + key + '"]') || el.querySelector('[type="' + key + '"]') || el.querySelector('[class*="' + key + '"]'),
+                        el: el.querySelector('[name="' + key + '"]') || el.querySelector('[id="' + key + '"]'),
                         vname: key,
                         value: obj.forms.data[ key ],
                         valid: obj.forms.validation[ key ]
