@@ -41,35 +41,23 @@
 	</div>
 </template>
 <script>
+import Vue from "vue";
+import Vuex from "vuex";
 
-	import Vue from 'vue'
-	import Vuex from 'vuex'
+export default {
+  name: "Login",
 
-	export default {
-
-		name: 'Login',
-
-		data: function() {
-
-			return {
-
-				email: '',
-				password: '',
-				validation: () => {
-
-					return {
-
-						email: Vue.$_Test.email( this.email ),
-						password: Vue.$_Test.password( this.password )
-
-					}
-
-				}
-
-			}
-
-		}
-
-	}
-
+  data: function() {
+    return {
+      email: "",
+      password: "",
+      validation: () => {
+        return {
+          email: Vue.$_Test.email(this.email),
+          password: Vue.$_Test.password(this.password)
+        };
+      }
+    };
+  }
+};
 </script>

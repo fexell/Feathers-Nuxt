@@ -33,45 +33,35 @@
 			<!-- Show only if logged in -->
 			<div id="Logged--In" v-else>
 				<div class="Auth-items">
-					<li class="Item">
-						<a href="#" v-logout>Logout</a>
-					</li>
+					<a href="#" v-logout>Logout</a>
 				</div>
 			</div>
 		</div>
 	</header>
 </template>
 <script>
+import Vue from "vue";
 
-	import Vue from 'vue'
+import Login from "@/components/forms/login.vue";
+import Register from "@/components/forms/register.vue";
 
-	import Login from '@/components/forms/login.vue'
-	import Register from '@/components/forms/register.vue'
+export default {
+  // The name of the component
+  name: "HeaderComponent",
 
-	export default {
-		// The name of the component
-		name: 'HeaderComponent',
+  components: {
+    Login,
+    Register
+  },
 
-		components: {
-
-			Login,
-			Register
-
-		},
-
-		data: function() {
-
-			return {
-				// An easier way to add menu items
-				items: ['About'],
-				currentView: 'Login'
-
-			}
-
-		}
-
-	}
-
+  data: function() {
+    return {
+      // An easier way to add menu items
+      items: ["About"],
+      currentView: "Login"
+    };
+  }
+};
 </script>
 <style lang="sass" scoped>
 

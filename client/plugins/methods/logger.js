@@ -16,8 +16,8 @@ const _Logger = () => {
 				logger.error(message, bind)
 
 				// Emit the error, including message
-				Vue.app.emit('error', message)
-				
+				Vue.app.emit.once('error', message)
+
 				break
 
 			// Log warnings
@@ -25,7 +25,7 @@ const _Logger = () => {
 				logger.warn(message, bind)
 
 				// Emit the warning, including message
-				Vue.app.emit('warn', message)
+				Vue.app.emit.once('warn', message)
 
 				break
 
@@ -34,7 +34,7 @@ const _Logger = () => {
 				logger.info(message, bind)
 
 				// Emit the information, including message
-				Vue.app.emit('info', message)
+				Vue.app.emit.once('info', message)
 
 				break
 
@@ -43,7 +43,7 @@ const _Logger = () => {
 				logger.verbose(message, bind)
 
 				// Emit the verbose, including message
-				Vue.app.emit('verbose', message)
+				Vue.app.emit.once('verbose', message)
 
 				break
 
@@ -52,7 +52,7 @@ const _Logger = () => {
 				logger.debug(message, bind)
 
 				// Emit the debug message
-				Vue.app.emit('debug', message)
+				Vue.app.emit.once('debug', message)
 
 				break
 
@@ -61,7 +61,7 @@ const _Logger = () => {
 				logger.silly(message, bind)
 
 				// Emit the silly message
-				Vue.app.emit('silly', message)
+				Vue.app.emit.once('silly', message)
 
 				break
 

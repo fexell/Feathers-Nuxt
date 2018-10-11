@@ -14,25 +14,28 @@ module.exports = function(app) {
     // real-time connection, e.g. when logging in via REST
     if(connection) {
       // Obtain the logged in user from the connection
-      const user = connection.user;
-      
+			const user = connection.user;
+
+			// Never return a user's password
+			delete user.password
+
       // The connection is no longer anonymous, remove it
       app.channel('anonymous').leave(connection);
 
       // Add it to the authenticated user channel
       app.channel('authenticated').join(connection);
 
-      // Channels can be named anything and joined on any condition 
-      
+      // Channels can be named anything and joined on any condition
+
       // E.g. to send real-time events only to admins use
       // if(user.isAdmin) { app.channel('admins').join(connection); }
 
       // If the user has joined e.g. chat rooms
       if(Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(connection));
-      
+
       // Easily organize users by email and userid for things like messaging
       app.channel(`emails/${user.email}`).join(connection);
-      // app.channel(`$(user.id}`).join(channel);
+			// app.channel(`$(user.id}`).join(channel);
 
     }
   });
@@ -57,7 +60,7 @@ module.exports = function(app) {
     return app.channel('anonymous').send({
 
       data: data
-      
+
     })
 
   })
