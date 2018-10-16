@@ -10,7 +10,7 @@
 
 	export default {
 
-		name: 'FooterComponent'
+		name: 'App-Footer'
 
 	}
 

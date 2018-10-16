@@ -5,15 +5,20 @@
 
 html,
 body
-	font:
-		family: 'Source Sans Pro', sans-serif
-		size: 19px
-	line-height: 1.628
 	word-break: break-all
 	white-space: nowrap
 	white-space: initial
 
+html
+	font-size: 72.5%
+
 body
+	font:
+		size: 1.4rem
+		family: 'Source Sans Pro', sans-serif
+		weight: 400
+	line-height: 1.588
+	background-color: #f2f4f4
 	transition: opacity 500ms
 	&.hide
 		opacity: 0
@@ -34,14 +39,43 @@ b
 a
 	text-decoration: none
 
-main#App,
-.container
-	display: flex
-	flex:
-		flow: column nowrap
+main > div
+	display: grid
+	min-height: 100vh
+	grid-template-columns: min( 240px ) 1fr
+	grid-template-rows: 60px 1fr 60px
+	grid-template-areas: "header header header header header" "sidebar content content content content" "sidebar footer footer footer footer"
+
+	&> header,
+	&> footer
+		padding: 1rem
+
+	&> header
+		grid-area: header
+
+		background-color: #58D68D
+
+		&> .container
+			display: flex
+
+	&> #Sidebar
+		grid-area: sidebar
+
+		background-color: #424949
+
+	&> section
+		grid-area: content
+
+		margin-left: 17px
+		margin-right: 17px
+
+	&> footer
+		grid-area: footer
+
+
 
 .container
-	max-width: 95%
+	max-width: 100%
 	margin:
 		left: auto
 		right: auto

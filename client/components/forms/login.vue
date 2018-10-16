@@ -45,6 +45,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 export default {
+	middleware: 'authenticated',
   name: "Login",
 
   data: function() {

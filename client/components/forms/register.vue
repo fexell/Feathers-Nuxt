@@ -68,7 +68,7 @@
 	import Vue from 'vue'
 
 	export default {
-
+		middleware: 'authenticated',
 		name: 'Register',
 		
 		data: function() {

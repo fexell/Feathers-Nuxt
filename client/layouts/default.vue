@@ -1,24 +1,31 @@
 <template>
 
-    <main id="App" v-update-authentication>
+    <main id="App">
+        <div class="container">
 
-        <header-component/>
+            <app-header/>
 
-        <section id="Content" class="comp--wrapper">
-            <nuxt />
-        </section>
+            <app-sidebar/>
 
-        <footer-component/>
+            <section id="Content" class="comp--wrapper">
+                <nuxt />
+            </section>
 
+            <app-footer/>
+
+        </div>
     </main>
 
 </template>
 <script>
 
 	import Vue from 'vue'
-	import Vuex from 'vuex'
-    import HeaderComponent from '@/components/headerComponent'
-	import FooterComponent from '@/components/footerComponent'
+    import Vuex from 'vuex'
+    
+    import AppHeader from '@/components/header'
+    import AppFooter from '@/components/footer'
+    import AppSidebar from '@/components/sidebar'
+
 	import * as Cookies from 'js-cookie'
 
 	Vue.use(Vuex)
@@ -27,8 +34,9 @@
 
         components: {
 
-            HeaderComponent,
-            FooterComponent
+            AppHeader,
+            AppFooter,
+            AppSidebar
 
 		},
 

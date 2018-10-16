@@ -8,7 +8,7 @@ import localStorage from 'localstorage-memory'
 
 Vue.use(Vuex)
 
-export const _Store = () => {
+const _Store = () => {
 
 		return new Vuex.Store({
 
@@ -123,7 +123,8 @@ export const _Store = () => {
 						// Exclude the accessToken from the cookie, for safety reasons
 						email: state.email,
 						userId: state.userId,
-						username: state.username
+						username: state.username,
+						accessToken: state.accessToken
 
 					})
 

@@ -38,6 +38,7 @@ export const _Forms = () => {
 			userObj.email = user.email
 
 			Vue.$Store.commit('Login', userObj)
+			$nuxt._router.replace('/dashboard')
 
 		})
 		.catch(error => {

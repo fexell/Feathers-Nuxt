@@ -1,96 +1,16 @@
 
-$main: 'rgb(246, 88, 70)'
-$shadow: 'rgb(196,70,56)'
-
-$Menu: "header > .container > .Menu"
-$Li: "header > .container > .Menu li"
-$A: "header > .container > .Menu li a, header > .container a"
-$Hover: "header > .container > .Menu li a:hover, header > .container a:hover"
-$LoggedOut: "header > .container > #Logged--Out"
-$LoggedIn: "header > .container > #Logged--In"
-$Forms: "header > .container > #Logged--Out > .Forms"
-
 header
-    position: fixed
-    width: 300px
-    height: 100vh
-    top: 0
-    left: 0
-    padding: 15px 0
+    ul
+        margin: 0 1rem
+        list-style-type: none
 
-    background-color: #{ $main }
+        li
+            float: left
+            margin: 0 1rem
 
-header > .container
-    height: 100%
-    padding: 0 15px
-    justify-content: center
-    align-items: center
+            a
+                color: #e4e8e8
 
-#{ $Menu }
-    display: flex
-    width: 100%
-    flex: 4 0 20%
-    flex:
-        flow: column nowrap
-    list-style-type: none
-
-#{ $LoggedOut },
-#{ $LoggedIn }
-    position: absolute
-    width: 100%
-    bottom: 50px
-    margin: 0 auto
-    padding: 0 15px
-
-    & a
-        margin: 0
-        padding: 5px
-
-#{ $LoggedOut } ul
-    width: 100%
-    list-style-type: none
-
-#{ $LoggedOut } ul li a
-    color: #FDFEFE
-
-#{ $Forms }
-
-    &> .Actions
-        display: flex
-        flex-flow: row nowrap
-        justify-content: center
-        align-items: center
-
-    & h1,
-    & h2,
-    & h3,
-    & h4,
-    & h5
-        text-align: center
-        color: #FDFEFE
-
-#{ $Li },
-#{ $A }
-    display: block
-    text-align: center
-
-#{ $A }
-    margin: 5px 15px
-    padding: 15px
-
-    border-radius: 3px
-
-    font-size: 20px
-    font-weight: 700
-
-    color: #FDFEFE
-
-    transition: all 250ms
-
-#{ $Hover }
-    color: #{ $main }
-    background-color: #FDFEFE
-    box-shadow: 0 5px 0 #D0D3D4
-
-    & .material-icons
-        color: #424949
+                &:hover
+                    color: #f2f4f4
+    

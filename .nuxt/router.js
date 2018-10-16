@@ -3,9 +3,10 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _4387b6de = () => import('..\\client\\pages\\test.vue' /* webpackChunkName: "pages_test" */).then(m => m.default || m)
-const _268d0571 = () => import('..\\client\\pages\\about.vue' /* webpackChunkName: "pages_about" */).then(m => m.default || m)
 const _7bf48ae6 = () => import('..\\client\\pages\\profile.vue' /* webpackChunkName: "pages_profile" */).then(m => m.default || m)
+const _268d0571 = () => import('..\\client\\pages\\about.vue' /* webpackChunkName: "pages_about" */).then(m => m.default || m)
+const _a863aa10 = () => import('..\\client\\pages\\dashboard.vue' /* webpackChunkName: "pages_dashboard" */).then(m => m.default || m)
+const _0fec834d = () => import('..\\client\\pages\\login.vue' /* webpackChunkName: "pages_login" */).then(m => m.default || m)
 const _4644e036 = () => import('..\\client\\pages\\index.vue' /* webpackChunkName: "pages_index" */).then(m => m.default || m)
 
 
@@ -67,9 +68,9 @@ export function createRouter () {
     scrollBehavior,
     routes: [
 		{
-			path: "/test",
-			component: _4387b6de,
-			name: "test"
+			path: "/profile",
+			component: _7bf48ae6,
+			name: "profile"
 		},
 		{
 			path: "/about",
@@ -77,9 +78,14 @@ export function createRouter () {
 			name: "about"
 		},
 		{
-			path: "/profile",
-			component: _7bf48ae6,
-			name: "profile"
+			path: "/dashboard",
+			component: _a863aa10,
+			name: "dashboard"
+		},
+		{
+			path: "/login",
+			component: _0fec834d,
+			name: "login"
 		},
 		{
 			path: "/",
