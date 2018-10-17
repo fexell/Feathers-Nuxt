@@ -1,6 +1,6 @@
 <template>
 
-    <main id="App">
+    <main id="App" v-update-authentication>
         <div class="container">
 
             <app-header/>
@@ -21,7 +21,7 @@
 
 	import Vue from 'vue'
     import Vuex from 'vuex'
-    
+
     import AppHeader from '@/components/header'
     import AppFooter from '@/components/footer'
     import AppSidebar from '@/components/sidebar'

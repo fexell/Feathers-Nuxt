@@ -2,6 +2,18 @@ import Vue from 'vue'
 
 export default function({ store, redirect }) {
 
-    const result = Vue.$Store.state.accessToken ? redirect('/dashboard') : null
+    if( !!isAuth() ) {
+
+		console.log( 'Auth: ' + isAuth() )
+
+		return redirect('/dashboard')
+
+	}
+
+	function isAuth() {
+
+		return process.client ? Vue.$Store.state.accessToken : undefined
+
+	}
 
 }

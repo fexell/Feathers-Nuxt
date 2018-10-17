@@ -3,11 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const _7bf48ae6 = () => import('..\\client\\pages\\profile.vue' /* webpackChunkName: "pages_profile" */).then(m => m.default || m)
-const _268d0571 = () => import('..\\client\\pages\\about.vue' /* webpackChunkName: "pages_about" */).then(m => m.default || m)
-const _a863aa10 = () => import('..\\client\\pages\\dashboard.vue' /* webpackChunkName: "pages_dashboard" */).then(m => m.default || m)
-const _0fec834d = () => import('..\\client\\pages\\login.vue' /* webpackChunkName: "pages_login" */).then(m => m.default || m)
-const _4644e036 = () => import('..\\client\\pages\\index.vue' /* webpackChunkName: "pages_index" */).then(m => m.default || m)
+const _53a8fa77 = () => import('..\\client\\pages\\profile.vue' /* webpackChunkName: "pages_profile" */).then(m => m.default || m)
+const _8e19904a = () => import('..\\client\\pages\\about.vue' /* webpackChunkName: "pages_about" */).then(m => m.default || m)
+const _61a11862 = () => import('..\\client\\pages\\dashboard.vue' /* webpackChunkName: "pages_dashboard" */).then(m => m.default || m)
+const _bb5a9492 = () => import('..\\client\\pages\\login.vue' /* webpackChunkName: "pages_login" */).then(m => m.default || m)
+const _4ea9dac0 = () => import('..\\client\\pages\\index.vue' /* webpackChunkName: "pages_index" */).then(m => m.default || m)
 
 
 
@@ -69,27 +69,27 @@ export function createRouter () {
     routes: [
 		{
 			path: "/profile",
-			component: _7bf48ae6,
+			component: _53a8fa77,
 			name: "profile"
 		},
 		{
 			path: "/about",
-			component: _268d0571,
+			component: _8e19904a,
 			name: "about"
 		},
 		{
 			path: "/dashboard",
-			component: _a863aa10,
+			component: _61a11862,
 			name: "dashboard"
 		},
 		{
 			path: "/login",
-			component: _0fec834d,
+			component: _bb5a9492,
 			name: "login"
 		},
 		{
 			path: "/",
-			component: _4644e036,
+			component: _4ea9dac0,
 			name: "index"
 		}
     ],

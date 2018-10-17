@@ -124,7 +124,6 @@ const _Store = () => {
 						email: state.email,
 						userId: state.userId,
 						username: state.username,
-						accessToken: state.accessToken
 
 					})
 

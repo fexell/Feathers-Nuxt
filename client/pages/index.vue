@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 
-		
+		{{ userLoggedIn }}
 
 	</div>
 </template>
@@ -9,7 +9,7 @@
 
 	export default {
 
-		
+
 
 	}
 

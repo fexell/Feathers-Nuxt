@@ -28,7 +28,7 @@
 
     export default {
 
-        middleware: 'authenticated',
+		middleware: ['authenticated'],
 
         head: {
 
@@ -51,12 +51,6 @@
 
             }
 
-        },
-
-        mounted: function() {
-
-            // if( Vue.$Store.state.accessToken ) $nuxt._router.replace('/dashboard')
-
         }
 
     }
@@ -70,7 +64,7 @@
 	.fade-enter,
 	.fade-leave
 		opacity: 0
-	
+
 	.fade-enter
 		transform: translateX(-100%)
 

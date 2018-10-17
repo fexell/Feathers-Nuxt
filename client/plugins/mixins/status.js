@@ -12,6 +12,12 @@ export const _Status = () => {
 				// Are we logged in or not?
 				return Vue.$Store.state.accessToken
 
+			},
+
+			userLoggedIn() {
+
+				return Vue.$Store.state.userLoggedIn
+
 			}
 
 		}
