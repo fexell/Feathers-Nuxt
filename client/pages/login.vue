@@ -28,7 +28,7 @@
 
     export default {
 
-		middleware: ['authenticated'],
+		middleware: ['auth'],
 
         head: {
 
