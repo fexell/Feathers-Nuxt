@@ -28,7 +28,8 @@
     "dev": "cross-env NODE_ENV=dev && nodemon src/",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production && node src/",
-    "mocha": "mocha test/ --recursive --exit"
+    "mocha": "mocha test/ --recursive --exit",
+    "nuxtDev": "nuxt"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.9",

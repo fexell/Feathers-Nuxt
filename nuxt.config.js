@@ -49,6 +49,8 @@ module.exports = {
 		]
 	},
 
+	mode: 'universal',
+
 	loader: 'sass-loader',
 
 	// Nuxt Loading - https://nuxtjs.org/api/configuration-loading
@@ -61,6 +63,7 @@ module.exports = {
 	plugins: [
 		'~/plugins/default.js',
 
+		//{ src: '~/plugins/persistedstate.js', ssr: false },
 		{ src: '~/plugins/notifications.js', ssr: false },
 	],
 
@@ -81,13 +84,15 @@ module.exports = {
 		}
 	},
 
-	router: {
+	// Nuxt srcDir - https://nuxtjs.org/api/configuration-srcdir
+	srcDir: 'client/',
 
-		
-
+	server: {
+		port: 3030
 	},
 
-	// Nuxt srcDir - https://nuxtjs.org/api/configuration-srcdir
-	srcDir: 'client/'
+	serverMiddleware: [
+		'../src'
+	]
 
 }

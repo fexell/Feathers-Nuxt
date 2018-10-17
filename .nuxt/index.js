@@ -13,6 +13,7 @@ import { createStore } from './store.js'
 
 /* Plugins */
 import nuxt_plugin_default_9a631fe8 from 'nuxt_plugin_default_9a631fe8' // Source: ..\\client\\plugins\\default.js
+import nuxt_plugin_persistedstate_19c75d83 from 'nuxt_plugin_persistedstate_19c75d83' // Source: ..\\client\\plugins\\persistedstate.js (ssr: false)
 import nuxt_plugin_notifications_15a88b85 from 'nuxt_plugin_notifications_15a88b85' // Source: ..\\client\\plugins\\notifications.js (ssr: false)
 
 
@@ -155,6 +156,7 @@ async function createApp (ssrContext) {
   if (typeof nuxt_plugin_default_9a631fe8 === 'function') await nuxt_plugin_default_9a631fe8(app.context, inject)
   
   if (process.browser) { 
+    if (typeof nuxt_plugin_persistedstate_19c75d83 === 'function') await nuxt_plugin_persistedstate_19c75d83(app.context, inject)
     if (typeof nuxt_plugin_notifications_15a88b85 === 'function') await nuxt_plugin_notifications_15a88b85(app.context, inject)
   }
 

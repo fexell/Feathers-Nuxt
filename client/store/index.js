@@ -18,7 +18,7 @@ const _Store = () => {
 				userId: '',
 				username: '',
 				email: '',
-				accessToken: localStorage.getItem('feathers-jwt')
+				accessToken: localStorage.getItem('feathers-jwt'),
 
 			},
 
@@ -38,12 +38,14 @@ const _Store = () => {
 
 						state[ key ] = data[ key ]
 
-						sessionStorage.setItem( key, data[ key ] )
+						//sessionStorage.setItem( key, data[ key ] )
 
 					}
 
+					console.log( state )
+
 					// Store the access token in localStorage
-					window.localStorage.setItem('feathers-jwt', state.accessToken)
+					localStorage.setItem('feathers-jwt', state.accessToken)
 
 					// Show a success notification that they are now logged in
 					Vue.app.emit('success', Vue.$_Messages.success.login.withUsername( state.username ))
@@ -54,7 +56,7 @@ const _Store = () => {
 				Logout( state ) {
 
 					// Remove all stored information
-					window.localStorage.clear()
+					localStorage.clear()
 					sessionStorage.clear()
 					Cookies.remove('UserData')
 
@@ -117,15 +119,11 @@ const _Store = () => {
 						setItem: ( key, value ) => Cookies.set( key, value, { expires: 3, secure: false, samesite: 'lax' } ),
 						removeItem: key => Cookies.remove( key )
 
-					},
-					reducer: state => ({
+						//getItem: key => localStorage.getItem( key ),
+						//setItem: ( key, value ) => localStorage.setItem( key, value ),
+						//removeItem: key => localStorage.removeItem( key )
 
-						// Exclude the accessToken from the cookie, for safety reasons
-						email: state.email,
-						userId: state.userId,
-						username: state.username,
-
-					})
+					}
 
 				})
 

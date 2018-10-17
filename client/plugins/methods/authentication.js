@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import * as Cookies from 'js-cookie'
+import localStorage from 'localstorage-memory'
 
 export const _Authentication = () => {
 
@@ -12,7 +13,7 @@ export const _Authentication = () => {
 		// Get the user cookie
 		const cookie = Cookies.get('UserData')
 		// Get authentication token
-		const authToken = global.localStorage.getItem('feathers-jwt')
+		const authToken = localStorage.getItem('feathers-jwt')
 		// Verify the authentication token
 		const verify = Vue.app.passport.payloadIsValid(authToken)
 
