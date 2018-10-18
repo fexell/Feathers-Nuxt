@@ -1,6 +1,6 @@
 <template>
 
-    <main id="App" v-update-authentication>
+    <main id="App">
         <div class="container">
 
             <app-header/>
@@ -40,6 +40,12 @@
 
 		},
 
+		beforeCreate: function() {
+
+			this.$store.commit('INIT_STORE')
+
+		},
+
         // Listen to all errors, warnings, info and success events.
         created: function() {
 
@@ -67,14 +73,12 @@
 
             })
 
-        },
+		},
 
         // Send vuex the localStorage "feathers-jwt"
-        beforeMount: function() {
+        mounted: function() {
 
-            const accessToken = localStorage.getItem('feathers-jwt')
 
-            if( accessToken ) this.$store.commit('accessToken', accessToken)
 
         }
 

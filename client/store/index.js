@@ -1,140 +1,179 @@
+/* eslint-disable */
+
 import Vue from 'vue'
 import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
-import * as Cookies from 'js-cookie'
-
-// This is absolutely needed - otherwise localStorage will return undefined
+import Cookie from 'cookie'
 import localStorage from 'localstorage-memory'
+import * as Cookies from 'js-cookie'
+import createPersistedState from 'vuex-persistedstate'
 
-Vue.use(Vuex)
+export const state = () => ({
 
-const _Store = () => {
+	userId: null,
+	email: null,
+	username: null,
+	accessToken: null,
 
-		return new Vuex.Store({
+})
 
-			state: {
+export const mutations = {
 
-				// Get the localStorage value
-				userId: '',
-				username: '',
-				email: '',
-				accessToken: localStorage.getItem('feathers-jwt'),
+	INIT_STORE: function( state ) {
 
-			},
+		if( localStorage.getItem('store') ) {
 
-			mutations: {
+			this.replaceState( Object.assign(state, JSON.parse(localStorage.getItem('store'))) )
 
-				// Is the user logged in?
-				accessToken( state, token ) {
+		}
 
-					state.accessToken = token
+	},
 
-				},
+	SET_USER: function( state, user ) {
 
-				// Login the user and change the token to the user's "feathers-jwt" key
-				Login( state, data ) {
+		for( const key in state ) {
 
-					for( let key in data ) {
+			state[ key ] = user[ key ]
 
-						state[ key ] = data[ key ]
+		}
 
-						//sessionStorage.setItem( key, data[ key ] )
+		$nuxt._router.replace('/dashboard')
 
-					}
+		Cookies.set('jwt', state.accessToken)
 
-					console.log( state )
+		Vue.app.emit('success', 'You have been sucessfully logged in, ' + user.username + '.')
 
-					// Store the access token in localStorage
-					localStorage.setItem('feathers-jwt', state.accessToken)
+	},
 
-					// Show a success notification that they are now logged in
-					Vue.app.emit('success', Vue.$_Messages.success.login.withUsername( state.username ))
+	UNSET_USER: function( state ) {
 
-				},
+		localStorage.clear()
+		Cookies.remove('jwt')
+		window.localStorage.clear()
 
-				// On logout clear the localStorage
-				Logout( state ) {
+		for( const key in state ) {
 
-					// Remove all stored information
-					localStorage.clear()
-					sessionStorage.clear()
-					Cookies.remove('UserData')
+			state[ key ] = null
 
-					// Unset all state data
-					for( const key in state ) {
+		}
 
-						state[ key ] = null
+		Vue.app.emit('success', 'You have been successfully logged out!')
 
-					}
-
-					$nuxt._router.replace('/')
-
-					Vue.app.emit('success', 'You are now logged out!')
-
-				}
-
-			},
-
-			actions: {
-
-				// Run the Logout mutation
-				Logout: ( context ) => {
-
-					context.commit('Logout')
-
-				}
-
-			},
-
-			getters: {
-
-				accessToken: state => {
-
-					// Get the "accessToken" state
-					return state.accessToken
-
-				},
-
-				email: state => {
-
-					return state.email
-
-				}
-
-			},
-
-			// Use the VuePersist plugin
-			plugins: [
-
-				createPersistedState({
-
-					// The name of the cookie
-					key: 'UserData',
-
-					// Storage type (= cookie)
-					storage: {
-
-						// Set a cookie with the user information
-						getItem: key => Cookies.get( key ),
-						setItem: ( key, value ) => Cookies.set( key, value, { expires: 3, secure: false, samesite: 'lax' } ),
-						removeItem: key => Cookies.remove( key )
-
-						//getItem: key => localStorage.getItem( key ),
-						//setItem: ( key, value ) => localStorage.setItem( key, value ),
-						//removeItem: key => localStorage.removeItem( key )
-
-					}
-
-				})
-
-			]
-
-	})
+	}
 
 }
 
-// Store the $Store in the Vue instance, to be able to use it in plugins
-Vue.$Store = _Store()
+export const actions = {
 
-// Export the _Store
-export default _Store
+	async Login( { commit }, data ) {
+
+		try {
+
+			let obj = new Object()
+
+			Vue.app.authenticate({
+
+				strategy: 'local',
+				email: data.email,
+				password: data.password,
+
+			})
+			.then( response => {
+
+				obj.accessToken = response.accessToken
+
+				return Vue.app.passport.verifyJWT( response.accessToken )
+
+			})
+			.then( payload => {
+
+				obj.userId = payload.userId
+
+				return Vue.app.service('users').get( payload.userId )
+
+			})
+			.then( user => {
+
+				obj.email = user.email
+				obj.username = user.username
+
+				Vue.app.set('user', user)
+
+				commit('SET_USER', obj)
+
+			})
+			.catch( error => {
+
+				Vue.app.emit('error', error.message)
+
+			})
+
+		} catch ( e ) {
+
+			throw e
+
+		}
+
+	},
+
+	async AuthenticateJWT({ commit }, token) {
+
+		const obj = new Object()
+
+		Vue.app.authenticate({
+
+			strategy: 'jwt',
+			accessToken: token,
+
+		})
+		.then( response => {
+
+			obj.accessToken = response.accessToken
+
+			return Vue.app.passport.verifyJWT( response.accessToken )
+
+		})
+		.then( payload => {
+
+			obj.userId = payload.userId
+
+			return Vue.app.service('users').get( payload.userId )
+
+		})
+		.then( user => {
+
+			obj.email = user.email
+			obj.username = user.username
+
+			Vue.app.set('user', user)
+
+			commit('SET_USER', obj)
+
+		})
+		.catch( error => {
+
+			Vue.app.emit('error', error.message)
+
+		})
+
+	},
+
+	async Logout({ commit }) {
+
+		commit('UNSET_USER', null)
+
+	}
+
+}
+
+export const getters = {
+
+	accessToken( state ) {
+
+		return state.accessToken
+
+	}
+
+}
+
+export const store = new Vuex.Store()
+//export const store = new Vuex.Store({ plugins: [ createPersistedState({ key: 'vuex', storage: { getItem: key => Cookies.get( key ), setItem: ( key, value ) => Cookies.set( key, value, { secure: false } ), removeItem: key => Cookies.remove( key ) } }) ] })

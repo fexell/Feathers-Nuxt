@@ -8,44 +8,7 @@ export const _Forms = () => {
 
 	const Login = ( user ) => {
 
-		let userObj = new Object()
-
-		Vue.app.authenticate({
-
-			strategy: 'local',
-			...user
-
-		})
-		.then(response => {
-
-			userObj.accessToken = response.accessToken
-
-			return Vue.app.passport.verifyJWT(userObj.accessToken)
-
-		})
-		.then(payload => {
-
-			userObj.userId = payload.userId
-
-			return Vue.app.service('users').get(payload.userId)
-
-		})
-		.then(user => {
-
-			Vue.app.set('user', user)
-
-			userObj.username = user.username
-			userObj.email = user.email
-
-			Vue.$Store.commit('Login', userObj)
-			$nuxt._router.replace('/dashboard')
-
-		})
-		.catch(error => {
-
-			Vue.Logger('error', error)
-
-		})
+		$nuxt.$store.dispatch('Login', user)
 
 	}
 

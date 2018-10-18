@@ -11,7 +11,7 @@ export const _Logout = () => {
 			el.addEventListener('click', () => {
 
 				// Run the Logout action in Vuex
-				return Vue.$Store.dispatch('Logout')
+				return $nuxt.$store.dispatch('Logout')
 
 			})
 

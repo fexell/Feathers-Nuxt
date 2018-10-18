@@ -1,6 +1,7 @@
+import Vue from 'vue'
 import * as Cookies from 'js-cookie'
-export default async ({ store, redirect }) => {
+export default ({ store, redirect }) => {
 
-	console.log( store.getters.accessToken )
+	if( store.state.accessToken ) redirect('/dashboard')
 
 }

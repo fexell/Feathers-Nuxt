@@ -2,7 +2,7 @@
     <div class="container">
         <h1>Dashboard</h1>
 
-        {{ token }}
+        {{ Token }}
     </div>
 </template>
 <script>
@@ -21,7 +21,7 @@
 
             return {
 
-                token: Vue.$Store.state.accessToken
+
 
             }
 

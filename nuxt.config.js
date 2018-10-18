@@ -63,7 +63,7 @@ module.exports = {
 	plugins: [
 		'~/plugins/default.js',
 
-		//{ src: '~/plugins/persistedstate.js', ssr: false },
+		{ src: '~/plugins/persistedstate.js', ssr: false },
 		{ src: '~/plugins/notifications.js', ssr: false },
 	],
 

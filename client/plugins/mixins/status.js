@@ -7,16 +7,10 @@ export const _Status = () => {
 
 		computed: {
 
-			accessToken() {
+			Token() {
 
 				// Are we logged in or not?
-				return Vue.$Store.state.accessToken
-
-			},
-
-			userLoggedIn() {
-
-				return Vue.$Store.state.userLoggedIn
+				return this.$store.state.accessToken
 
 			}
 

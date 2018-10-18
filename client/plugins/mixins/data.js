@@ -1,5 +1,6 @@
 
 import Vue from 'vue'
+import * as Cookies from 'js-cookie'
 
 export const _Data = () => {
 
@@ -28,19 +29,19 @@ export const _Data = () => {
 
             UserId: function() {
 
-                return Vue.$Store.state.userId
+                return this.$store.state.userId
 
             },
 
             Username: function() {
 
-                return Vue.$Store.state.username
+                return this.$store.state.username
 
             },
 
             Email: function() {
 
-                return Vue.$Store.state.email
+                return this.$store.state.email
 
             },
 

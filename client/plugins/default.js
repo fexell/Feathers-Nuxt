@@ -23,6 +23,7 @@
 //
 
 import Vue from 'vue'
+import localStorage from 'localstorage-memory'
 
 //
 // 1) _Require_
@@ -34,7 +35,6 @@ const _Forms                = require('./forms')
 
 // 1.1) Directives
 const _Authenticate         = require('./directives/authenticate') // v-update-authentication, which calls the authentication method in methods/authentication
-const _Login                = require('./directives/login') // v-login
 const _Logout				= require('./directives/logout') // v-logout
 const _Register             = require('./directives/register') // v-register
 const _Validate             = require('./directives/validate') // v-validate
@@ -75,7 +75,6 @@ Vue.use(_Authentication) // The authentication method
 
 // 2.3) Directives
 Vue.use(_Authenticate) // v-update-authentication
-Vue.use(_Login) // v-login
 Vue.use(_Logout) // v-logout
 Vue.use(_Register) // v-register
 Vue.use(_Validate) // v-validate
