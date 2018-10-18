@@ -6,7 +6,7 @@
 // can be found here: https://nuxtjs.org/api .
 //
 
-const webpack = require('webpack')
+const config = require('config')
 
 module.exports = {
 
@@ -16,12 +16,11 @@ module.exports = {
 			config.node = {
 				fs: "empty"
 			}
-		}
+		},
 	},
 
-	// Nuxt CSS - https://nuxtjs.org/api/configuration-css
 	css: [
-		'./assets/sass/main.sass'
+		'~/assets/sass/main.sass',
 	],
 
 	// Nuxt Dev - https://nuxtjs.org/api/configuration-dev
@@ -29,13 +28,18 @@ module.exports = {
 
 	// Nuxt Env - https://nuxtjs.org/api/configuration-env
 	env: {
-		baseUrl: process.env.BASE_URL || 'http://localhost:3030'
+		baseUrl: process.env.BASE_URL || 'http://localhost:3030',
+		NODE_ENV: 'dev'
 	},
 
 	// Nuxt Head - https://nuxtjs.org/api/configuration-head
 	head: {
 		title: 'App',
 		titleTemplate: '%s - Feathers + Nuxt',
+		link: [
+			{ rel: 'stylesheet', href: '//fonts.googleapis.com/icon?family=Material+Icons' },
+			{ rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Abril+Fatface' },
+		],
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1.0005' },
@@ -43,13 +47,7 @@ module.exports = {
 		],
 	},
 
-	metaInfo: {
-		link: [
-			{ rel: 'stylesheet', href: './assets/sass/main.sass' },
-		]
-	},
-
-	mode: 'universal',
+	mode: 'spa',
 
 	loader: 'sass-loader',
 
@@ -63,7 +61,6 @@ module.exports = {
 	plugins: [
 		'~/plugins/default.js',
 
-		{ src: '~/plugins/persistedstate.js', ssr: false },
 		{ src: '~/plugins/notifications.js', ssr: false },
 	],
 
@@ -76,11 +73,6 @@ module.exports = {
 	// Enables http2: https://developers.google.com/web/fundamentals/performance/http2/
 		http2: {
 			push: true
-		},
-		bundleRenderer: {
-			shouldPreload: ( file, type ) => {
-				return ['script', 'style', 'font'].includes( type )
-			}
 		}
 	},
 
@@ -88,7 +80,8 @@ module.exports = {
 	srcDir: 'client/',
 
 	server: {
-		port: 3030
+		port: config.port,
+		host: config.host
 	},
 
 	serverMiddleware: [

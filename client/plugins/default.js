@@ -17,13 +17,14 @@
 // 2.4) Mixins
 // 2.5) Prototypes
 // 2.6) General
+// --------------------
+// 3) Disable Devtools
 //
 // ********************
 // </Table Of Contents>
 //
 
 import Vue from 'vue'
-import localStorage from 'localstorage-memory'
 
 //
 // 1) _Require_
@@ -52,9 +53,6 @@ const _Status               = require('./mixins/status')
 
 // 1.4) Prototypes
 const _Defaults             = require('./prototypes/defaults')
-
-// 1.5) General
-const _Material				= require('./general/material')
 
 // Use the needed plugins
 
@@ -86,5 +84,13 @@ Vue.use(_Status) // Vuex localStorage status "middleware"
 // 2.5) Prototypes
 Vue.use(_Defaults) // Stuff to bind to "this"-keyword and methods/functions to run right away
 
-// 2.6) General
-Vue.use(_Material)
+// 3) Disable Devtools
+// _________________________________________________________
+// Disable Vue devtools if this application is in production
+if(( process.env.NODE_ENV === 'production' )) {
+
+    Vue.config.devtools     = false
+    Vue.config.debug        = false
+    Vue.config.silent       = true
+
+}

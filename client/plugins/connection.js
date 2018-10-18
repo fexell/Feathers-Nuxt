@@ -14,7 +14,7 @@ export const _Connection = () => {
 		Vue.io 				= io // This binds "socket.io-client" to the Vue instance.
 		Vue.auth			= auth // This binds "feathers/authentication-client" to the Vue instance.
 
-		Vue.socket 			= Vue.io('http://localhost:3030') // This creates a global socket, on the Vue instance. Usage example: Vue.socket.emit('create', 'users'...)
+		Vue.socket 			= Vue.io( process.env.baseUrl ) // This creates a global socket, on the Vue instance. Usage example: Vue.socket.emit('create', 'users'...)
 		Vue.app 			= Vue.feathers() // This binds the actual important part of feathers to the Vue instance. Usage example: Vue.app.emit(), Vue.app.service('users'), ...
 
 		Vue.app.configure(Vue.socketio(Vue.socket))

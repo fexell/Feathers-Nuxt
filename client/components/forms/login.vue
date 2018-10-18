@@ -54,8 +54,8 @@ export default {
       password: "",
       validation: () => {
         return {
-          email: Vue.$_Test.email(this.email),
-          password: Vue.$_Test.password(this.password)
+          email: Vue.$Test.email(this.email),
+          password: Vue.$Test.password(this.password)
         };
       }
     };

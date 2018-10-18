@@ -4,7 +4,7 @@ import Vue from 'vue'
 export const _Messages = () => {
 
     // Default messages
-    Vue.$_Messages = {
+    Vue.$Messages = {
 
         error: {
 

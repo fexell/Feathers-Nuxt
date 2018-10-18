@@ -41,7 +41,7 @@ export const _Validate = () => {
                 // If it's username
                 case 'username': {
 
-                    toggleValid( Vue.$_Test.username( el.value ) )
+                    toggleValid( Vue.$Test.username( el.value ) )
 
                     break
 
@@ -50,7 +50,7 @@ export const _Validate = () => {
                 // If it's email
                 case 'email': {
 
-                    toggleValid( Vue.$_Test.email( el.value ) )
+                    toggleValid( Vue.$Test.email( el.value ) )
 
                     break
 
@@ -59,7 +59,7 @@ export const _Validate = () => {
                 // If it's password
                 case 'password': {
 
-                    toggleValid( Vue.$_Test.password( el.value ) )
+                    toggleValid( Vue.$Test.password( el.value ) )
 
                     break
 
@@ -76,10 +76,10 @@ export const _Validate = () => {
                         const target        = vnode.context[ property ]
 
                         // If an expression was provided
-                        if( exp ) toggleValid( Vue.$_Test[ exp ]( el.value ) && el.value === target )
+                        if( exp ) toggleValid( Vue.$Test[ exp ]( el.value ) && el.value === target )
 
                         // Otherwise try do a regexp test against the modifier
-                        else if( !exp && typeof Vue.$_Test[ property ] !== 'undefined' ) toggleValid( Vue.$_Test[ property ]( el.value ) && el.value === target )
+                        else if( !exp && typeof Vue.$Test[ property ] !== 'undefined' ) toggleValid( Vue.$Test[ property ]( el.value ) && el.value === target )
 
                         // Otherwise show a console.error that the modifier is not valid
                         else return console.error('Could not find a valid modifier. You provided: "' + property + '". This includes unable to find a modifier in our default ones. If you want to add default modifiers, please see the documentation.')

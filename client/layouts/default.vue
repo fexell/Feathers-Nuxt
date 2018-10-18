@@ -26,7 +26,7 @@
     import AppFooter from '@/components/footer'
     import AppSidebar from '@/components/sidebar'
 
-	import * as Cookies from 'js-cookie'
+    import * as Cookies from 'js-cookie'
 
 	Vue.use(Vuex)
 
@@ -38,11 +38,14 @@
             AppFooter,
             AppSidebar
 
-		},
+        },
+        
+        layout: 'default',
 
+        // Initialize the vuex store storage
 		beforeCreate: function() {
 
-			this.$store.commit('INIT_STORE')
+            this.$store.commit('INIT_STORE')
 
 		},
 
@@ -73,12 +76,11 @@
 
             })
 
-		},
+        },
 
-        // Send vuex the localStorage "feathers-jwt"
         mounted: function() {
 
-
+            console.log( process )
 
         }
 

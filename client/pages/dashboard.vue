@@ -11,6 +11,8 @@
 
     export default {
 
+        middleware: 'notAuthenticated',
+
         head: {
 
             title: 'Dashboard'
@@ -25,7 +27,7 @@
 
             }
 
-        }
+        },
 
     }
 

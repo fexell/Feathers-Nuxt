@@ -8,7 +8,7 @@ export const _Authentication = () => {
 
 		const cookie = Cookies.getJSON('vuex')
 
-		$nuxt.$store.dispatch( 'AuthenticateJWT', cookie.accessToken )
+		$nuxt.$store.dispatch( 'Login', { strategy: 'jwt', accessToken: cookie.accessToken } )
 
 	}
 

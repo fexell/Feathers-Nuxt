@@ -6,34 +6,21 @@ export const _Forms = () => {
 	let obj = new Object()
 	obj.forms = new Object()
 
-	const Login = ( user ) => {
+	const Login = ( data ) => {
 
-		$nuxt.$store.dispatch('Login', user)
-
-	}
-
-	const Signup = ( user ) => {
-
-		Vue.socket.emit('create', 'users', user, (error, message) => {
-
-			// Replace, for example, "email:" with empty string
-			if( error ) return Vue.Logger('error', error.message.replace(/\w+\:/i, ''))
-
-			Vue.app.emit('success', 'User <span style="color:#7fb3d5;">' + message.username + '</span> has been successfully created. You can now log in!')
-
-		})
+		$nuxt.$store.dispatch('Login', data)
 
 	}
 
-	const Find = ( target, query ) => {
+	const Signup = ( data ) => {
 
-		Vue.socket.emit('find', target, query, ( error, data ) => {
+		$nuxt.$store.dispatch('Signup', data)
 
-			if( error ) return Vue.Logger('error', error.message.replace(/\w+\:/i, ''))
+	}
 
-			console.log( data )
+	const Find = ( target, data ) => {
 
-		})
+		$nuxt.$store.dispatch('Find', target, data)
 
 	}
 
@@ -57,23 +44,23 @@ export const _Forms = () => {
 
 				obj.forms.elements.forEach((el, i) => {
 
-					o[i] = {
+					o[ i ] = {
 
 						el: el, // The input element
 						value: el.value, // The input value
-						vname: ((vname = new Array()) => { for (const key in obj.forms.mods) { vname.push(key) } return vname[i] })(), // Get the vnode name
-						valid: ((valid = new Array()) => { for (const key in obj.forms.mods) { valid.push(obj.forms.validation[key]) } return valid[i] })() // Get the validation boolean
+						vname: (( vname = new Array() ) => { for ( const key in obj.forms.mods ) { vname.push( key ) } return vname[ i ] })(), // Get the vnode name
+						valid: (( valid = new Array() ) => { for ( const key in obj.forms.mods ) { valid.push( obj.forms.validation[ key ] ) } return valid[ i ] })() // Get the validation boolean
 
 					}
 
-					return o[i]
+					return o[ i ]
 
 				})
 
 				// Return the object as a promise
 				return new Promise((resolve) => {
 
-					resolve(o)
+					resolve( o )
 
 				})
 
@@ -96,6 +83,7 @@ export const _Forms = () => {
 
 						Login({
 
+							strategy: 'local',
 							email: obj.forms.data.email,
 							password: obj.forms.data.password
 
@@ -121,8 +109,6 @@ export const _Forms = () => {
 
 					case 'find': {
 
-						console.log( obj.forms.data.username )
-
 						Find('users', { username: obj.forms.data.username })
 
 						break
@@ -132,8 +118,6 @@ export const _Forms = () => {
 				}
 
 			})
-
-			console.log(obj)
 
 			// Return the obj so we can access its data in this entire plugin
 			return obj
@@ -165,8 +149,6 @@ export const _Forms = () => {
 				}
 
 			})
-
-			console.log(obj)
 
 		}
 

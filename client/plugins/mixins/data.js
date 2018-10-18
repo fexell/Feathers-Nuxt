@@ -14,9 +14,9 @@ export const _Data = () => {
                 // Global regex props
                 regex: {
 
-                    username: Vue.$_Regex.username,
-                    email: Vue.$_Regex.email,
-                    password: Vue.$_Regex.password
+                    username: Vue.$Regex.username,
+                    email: Vue.$Regex.email,
+                    password: Vue.$Regex.password
 
                 }
 

@@ -69,7 +69,7 @@ const _Logger = () => {
 
 	}
 
-	Vue.prototype.$_logger = Vue.Logger
+	Vue.prototype.$Logger = Vue.Logger
 
 }
 

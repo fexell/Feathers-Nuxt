@@ -83,10 +83,10 @@
 
 					return {
 
-						username: Vue.$_Test.username( this.username ),
-						email: Vue.$_Test.email( this.email ),
-						password: Vue.$_Test.password( this.password ),
-						confirm: Vue.$_Test.password( this.confirm ) && this.password === this.confirm
+						username: Vue.$Test.username( this.username ),
+						email: Vue.$Test.email( this.email ),
+						password: Vue.$Test.password( this.password ),
+						confirm: Vue.$Test.password( this.confirm ) && this.password === this.confirm
 
 					}
 

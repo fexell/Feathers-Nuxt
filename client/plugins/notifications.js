@@ -58,7 +58,7 @@ const _Notifications = {
 
         })
 
-        Vue.prototype.$_toast = Vue.Toast
+        Vue.prototype.$Toast = Vue.Toast
 
     }
 

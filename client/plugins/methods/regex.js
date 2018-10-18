@@ -4,7 +4,7 @@ import Vue from 'vue'
 export const _Regex = () => {
 
     // Regexes'
-    Vue.$_Regex = {
+    Vue.$Regex = {
 
 		username: /^[-\w\.\$@\*\!]{5,30}$/,
 		email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
@@ -13,49 +13,49 @@ export const _Regex = () => {
     }
 
     // Test against the regexes'
-	Vue.$_Test = {
+	Vue.$Test = {
 
         // Simple username regex function that returns "false" or "true"
         username: ( username ) => {
 
-            return Vue.$_Regex.username.test( username )
+            return Vue.$Regex.username.test( username )
 
         },
 
         // Simple email regex function that returns "false" or "true"
         email: ( email ) => {
 
-            return Vue.$_Regex.email.test( email )
+            return Vue.$Regex.email.test( email )
 
         },
 
         // Simple password regex function that returns "false" or "true"
         password: ( password ) => {
 
-            return Vue.$_Regex.password.test( password )
+            return Vue.$Regex.password.test( password )
 
         }
 
     }
 
     // Global stream functions
-    Vue.$_Stream = {
+    Vue.$Stream = {
 
         Login: ( email, password ) => {
 
             return new Promise( ( resolve, reject ) => {
 
                 // If email is empty
-                if( !email ) reject( Vue.$_Messages.error.email.empty )
+                if( !email ) reject( Vue.$Messages.error.email.empty )
                 // If password is empty
-                else if( !password ) reject( Vue.$_Messages.error.password.empty )
+                else if( !password ) reject( Vue.$Messages.error.password.empty )
 
                 // If email doesn't pass the validation regex
-                else if( !Vue.$_Test.email( email ) ) reject( Vue.$_Messages.error.email.invalid )
+                else if( !Vue.$Test.email( email ) ) reject( Vue.$Messages.error.email.invalid )
                 // If password doesn't pass the validation regex
-                else if( !Vue.$_Test.password( password ) ) reject( Vue.$_Messages.error.password.invalid )
+                else if( !Vue.$Test.password( password ) ) reject( Vue.$Messages.error.password.invalid )
                 // If everything was successful, resolve our promise
-                else resolve( Vue.$_Messages.success.login.default )
+                else resolve( Vue.$Messages.success.login.default )
 
             })
 
@@ -74,7 +74,7 @@ export const _Regex = () => {
 
                     let result, password, confirm
 
-                    if( !value ) reject(Vue.$_DefaultMessages.error.empty.specific( index ))
+                    if( !value ) reject(Vue.$DefaultMessages.error.empty.specific( index ))
                     else if( /password/i.test( index ) ) password = value
                     else if( /confirm/i.test( index ) ) result = password === value ? true : false
 

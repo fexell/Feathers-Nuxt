@@ -2,10 +2,8 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Cookie from 'cookie'
-import localStorage from 'localstorage-memory'
 import * as Cookies from 'js-cookie'
-import createPersistedState from 'vuex-persistedstate'
+import PersistedState from '../plugins/persistedstate'
 
 export const state = () => ({
 
@@ -18,9 +16,12 @@ export const state = () => ({
 
 export const mutations = {
 
+	// This is instead of Nuxt's nuxtServerInit.
+	// Please, do not nuxtServerInit anywhere here,
+	// since it will break the site.
 	INIT_STORE: function( state ) {
 
-		if( localStorage.getItem('store') ) {
+		if( state.accessToken ) {
 
 			this.replaceState( Object.assign(state, JSON.parse(localStorage.getItem('store'))) )
 
@@ -28,22 +29,27 @@ export const mutations = {
 
 	},
 
-	SET_USER: function( state, user ) {
+	// Set the user, as well as all needed data
+	SET_USER: function( state, data ) {
 
 		for( const key in state ) {
 
-			state[ key ] = user[ key ]
+			state[ key ] = data[ key ]
 
 		}
 
+		// Redirect the user to dashboard
 		$nuxt._router.replace('/dashboard')
 
+		// For easier access to the JWT token
 		Cookies.set('jwt', state.accessToken)
 
-		Vue.app.emit('success', 'You have been sucessfully logged in, ' + user.username + '.')
+		// Display a success notification if the user is successfully authenticated
+		Vue.app.emit('success', 'You have been sucessfully logged in, <span>' + data.username + '</span>.')
 
 	},
 
+	// Unset the user upon log out
 	UNSET_USER: function( state ) {
 
 		localStorage.clear()
@@ -58,25 +64,23 @@ export const mutations = {
 
 		Vue.app.emit('success', 'You have been successfully logged out!')
 
+		$nuxt._router.replace('/')
+
 	}
 
 }
 
 export const actions = {
 
+	// The login dispatch function.
+	// "data" needs to contain the Feathers JS "strategy", as well as the data to authenticate against
 	async Login( { commit }, data ) {
 
 		try {
 
 			let obj = new Object()
 
-			Vue.app.authenticate({
-
-				strategy: 'local',
-				email: data.email,
-				password: data.password,
-
-			})
+			Vue.app.authenticate( data )
 			.then( response => {
 
 				obj.accessToken = response.accessToken
@@ -113,53 +117,46 @@ export const actions = {
 
 		}
 
+		Promise.resolve()
+
 	},
 
-	async AuthenticateJWT({ commit }, token) {
+	// The signup dispatch function
+	async Signup({ dispatch }, data) {
 
-		const obj = new Object()
+		Vue.socket.emit('create', 'users', data, (error, message) => {
 
-		Vue.app.authenticate({
+			// Replace, for example, "email:" with empty string
+			if( error ) return Vue.Logger('error', error.message.replace(/\w+\:/i, ''))
 
-			strategy: 'jwt',
-			accessToken: token,
+			Vue.app.emit('success', 'User <span>' + message.username + '</span> has been successfully created. You\'ll be logged in shortly.')
 
-		})
-		.then( response => {
-
-			obj.accessToken = response.accessToken
-
-			return Vue.app.passport.verifyJWT( response.accessToken )
-
-		})
-		.then( payload => {
-
-			obj.userId = payload.userId
-
-			return Vue.app.service('users').get( payload.userId )
-
-		})
-		.then( user => {
-
-			obj.email = user.email
-			obj.username = user.username
-
-			Vue.app.set('user', user)
-
-			commit('SET_USER', obj)
-
-		})
-		.catch( error => {
-
-			Vue.app.emit('error', error.message)
+			// Automatically login the user if successfully created - uncomment or remove this bit
+			// of code if you want the new user to log in manually
+			dispatch('Login', { strategy: 'local', email: data.email, password: data.password })
 
 		})
 
 	},
 
+	async Find({ commit }, target, data) {
+
+		Vue.socket.emit('find', target, data, ( error, data ) => {
+
+			if( error ) return Vue.Logger('error', error.message.replace(/\w+\:/i, ''))
+
+			console.log( data )
+
+		})
+
+	},
+
+	// The logout dispatch function
 	async Logout({ commit }) {
 
 		commit('UNSET_USER', null)
+
+		Promise.resolve()
 
 	}
 
@@ -175,5 +172,16 @@ export const getters = {
 
 }
 
-export const store = new Vuex.Store()
-//export const store = new Vuex.Store({ plugins: [ createPersistedState({ key: 'vuex', storage: { getItem: key => Cookies.get( key ), setItem: ( key, value ) => Cookies.set( key, value, { secure: false } ), removeItem: key => Cookies.remove( key ) } }) ] })
+export default function() {
+	
+	return new Vuex.Store({
+
+		...state,
+		mutations,
+		actions,
+		getters,
+		plugins: [ PersistedState ] // See [ plugins/persistedstate.js ], to see what the code does
+
+	})
+
+}

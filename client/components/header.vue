@@ -7,7 +7,6 @@
 				<li v-show="Token"><nuxt-link to="/dashboard">Dashboard</nuxt-link></li>
 				<li v-show="Token"><a href="#" v-logout>Logout</a></li>
 				<li v-show="!Token"><nuxt-link to="/login">Login</nuxt-link></li>
-				<li><nuxt-link to="/login">Login</nuxt-link></li>
 			</ul>
 		</nav>
 	</header>
