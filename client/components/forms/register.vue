@@ -1,10 +1,12 @@
 <template>
 	<div id="Form">
 		<h4 class="align-center">Register</h4>
-		<form id="Register" class="form" v-form:signup.username.email.password.confirm>
+		<form id="Register" class="form" @submit.prevent="Signup">
 			<div class="form-item">
 				<input
-				v-model="username"
+				:class="{ invalid: $v.username.$error, valid: !$v.username.$error && username.length }"
+				@input="$v.username.$touch()"
+				v-model.trim="username"
 				type="text"
 				name="username"
 				min="5"
@@ -17,7 +19,9 @@
 			</div>
 			<div class="form-item">
 				<input
-				v-model="email"
+				:class="{ invalid: $v.email.$error, valid: !$v.email.$error && email.length }"
+				@input="$v.email.$touch()"
+				v-model.trim="email"
 				type="email"
 				name="email"
 				placeholder="Email"
@@ -28,7 +32,9 @@
 			</div>
 			<div class="form-item">
 				<input
-				v-model="password"
+				:class="{ invalid: $v.password.$error, valid: !$v.password.$error && password.length }"
+				@input="$v.password.$touch()"
+				v-model.trim="password"
 				type="password"
 				name="password"
 				min="6"
@@ -41,7 +47,9 @@
 			</div>
 			<div class="form-item">
 				<input
-				v-model="confirm"
+				:class="{ invalid: $v.confirm.$error, valid: !$v.confirm.$error && confirm.length }"
+				@input="$v.confirm.$touch()"
+				v-model.trim="confirm"
 				type="password"
 				name="confirm"
 				min="6"
@@ -66,6 +74,10 @@
 <script>
 
 	import Vue from 'vue'
+	import { required, email, sameAs } from 'vuelidate/lib/validators'
+
+	const username = ( value ) => Vue.$Test.username( value )
+	const password = ( value ) => Vue.$Test.password( value )
 
 	export default {
 		name: 'Register',
@@ -78,18 +90,50 @@
 				email: '',
 				password: '',
 				confirm: '',
-				validation: function() {
 
-					return {
+			}
 
-						username: Vue.$Test.username( this.username ),
-						email: Vue.$Test.email( this.email ),
-						password: Vue.$Test.password( this.password ),
-						confirm: Vue.$Test.password( this.confirm ) && this.password === this.confirm
+		},
 
-					}
+		validations: {
 
-				}
+			username: {
+
+				required,
+				username
+
+			},
+
+			email: {
+
+				required,
+				email
+
+			},
+
+			password: {
+
+				required,
+				password
+
+			},
+
+			confirm: {
+
+				required,
+				sameAsPassword: sameAs('password')
+
+			},
+
+		},
+
+		methods: {
+
+			Signup: function() {
+
+				if( this.$v.$invalid ) return Vue.app.emit('error', 'Something you have provided turned up invalid.')
+
+				this.$store.dispatch('Signup', { username: this.username, email: this.email, password: this.password })
 
 			}
 

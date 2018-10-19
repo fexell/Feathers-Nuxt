@@ -13,6 +13,7 @@ import { createStore } from './store.js'
 
 /* Plugins */
 import nuxt_plugin_default_9a631fe8 from 'nuxt_plugin_default_9a631fe8' // Source: ..\\client\\plugins\\default.js
+import nuxt_plugin_vuelidate_4be431c8 from 'nuxt_plugin_vuelidate_4be431c8' // Source: ..\\client\\plugins\\vuelidate.js
 import nuxt_plugin_notifications_15a88b85 from 'nuxt_plugin_notifications_15a88b85' // Source: ..\\client\\plugins\\notifications.js (ssr: false)
 
 
@@ -36,7 +37,7 @@ Vue.use(Meta, {
   tagIDKeyName: 'hid' // the property name that vue-meta uses to determine whether to overwrite or append a tag
 })
 
-const defaultTransition = {"name":"page","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
+const defaultTransition = {"name":"layout","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
 async function createApp (ssrContext) {
   const router = createRouter(ssrContext)
@@ -153,6 +154,7 @@ async function createApp (ssrContext) {
   // Plugin execution
   
   if (typeof nuxt_plugin_default_9a631fe8 === 'function') await nuxt_plugin_default_9a631fe8(app.context, inject)
+  if (typeof nuxt_plugin_vuelidate_4be431c8 === 'function') await nuxt_plugin_vuelidate_4be431c8(app.context, inject)
   
   if (process.browser) { 
     if (typeof nuxt_plugin_notifications_15a88b85 === 'function') await nuxt_plugin_notifications_15a88b85(app.context, inject)

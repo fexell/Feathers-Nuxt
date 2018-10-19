@@ -1,10 +1,12 @@
 <template>
 	<div id="Form">
 		<h4 class="align-center">Login</h4>
-		<form id="Login" class="form" v-form:login.email.password>
+		<form id="Login" class="form" @submit.prevent="Login">
 			<div class="form-item">
 				<input
-				v-model="email"
+				:class="{ invalid: $v.email.$error, valid: !$v.email.$error && email.length }"
+				@input="$v.email.$touch()"
+				v-model.trim="email"
 				type="email"
 				name="email"
 				placeholder="Email"
@@ -15,7 +17,9 @@
 			</div>
 			<div class="form-item">
 				<input
-				v-model="password"
+				:class="{ invalid: $v.password.$error, valid: !$v.password.$error && password.length }"
+				@input="$v.password.$touch()"
+				v-model.trim="password"
 				type="password"
 				name="password"
 				min="6"
@@ -42,32 +46,54 @@
 </template>
 <script>
 
-	import Vue from "vue";
-	import Vuex from "vuex";
+	import Vue from 'vue'
+	import { required, email } from 'vuelidate/lib/validators'
+
+	const password = ( value ) => Vue.$Test.password( value )
 
 	export default {
 
-	name: "Login",
+		name: "Login",
 
-	data: function() {
+		data: function() {
 
 			return {
 				email: '',
 				password: '',
-				validation: () => {
 
-					return {
+			}
 
-						email: Vue.$Test.email( this.email ),
-						password: Vue.$Test.password( this.password ),
+		},
 
-					};
+		validations: {
 
-				}
+			email: {
 
-			};
+				required,
+				email,
+
+			},
+
+			password: {
+
+				required,
+				password,
+
+			}
+
+		},
+
+		methods: {
+
+			Login: function() {
+
+				if( this.$v.$invalid ) return Vue.app.emit('error', 'Something you have provided turned up invalid.')
+
+				this.$store.dispatch('Login', { strategy: 'local', email: this.email, password: this.password })
+
+			}
 
 		}
 
-	};
+	}
 </script>

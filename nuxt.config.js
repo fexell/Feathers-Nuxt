@@ -17,8 +17,8 @@ module.exports = {
 				fs: "empty"
 			}
 		},
-		removeAttributeQuotes: false,
-  		removeComments: false,
+		removeAttributeQuotes: true,
+  		removeComments: true,
 	},
 
 	css: [
@@ -52,6 +52,13 @@ module.exports = {
 
 	mode: 'spa',
 
+	layoutTransition: 'layout',
+
+	transition: {
+		name: 'layout',
+		mode: 'out-in',
+	},
+
 	loader: 'sass-loader',
 
 	// Nuxt Loading - https://nuxtjs.org/api/configuration-loading
@@ -63,6 +70,7 @@ module.exports = {
 	// Nuxt Plugins (can be custom plugins as well) - https://nuxtjs.org/api/configuration-plugins
 	plugins: [
 		'~/plugins/default.js',
+		'~/plugins/vuelidate.js',
 
 		{ src: '~/plugins/notifications.js', ssr: false },
 	],

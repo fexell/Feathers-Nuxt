@@ -22,7 +22,7 @@ export const mutations = {
 	INIT_STORE: function( state ) {
 
 		if( state.accessToken ) {
-
+			
 			this.replaceState( Object.assign(state, JSON.parse(localStorage.getItem('store'))) )
 
 		}

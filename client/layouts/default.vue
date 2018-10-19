@@ -20,15 +20,12 @@
 <script>
 
 	import Vue from 'vue'
-    import Vuex from 'vuex'
 
     import AppHeader from '@/components/header'
     import AppFooter from '@/components/footer'
     import AppSidebar from '@/components/sidebar'
 
     import * as Cookies from 'js-cookie'
-
-	Vue.use(Vuex)
 
     export default {
 
@@ -77,12 +74,6 @@
             })
 
         },
-
-        mounted: function() {
-
-            console.log( process )
-
-        }
 
     }
 
