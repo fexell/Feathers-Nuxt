@@ -1,5 +1,6 @@
 <h1> Feathers JS + Nuxt JS Boilerplate </h1>
   
+<img src="https://i.imgur.com/U4NYlka.jpg" />
 <h2>Information</h2>
 This is a boilerplate using Feathers JS and Nuxt JS. Everything is already setup:<br /><br />
 <ol>
@@ -8,10 +9,30 @@ This is a boilerplate using Feathers JS and Nuxt JS. Everything is already setup
 <li>Vuex</li>
 <li>Login</li>
 <li>Sign up/Register</li>
-<li>Automatic authentication</li>
+<li>Automatic re-authentication</li>
 <li>Password and Email validation (<b>NOT</b> email validation/email verification)</li>
 </ol>
+<br />
+<br />
+<i>
+<strong>If you want to help with developing</strong> this boilerplate, please send me a message here or to my email: 
+<a href="mailto:fexellofficial@gmail.com">fexellofficial@gmail.com</a>. Please keep in mind that this is the <strong>public repo</strong> of this boilerplate. There is 
+a private repo where I push updates more frequently, and this is the reason why you have to message me, to gain access to it.
+</i>
 
+<hr />
+<h2>Updates</h2>
+<i>Updates and announcements will be displayed here, as in information on what I'm currently working on for the boilerplate.</i>
+<br />
+<br />
+<ol>
+<li>Better <code>form</code> handling.</li>
+</ol>
+<br />
+
+<i><b>* :</b> Updates/New features not yet pushed to this repo.</i>
+
+<hr />
 <h2>Installation</h2>
 
 Clone this repo:<br />
