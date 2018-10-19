@@ -17,6 +17,8 @@ module.exports = {
 				fs: "empty"
 			}
 		},
+		removeAttributeQuotes: false,
+  		removeComments: false,
 	},
 
 	css: [
@@ -37,6 +39,7 @@ module.exports = {
 		title: 'App',
 		titleTemplate: '%s - Feathers + Nuxt',
 		link: [
+			{ rel: 'icon', type: 'image/png', href: '/favicon.png' },
 			{ rel: 'stylesheet', href: '//fonts.googleapis.com/icon?family=Material+Icons' },
 			{ rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Abril+Fatface' },
 		],
@@ -74,6 +77,10 @@ module.exports = {
 		http2: {
 			push: true
 		}
+	},
+
+	router: {
+		base: '/'
 	},
 
 	// Nuxt srcDir - https://nuxtjs.org/api/configuration-srcdir

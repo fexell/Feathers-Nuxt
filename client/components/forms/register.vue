@@ -1,6 +1,6 @@
 <template>
 	<div id="Form">
-		<h4>Register</h4>
+		<h4 class="align-center">Register</h4>
 		<form id="Register" class="form" v-form:signup.username.email.password.confirm>
 			<div class="form-item">
 				<input
@@ -68,9 +68,8 @@
 	import Vue from 'vue'
 
 	export default {
-		middleware: 'authenticated',
 		name: 'Register',
-		
+
 		data: function() {
 
 			return {

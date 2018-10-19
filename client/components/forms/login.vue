@@ -1,6 +1,6 @@
 <template>
 	<div id="Form">
-		<h4>Login</h4>
+		<h4 class="align-center">Login</h4>
 		<form id="Login" class="form" v-form:login.email.password>
 			<div class="form-item">
 				<input
@@ -41,24 +41,33 @@
 	</div>
 </template>
 <script>
-import Vue from "vue";
-import Vuex from "vuex";
 
-export default {
-	middleware: 'authenticated',
-  name: "Login",
+	import Vue from "vue";
+	import Vuex from "vuex";
 
-  data: function() {
-    return {
-      email: "",
-      password: "",
-      validation: () => {
-        return {
-          email: Vue.$Test.email(this.email),
-          password: Vue.$Test.password(this.password)
-        };
-      }
-    };
-  }
-};
+	export default {
+
+	name: "Login",
+
+	data: function() {
+
+			return {
+				email: '',
+				password: '',
+				validation: () => {
+
+					return {
+
+						email: Vue.$Test.email( this.email ),
+						password: Vue.$Test.password( this.password ),
+
+					};
+
+				}
+
+			};
+
+		}
+
+	};
 </script>

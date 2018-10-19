@@ -2,7 +2,7 @@
 	<!-- This is the "Footer Component". -->
 	<footer id="Footer" class="comp--wrapper">
 		<div class="container">
-			<a href="//localhost:3030" target="_blank">API</a>
+			<a class="font-weight-600" href="//localhost:3030" target="_blank"><i class="material-icons">important_devices</i> API</a>
 		</div>
 	</footer>
 </template>
@@ -21,6 +21,7 @@
 			text-align: center
 
 			& a
+				letter-spacing: 2px
 				color: #b3b6b7
 
 				&:hover

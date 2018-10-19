@@ -58,29 +58,29 @@
 </script>
 <style lang="sass" scoped>
 
-    .fade
-        transition: all 500ms ease
+	.fade
+		transition: all 500ms ease
 
-    .fade-enter,
-    .fade-leave
-        opacity: 0
+	.fade-enter,
+	.fade-leave
+		opacity: 0
 
-    .fade-enter
-        transform: scale(1.4)
+	.fade-enter
+		transform: scale(1.4)
 
-    .container
-        width: 30%
+	.container
+		width: 40rem
 
-    ul
-        list-style-type: none
+	ul
+		list-style-type: none
 
-        li
-            a
-                display: block
-                text-align: center
-                color: #b3b6b7
+		li
+			a
+				display: block
+				text-align: center
+				color: #b3b6b7
 
-                &:hover
-                    color: #58D68D
+				&:hover
+					color: #58D68D
 
 </style>
