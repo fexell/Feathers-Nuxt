@@ -41,9 +41,6 @@ export const mutations = {
 		// Redirect the user to dashboard
 		$nuxt._router.replace('/dashboard')
 
-		// For easier access to the JWT token
-		Cookies.set('jwt', state.accessToken)
-
 		// Display a success notification if the user is successfully authenticated
 		Vue.app.emit('success', 'You have been sucessfully logged in, <span>' + data.username + '</span>.')
 
@@ -53,7 +50,6 @@ export const mutations = {
 	UNSET_USER: function( state ) {
 
 		localStorage.clear()
-		Cookies.remove('jwt')
 		window.localStorage.clear()
 
 		for( const key in state ) {
@@ -147,6 +143,28 @@ export const actions = {
 	async Logout({ commit }) {
 
 		commit('UNSET_USER', null)
+
+		Promise.resolve()
+
+	},
+
+	async INIT_STORE({ commit, dispatch, state }) {
+
+		let store = JSON.parse( localStorage.getItem('store') )
+
+		if( !state.userId || !state.email || !state.username || !state.accessToken || state.accessToken !== store.accessToken ) return dispatch('Logout')
+
+		Vue.app.passport.verifyJWT( state.accessToken )
+			.then(() => {
+
+				commit('INIT_STORE')
+
+			})
+			.catch(() => {
+
+				commit('UNSET_USER')
+
+			})
 
 		Promise.resolve()
 

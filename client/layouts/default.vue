@@ -8,10 +8,12 @@
             <app-sidebar/>
 
             <section id="Content" class="comp--wrapper">
-                <nuxt />
+                <nuxt/>
             </section>
 
             <app-footer/>
+
+            <iframe style="position:absolute;top:-9999px;left:-9999px;width:0px;height:0px;display:none;" src="./lsc.html"></iframe>
 
         </div>
     </main>
@@ -42,7 +44,7 @@
         // Initialize the vuex store storage
 		beforeCreate: function() {
 
-            this.$store.commit('INIT_STORE')
+            this.$store.dispatch('INIT_STORE')
 
 		},
 
@@ -74,6 +76,13 @@
             })
 
         },
+
+        mounted: function() {
+
+            document.querySelector('iframe').contentWindow.Vue = Vue
+            document.querySelector('iframe').contentWindow.$nuxt = $nuxt
+
+        }
 
     }
 
