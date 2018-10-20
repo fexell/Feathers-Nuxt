@@ -12,7 +12,7 @@ module.exports = {
 
 	// Nuxt Build - https://nuxtjs.org/api/configuration-build
 	build: {
-		extend: (config, { isDev, isClient }) => {
+		extend: ( config ) => {
 			config.node = {
 				fs: "empty"
 			}

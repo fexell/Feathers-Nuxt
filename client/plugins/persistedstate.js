@@ -1,4 +1,5 @@
 import createPersistedState from 'vuex-persistedstate'
+// import localStorage from 'localstorage-memory'
 
 let PersistedState
 

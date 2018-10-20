@@ -76,46 +76,38 @@ export const actions = {
 	// "data" needs to contain the Feathers JS "strategy", as well as the data to authenticate against
 	async Login( { commit }, data ) {
 
-		try {
+		let obj = new Object()
 
-			let obj = new Object()
+		Vue.app.authenticate( data )
+		.then( response => {
 
-			Vue.app.authenticate( data )
-			.then( response => {
+			obj.accessToken = response.accessToken
 
-				obj.accessToken = response.accessToken
+			return Vue.app.passport.verifyJWT( response.accessToken )
 
-				return Vue.app.passport.verifyJWT( response.accessToken )
+		})
+		.then( payload => {
 
-			})
-			.then( payload => {
+			obj.userId = payload.userId
 
-				obj.userId = payload.userId
+			return Vue.app.service('users').get( payload.userId )
 
-				return Vue.app.service('users').get( payload.userId )
+		})
+		.then( user => {
 
-			})
-			.then( user => {
+			obj.email = user.email
+			obj.username = user.username
 
-				obj.email = user.email
-				obj.username = user.username
+			Vue.app.set('user', user)
 
-				Vue.app.set('user', user)
+			commit('SET_USER', obj)
 
-				commit('SET_USER', obj)
+		})
+		.catch( error => {
 
-			})
-			.catch( error => {
+			Vue.app.emit('error', error.message)
 
-				Vue.app.emit('error', error.message)
-
-			})
-
-		} catch ( e ) {
-
-			throw e
-
-		}
+		})
 
 		Promise.resolve()
 
@@ -176,7 +168,7 @@ export default function() {
 	
 	return new Vuex.Store({
 
-		...state,
+		state,
 		mutations,
 		actions,
 		getters,
