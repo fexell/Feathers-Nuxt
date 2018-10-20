@@ -36,7 +36,6 @@ const _Connection           = require('./connection') // The most important plug
 // 1.1) Directives
 const _Authenticate         = require('./directives/authenticate') // v-update-authentication, which calls the authentication method in methods/authentication
 const _Logout				= require('./directives/logout') // v-logout
-const _Register             = require('./directives/register') // v-register
 
 // 1.2) Methods
 const _Storage              = require('./methods/storage')
@@ -71,7 +70,6 @@ Vue.use(_Authentication) // The authentication method
 // 2.3) Directives
 Vue.use(_Authenticate) // v-update-authentication
 Vue.use(_Logout) // v-logout
-Vue.use(_Register) // v-register
 
 // 2.4) Mixins
 Vue.use(_Data) // Global Vue data props

@@ -6,8 +6,11 @@ export const _Regex = () => {
 	// Regexes'
 	Vue.$Regex = {
 
+		/* eslint-disable-next-line */
 		username: /^[-\w\.\$@\*\!]{5,30}$/,
+		/* eslint-disable-next-line */
 		email: /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+		/* eslint-disable-next-line */
 		password: /^((?![^ -~])((?=.*\d{1,})(?=.*[A-Z]{1,})(?=.*[a-z]{1,})(?=.*[^\w\d\s:])([^\s]){6,64}))$/m
 
 	}

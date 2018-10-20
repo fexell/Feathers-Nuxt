@@ -8,6 +8,7 @@ export const _Storage = () => {
 
 		for( const key in obj ) {
 
+			/* eslint-disable-next-line */
 			sessionStorage.setItem( key, obj[ key ] )
 
 		}
