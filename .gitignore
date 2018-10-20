@@ -112,6 +112,7 @@ $RECYCLE.BIN/
 # Others
 lib/
 data/
+.nuxt
 .nuxt/App.js
 .nuxt/client.js
 .nuxt/components/no-ssr.js
