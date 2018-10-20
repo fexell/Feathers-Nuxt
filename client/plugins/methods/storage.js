@@ -4,15 +4,15 @@ import Vue from 'vue'
 
 export const _Storage = () => {
 
-    Vue.$SessionStorage = ( obj ) => {
+	Vue.$SessionStorage = ( obj ) => {
 
-        for( const key in obj ) {
+		for( const key in obj ) {
 
-            sessionStorage.setItem( key, obj[ key ] )
+			sessionStorage.setItem( key, obj[ key ] )
 
-        }
+		}
 
-    }
+	}
 
 }
 

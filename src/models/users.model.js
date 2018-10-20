@@ -3,16 +3,17 @@
 // See http://mongoosejs.com/docs/models.html
 // for more of what you can do here.
 module.exports = function (app) {
-  const mongooseClient = app.get('mongooseClient');
-  const users = new mongooseClient.Schema({
+	const mongooseClient = app.get('mongooseClient');
+	const users = new mongooseClient.Schema({
 
-    username: {
+		username: {
 
 			type: String,
 			validate: {
 
 				validator: function( v ) {
 
+					/* eslint-disable-next-line */
 					return /^[-\w\.\$@\*\!]{5,30}$/.test( v )
 
 				},
@@ -21,33 +22,34 @@ module.exports = function (app) {
 
 			}
 
-    },
+		},
 
-    email: {
-      type: String,
-      lowercase: true,
-      unique: true,
-      validate: {
+		email: {
+			type: String,
+			lowercase: true,
+			unique: true,
+			validate: {
 
-        validator: function( v ) {
+				validator: function( v ) {
 
-          return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test( v )
+					/* eslint-disable-next-line */
+					return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test( v )
 
-        },
+				},
 
-        message: props => `${ props.value } is not a valid email.`
+				message: props => `${ props.value } is not a valid email.`
 
-      }
-    },
+			}
+		},
 
-    password: {
-      type: String
-    },
+		password: {
+			type: String
+		},
 
 
-  }, {
-    timestamps: true
-  });
+	}, {
+		timestamps: true
+	});
 
-  return mongooseClient.model('users', users);
+	return mongooseClient.model('users', users);
 };

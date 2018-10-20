@@ -8,6 +8,7 @@ export const _Authentication = () => {
 
 		const cookie = Cookies.getJSON('vuex')
 
+		/* eslint-disable-next-line */
 		$nuxt.$store.dispatch( 'Login', { strategy: 'jwt', accessToken: cookie.accessToken } )
 
 	}

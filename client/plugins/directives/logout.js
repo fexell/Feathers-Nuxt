@@ -6,11 +6,12 @@ export const _Logout = () => {
 	Vue.directive('logout', {
 
 		// Bind the logout to a click event
-		bind: ( el, binding, vnode ) => {
+		bind: ( el ) => {
 
 			el.addEventListener('click', () => {
 
 				// Run the Logout action in Vuex
+				/* eslint-disable-next-line */
 				return $nuxt.$store.dispatch('Logout')
 
 			})

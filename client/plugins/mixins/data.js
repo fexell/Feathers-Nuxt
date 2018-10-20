@@ -4,50 +4,50 @@ import * as Cookies from 'js-cookie'
 
 export const _Data = () => {
 
-    // Global mixin
-    Vue.mixin({
+	// Global mixin
+	Vue.mixin({
 
-        data: function() {
+		data: function() {
 
-            return {
+			return {
 
-                // Global regex props
-                regex: {
+				// Global regex props
+				regex: {
 
-                    username: Vue.$Regex.username,
-                    email: Vue.$Regex.email,
-                    password: Vue.$Regex.password
+					username: Vue.$Regex.username,
+					email: Vue.$Regex.email,
+					password: Vue.$Regex.password
 
-                }
+				}
 
-            }
+			}
 
-        },
+		},
 
 		// Store some of the Vuex information and make them globally available
-        computed: {
+		computed: {
 
-            UserId: function() {
+			UserId: function() {
 
-                return this.$store.state.userId
+				return this.$store.state.userId
 
-            },
+			},
 
-            Username: function() {
+			Username: function() {
 
-                return this.$store.state.username
+				return this.$store.state.username
 
-            },
+			},
 
-            Email: function() {
+			Email: function() {
 
-                return this.$store.state.email
+				return this.$store.state.email
 
-            },
+			},
 
-        }
+		}
 
-    })
+	})
 
 }
 

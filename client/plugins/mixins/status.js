@@ -3,7 +3,7 @@ import Vue from 'vue'
 
 export const _Status = () => {
 
-    Vue.mixin({
+	Vue.mixin({
 
 		computed: {
 

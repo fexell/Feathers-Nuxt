@@ -85,8 +85,8 @@ Vue.use(_Defaults) // Stuff to bind to "this"-keyword and methods/functions to r
 // Disable Vue devtools if this application is in production
 if(( process.env.NODE_ENV === 'production' )) {
 
-    Vue.config.devtools     = false
-    Vue.config.debug        = false
-    Vue.config.silent       = true
+	Vue.config.devtools     = false
+	Vue.config.debug        = false
+	Vue.config.silent       = true
 
 }

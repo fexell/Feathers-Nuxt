@@ -1,29 +1,26 @@
 {
   "env": {
     "es6": true,
-    "node": true,
-    "mocha": true
+    "node": true
   },
   "parserOptions": {
-    "ecmaVersion": 2017
+    "ecmaVersion": 2017,
+    "sourceType": "module"
   },
   "extends": "eslint:recommended",
   "rules": {
     "indent": [
       "error",
-      2
+      "tab"
     ],
     "linebreak-style": [
       "error",
-      "unix"
+      "windows"
     ],
     "quotes": [
       "error",
       "single"
     ],
-    "semi": [
-      "error",
-      "always"
-    ]
+    "semi": 0
   }
 }
