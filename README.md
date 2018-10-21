@@ -10,7 +10,8 @@ This is a boilerplate using Feathers JS and Nuxt JS. Everything is already setup
 <li>Login</li>
 <li>Sign up/Register</li>
 <li>Automatic re-authentication</li>
-<li>Password and Email validation (<b>NOT</b> email validation/email verification)</li>
+<li>Vuelidate</li>
+<li>Vue-Notifications</li>
 </ol>
 <br />
 <br />
