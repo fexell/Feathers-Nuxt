@@ -1,16 +1,14 @@
 /* eslint-disable */
 
 import Vue from 'vue'
-import Vuex from 'vuex'
-import * as Cookies from 'js-cookie'
 import PersistedState from '../plugins/persistedstate'
 
 export const state = () => ({
 
-	userId: null,
-	email: null,
-	username: null,
-	accessToken: null,
+	userId: undefined,
+	email: undefined,
+	username: undefined,
+	accessToken: undefined,
 
 })
 
@@ -20,10 +18,10 @@ export const mutations = {
 	// Please, do not nuxtServerInit anywhere here,
 	// since it will break the site.
 	INIT_STORE: function( state ) {
+		
+		if( Object.getOwnPropertyNames( state ).length === 0 ) {
 
-		if( state.accessToken ) {
-			
-			this.replaceState( Object.assign(state, JSON.parse(localStorage.getItem('store'))) )
+			this.replaceState( Object.assign( state, JSON.parse( localStorage.getItem('store') ) ) )
 
 		}
 
@@ -39,7 +37,7 @@ export const mutations = {
 		}
 
 		// Redirect the user to dashboard
-		$nuxt._router.replace('/dashboard')
+		$nuxt._router.replace('/dashboard', null, null)
 
 		// Display a success notification if the user is successfully authenticated
 		Vue.app.emit('success', 'You have been sucessfully logged in, <span>' + data.username + '</span>.')
@@ -49,18 +47,15 @@ export const mutations = {
 	// Unset the user upon log out
 	UNSET_USER: function( state ) {
 
-		localStorage.clear()
-		window.localStorage.clear()
-
 		for( const key in state ) {
 
-			state[ key ] = null
+			state[ key ] = undefined
 
 		}
 
-		Vue.app.emit('success', 'You have been successfully logged out!')
+		$nuxt._router.replace('/', null, null)
 
-		$nuxt._router.replace('/')
+		Vue.app.emit('success', 'You have been successfully logged out!')
 
 	}
 
@@ -96,7 +91,7 @@ export const actions = {
 
 			Vue.app.set('user', user)
 
-			commit('SET_USER', obj)
+			commit( 'SET_USER', obj )
 
 		})
 		.catch( error => {
@@ -142,29 +137,42 @@ export const actions = {
 	// The logout dispatch function
 	async Logout({ commit }) {
 
-		commit('UNSET_USER', null)
+		// Commmit to unset all the user state data
+		commit('UNSET_USER')
+
+		// Clear the localStorage
+		localStorage.clear()
 
 		Promise.resolve()
 
 	},
+	
+	async Init({ commit, state }) {
 
-	async INIT_STORE({ commit, dispatch, state }) {
+		// If state.accessToken exists...
+		if( state.accessToken ) {
+			
+			let store = JSON.parse( localStorage.getItem('store') )
 
-		let store = JSON.parse( localStorage.getItem('store') )
+			if( !state.userId || !state.email || !state.username || !state.accessToken || state.accessToken !== store.accessToken ) return commit('UNSET_USER')
 
-		if( !state.userId || !state.email || !state.username || !state.accessToken || state.accessToken !== store.accessToken ) return dispatch('Logout')
+			Vue.app.passport.verifyJWT( state.accessToken )
+				.then(() => {
 
-		Vue.app.passport.verifyJWT( state.accessToken )
-			.then(() => {
+					commit('INIT_STORE')
 
-				commit('INIT_STORE')
+				})
+				.catch(() => {
 
-			})
-			.catch(() => {
+					commit('UNSET_USER')
 
-				commit('UNSET_USER')
+				})
 
-			})
+		} else {
+
+			localStorage.clear()
+
+		}
 
 		Promise.resolve()
 
@@ -182,16 +190,6 @@ export const getters = {
 
 }
 
-export default function() {
-	
-	return new Vuex.Store({
-
-		state,
-		mutations,
-		actions,
-		getters,
-		plugins: [ PersistedState ] // See [ plugins/persistedstate.js ], to see what the code does
-
-	})
-
-}
+export const plugins = [
+	PersistedState
+]

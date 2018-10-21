@@ -13,6 +13,7 @@
 
             <app-footer/>
 
+            <!-- lsc = localStorageChange. This checks if the localStorage changes, and if it does, logout the user. -->
             <iframe style="position:absolute;top:-9999px;left:-9999px;width:0px;height:0px;display:none;" src="./lsc.html"></iframe>
 
         </div>
@@ -44,7 +45,7 @@
         // Initialize the vuex store storage
 		beforeCreate: function() {
 
-            this.$store.dispatch('INIT_STORE')
+            this.$store.dispatch('Init')
 
 		},
 
@@ -79,6 +80,7 @@
 
         mounted: function() {
 
+            // Provide the iFrame window object with our Vue and $nuxt object.
             document.querySelector('iframe').contentWindow.Vue = Vue
             document.querySelector('iframe').contentWindow.$nuxt = $nuxt
 

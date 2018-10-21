@@ -1,1 +1,1 @@
-<script>(function(){window.addEventListener('storage',function(b){JSON.parse(localStorage.getItem('store'));if('store'===b.key&&b.oldValue!==b.newValue&&!/null/i.test(b.oldValue))return $nuxt.$store.dispatch('Logout')})})();</script>
+<script>window.addEventListener('storage',function(b){try{let c=$nuxt.$store.state,d=JSON.parse(b.storageArea.store);for(const f in c)if(c[f]!==d[f]||0===Object.getOwnPropertyNames(d).length)return $nuxt.$store.dispatch('Logout')}catch(c){return localStorage.clear()}});</script>
