@@ -28,6 +28,7 @@ a private repo where I push updates more frequently, and this is the reason why 
 <br />
 <ol>
 <li>Better <code>form</code> handling.</li>
+<li>Security updates. <i>This will be pushed as we go.</i></li>
 </ol>
 <br />
 

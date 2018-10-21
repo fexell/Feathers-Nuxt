@@ -42,7 +42,6 @@ module.exports = {
 			{ rel: 'icon', type: 'image/png', href: '/favicon.png' },
 			{ rel: 'stylesheet', href: '//fonts.googleapis.com/icon?family=Material+Icons' },
 			{ rel: 'stylesheet', href: '//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Abril+Fatface' },
-			//{ rel: 'import', href: './lsc.html' },
 		],
 		meta: [
 			{ charset: 'utf-8' },
