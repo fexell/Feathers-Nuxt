@@ -56,6 +56,7 @@ export const mutations = {
 		$nuxt._router.replace('/', null, null)
 
 		Vue.app.emit('success', 'You have been successfully logged out!')
+		Vue.app.logout()
 
 	}
 
@@ -154,7 +155,7 @@ export const actions = {
 			
 			let store = JSON.parse( localStorage.getItem('store') )
 
-			if( !state.userId || !state.email || !state.username || !state.accessToken || state.accessToken !== store.accessToken ) return commit('UNSET_USER')
+			if( state.accessToken !== store.accessToken ) return commit('UNSET_USER')
 
 			Vue.app.passport.verifyJWT( state.accessToken )
 				.then(() => {

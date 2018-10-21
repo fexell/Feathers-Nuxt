@@ -9,7 +9,7 @@ module.exports = function(app) {
 		app.channel('anonymous').join(connection);
 	});
 
-	app.on('login', (authResult, { connection }) => {
+	app.on('login', (payload, { connection }) => {
 		// connection can be undefined if there is no
 		// real-time connection, e.g. when logging in via REST
 		if(connection) {
@@ -25,17 +25,8 @@ module.exports = function(app) {
 			// Add it to the authenticated user channel
 			app.channel('authenticated').join(connection);
 
-			// Channels can be named anything and joined on any condition
-
-			// E.g. to send real-time events only to admins use
-			// if(user.isAdmin) { app.channel('admins').join(connection); }
-
-			// If the user has joined e.g. chat rooms
-			if(Array.isArray(user.rooms)) user.rooms.forEach(room => app.channel(`rooms/${room.id}`).join(connection));
-
 			// Easily organize users by email and userid for things like messaging
 			app.channel(`emails/${user.email}`).join(connection);
-			// app.channel(`$(user.id}`).join(channel);
 
 		}
 	});
@@ -50,6 +41,24 @@ module.exports = function(app) {
 		// e.g. to publish all service events to all authenticated users use
 		return app.channel('authenticated');
 	});
+
+	app.publish( data => {
+
+		const { email } = data
+
+		console.log( email )
+
+		if( email ) {
+			
+			return app.channel(`emails/${email}`).send({
+
+				data: data
+	
+			})
+
+		}
+
+	})
 
 	// Here you can also add service specific event publishers
 	// e.g. the publish the `users` service `created` event to the `admins` channel
