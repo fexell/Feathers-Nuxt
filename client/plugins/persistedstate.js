@@ -1,4 +1,7 @@
 import createPersistedState from 'vuex-persistedstate'
+import { CookieStorage } from 'cookie-storage'
+
+const cookieStorage = new CookieStorage()
 
 let PersistedState
 
@@ -8,12 +11,13 @@ if( process.browser ) {
 
 		key: 'store',
 		/* eslint-disable-next-line */
-		storage: localStorage,
-		reducer: state => ({
+		storage: {
 
-			accessToken: state.accessToken
+			getItem: key => cookieStorage.getItem( key ),
+			setItem: ( key, value ) => cookieStorage.setItem( key, value ),
+			removeItem: key => cookieStorage.removeItem( key )
 
-		})
+		}
 
 	})
 

@@ -2,6 +2,9 @@
 
 import Vue from 'vue'
 import PersistedState from '../plugins/persistedstate'
+import { CookieStorage } from 'cookie-storage'
+
+const cookieStorage = new CookieStorage()
 
 export const state = () => ({
 
@@ -19,11 +22,9 @@ export const mutations = {
 	// since it will break the site.
 	INIT_STORE: function( state ) {
 
-		if( Object.getOwnPropertyNames( state ).length === 0 ) {
+		this.replaceState( Object.assign( state, JSON.parse( cookieStorage.getItem('store') ) ) )
 
-			this.replaceState( Object.assign( state, JSON.parse( localStorage.getItem('store') ) ) )
-
-		}
+		Vue.app.emit('info', 'Re-authentication was successful!')
 
 	},
 
@@ -40,26 +41,25 @@ export const mutations = {
 		if( window.location.pathname === '/login' ) $nuxt._router.replace('/dashboard', null, null)
 
 		// Display a success notification if the user is successfully authenticated
-		Vue.app.emit('success', 'Welcome back, <span>' + data.username + '</span>.')
-
-		// Since you cannot set a feathers accessToken as an object (as in {accessToken: XXXXXX}),
-		// we need to store the token in a localStorage item that Feathers will recognize
-		localStorage.setItem('jwt', state.accessToken)
+		Vue.app.emit('success', 'Welcome in, <span>' + data.username + '</span>.')
 
 	},
 
 	// Unset the user upon log out
 	UNSET_USER: function( state ) {
 
+		// Set all states to undefined
 		for( const key in state ) {
 
 			state[ key ] = undefined
 
 		}
 
-		$nuxt._router.replace('/', null, null)
+		if( window.location.pathname === '/dashboard' ) $nuxt._router.replace('/', null, null)
 
 		Vue.app.emit('success', 'You have been successfully logged out!')
+
+		// Let Feathers handle the logout process of clearing storaged data, etc.
 		Vue.app.logout()
 
 	}
@@ -146,28 +146,37 @@ export const actions = {
 		commit('UNSET_USER')
 
 		// Clear the localStorage
-		localStorage.clear()
+		cookieStorage.clear()
 
 		Promise.resolve()
 
 	},
 
-	async Init({ commit, dispatch, state }) {
+	async Init({ commit, state }) {
 
-		// If state.accessToken exists...
-		if( state.accessToken ) {
+		if( cookieStorage.getItem('jwt') && cookieStorage.getItem('store') || state.accessToken ) {
 
-			const fromForm = false
+			Vue.app.passport.getJWT()
+				.then( jwt => {
 
-			let store = JSON.parse( localStorage.getItem('store') )
+					return Vue.app.passport.verifyJWT( jwt )
 
-			if( state.accessToken !== store.accessToken ) return commit('UNSET_USER')
+				})
+				.then( payload => {
 
-			dispatch('Login', { strategy: 'jwt', accessToken: state.accessToken })
+					return Vue.app.passport.payloadIsValid( payload )
 
-		} else {
+				})
+				.then(() => {
 
-			localStorage.clear()
+					return commit('INIT_STORE')
+
+				})
+				.catch(() => {
+
+					return Vue.app.logout()
+
+				})
 
 		}
 

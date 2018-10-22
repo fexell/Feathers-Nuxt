@@ -3,6 +3,9 @@ import feathers from '@feathersjs/feathers'
 import socketio from '@feathersjs/socketio-client'
 import io from 'socket.io-client'
 import auth from '@feathersjs/authentication-client'
+import { CookieStorage } from 'cookie-storage'
+
+const cookieStorage = new CookieStorage()
 
 export const _Connection = () => {
 
@@ -18,7 +21,7 @@ export const _Connection = () => {
 		Vue.app 			= Vue.feathers() // This binds the actual important part of feathers to the Vue instance. Usage example: Vue.app.emit(), Vue.app.service('users'), ...
 
 		Vue.app.configure(Vue.socketio(Vue.socket))
-		Vue.app.configure(Vue.auth({ service: 'users', storage: localStorage, storageKey: 'jwt' }))
+		Vue.app.configure(Vue.auth({ entity: 'user', service: 'users', cookie: 'jwt', storage: cookieStorage, storageKey: 'jwt' }))
 
 	}
 

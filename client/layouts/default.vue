@@ -13,9 +13,6 @@
 
             <app-footer/>
 
-            <!-- lsc = localStorageChange. This checks if the localStorage changes, and if it does, logout the user. -->
-            <iframe style="position:absolute;top:-9999px;left:-9999px;width:0px;height:0px;display:none;" src="/lsc.html" />
-
         </div>
     </main>
 
@@ -75,20 +72,6 @@
                 this.success({ title: 'Success', message: message, type: 'success' })
 
             })
-
-        },
-
-        mounted: function() {
-
-            // The code below is for the localStorageChange iframe.
-            //
-            // If anything gets changed in the localStorage, it will then
-            // logout the user.
-            //
-            // It also watches to see if the iframe is getting deleted,
-            // to then re-inert itself into the DOM - i.e, prevent
-            // the visitor/user from deleting the iframe.
-            document.querySelector('iframe').contentWindow.Vue=Vue,document.querySelector('iframe').contentWindow.$nuxt=$nuxt;var mutationObserver=new MutationObserver(function(a){a.forEach(function(b){b.removedNodes[0]&&'IFRAME'===b.removedNodes[0].nodeName&&document.querySelector('#App > .container').append(b.removedNodes[0]),document.querySelector('iframe').contentWindow.Vue=Vue,document.querySelector('iframe').contentWindow.$nuxt=$nuxt})});mutationObserver.observe(document.documentElement,{childList:!0,subtree:!0});
 
         }
 

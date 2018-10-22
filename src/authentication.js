@@ -7,7 +7,7 @@ module.exports = function (app) {
 	// Set up authentication with the secret
 	app.configure(authentication(config));
 	app.configure(jwt());
-	app.configure(local());
+	app.configure(local({ session: true }));
 	// The `authentication` service is used to create a JWT.
 	// The before `create` hook registers strategies that can be used
 	// to create a new valid JWT (e.g. local or oauth2)
@@ -17,7 +17,7 @@ module.exports = function (app) {
 				authentication.hooks.authenticate(config.strategies)
 			],
 			remove: [
-				authentication.hooks.authenticate('jwt')
+				authentication.hooks.authenticate(['jwt'])
 			]
 		}
 	});

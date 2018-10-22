@@ -3,8 +3,14 @@
 
 		<h1 class="align-center">Welcome to this web application!</h1>
 
-		{{ Username }}
-		{{ UserId }}
+		<div v-if="Token">
+			<p>
+				<b>Your UserId:</b> {{ UserId }}
+			</p>
+			<p>
+				<b>Your username:</b> {{ Username }}
+			</p>
+		</div>
 
 	</div>
 </template>
