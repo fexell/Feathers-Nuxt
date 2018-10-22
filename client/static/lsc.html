@@ -1,3 +1,19 @@
 <script>
-(function(){window.addEventListener('storage',function(b){try{let c=$nuxt.$store.state,d=JSON.parse(b.storageArea.store);for(const f in c)if(c[f]!==d[f]||0===Object.getOwnPropertyNames(d).length)return $nuxt.$store.dispatch('Logout')}catch(c){return localStorage.clear()}})})();
+(function() {
+	window.addEventListener('storage', function(b) {
+		try {
+			let c = $nuxt.$store.state,
+				d = JSON.parse(b.storageArea.store);
+			if (c.accessToken !== d.accessToken || 0 === Object.getOwnPropertyNames(d).length) {
+
+				Vue.app.emit('error', 'Please refrain from altering your local storage!')
+
+				return $nuxt.$store.dispatch('Logout')
+
+			}
+		} catch (c) {
+			return localStorage.clear()
+		}
+	})
+})();
 </script>

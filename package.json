@@ -23,7 +23,7 @@
   },
   "scripts": {
     "dev": "nuxt",
-    "start": "nuxt start",
+    "start": "nuxt start && NODE_ENV=production",
     "build": "nuxt build",
     "generate": "nuxt generate",
     "test": "ava --serial --verbose",

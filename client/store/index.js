@@ -18,7 +18,7 @@ export const mutations = {
 	// Please, do not nuxtServerInit anywhere here,
 	// since it will break the site.
 	INIT_STORE: function( state ) {
-		
+
 		if( Object.getOwnPropertyNames( state ).length === 0 ) {
 
 			this.replaceState( Object.assign( state, JSON.parse( localStorage.getItem('store') ) ) )
@@ -37,10 +37,14 @@ export const mutations = {
 		}
 
 		// Redirect the user to dashboard
-		$nuxt._router.replace('/dashboard', null, null)
+		if( window.location.pathname === '/login' ) $nuxt._router.replace('/dashboard', null, null)
 
 		// Display a success notification if the user is successfully authenticated
-		Vue.app.emit('success', 'You have been sucessfully logged in, <span>' + data.username + '</span>.')
+		Vue.app.emit('success', 'Welcome back, <span>' + data.username + '</span>.')
+
+		// Since you cannot set a feathers accessToken as an object (as in {accessToken: XXXXXX}),
+		// we need to store the token in a localStorage item that Feathers will recognize
+		localStorage.setItem('jwt', state.accessToken)
 
 	},
 
@@ -147,27 +151,19 @@ export const actions = {
 		Promise.resolve()
 
 	},
-	
-	async Init({ commit, state }) {
+
+	async Init({ commit, dispatch, state }) {
 
 		// If state.accessToken exists...
 		if( state.accessToken ) {
-			
+
+			const fromForm = false
+
 			let store = JSON.parse( localStorage.getItem('store') )
 
 			if( state.accessToken !== store.accessToken ) return commit('UNSET_USER')
 
-			Vue.app.passport.verifyJWT( state.accessToken )
-				.then(() => {
-
-					commit('INIT_STORE')
-
-				})
-				.catch(() => {
-
-					commit('UNSET_USER')
-
-				})
+			dispatch('Login', { strategy: 'jwt', accessToken: state.accessToken })
 
 		} else {
 

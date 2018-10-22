@@ -8,7 +8,12 @@ if( process.browser ) {
 
 		key: 'store',
 		/* eslint-disable-next-line */
-		storage: localStorage
+		storage: localStorage,
+		reducer: state => ({
+
+			accessToken: state.accessToken
+
+		})
 
 	})
 

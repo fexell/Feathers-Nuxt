@@ -39,7 +39,7 @@
             AppSidebar
 
         },
-        
+
         layout: 'default',
 
         // Initialize the vuex store storage
