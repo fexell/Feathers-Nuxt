@@ -1,6 +1,6 @@
 <script>
 (function() {
-	window.addEventListener('storage', function(b) {
+	window.addEventListener('storage', async function(b) {
 		try {
 			let c = $nuxt.$store.state,
 				d = JSON.parse(b.storageArea.store);
@@ -14,6 +14,8 @@
 		} catch (c) {
 			return localStorage.clear()
 		}
+
+		Promise.resolve()
 	})
 })();
 </script>
