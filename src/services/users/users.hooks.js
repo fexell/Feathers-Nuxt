@@ -8,8 +8,8 @@ const {
 module.exports = {
 	before: {
 		all: [],
-		find: [ authenticate('jwt') ],
-		get: [ authenticate('jwt') ],
+		find: [],
+		get: [],
 		create: [ hashPassword() ],
 		update: [ hashPassword(),  authenticate('jwt') ],
 		patch: [ hashPassword(),  authenticate('jwt') ],

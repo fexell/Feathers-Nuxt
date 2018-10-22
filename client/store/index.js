@@ -1,5 +1,9 @@
 /* eslint-disable */
 
+//
+// TODO: Add more accessible Feathers Service events, such as "get", "remove", "update", "patch", etc.
+//
+
 import Vue from 'vue'
 import PersistedState from '../plugins/persistedstate'
 import { CookieStorage } from 'cookie-storage'
@@ -24,7 +28,7 @@ export const mutations = {
 
 		this.replaceState( Object.assign( state, JSON.parse( cookieStorage.getItem('store') ) ) )
 
-		Vue.app.emit('info', 'Re-authentication was successful!')
+		Vue.app.emit('success', 'Re-authentication was successful!')
 
 	},
 
@@ -57,8 +61,6 @@ export const mutations = {
 
 		if( window.location.pathname === '/dashboard' ) $nuxt._router.replace('/', null, null)
 
-		Vue.app.emit('success', 'You have been successfully logged out!')
-
 		// Let Feathers handle the logout process of clearing storaged data, etc.
 		Vue.app.logout()
 
@@ -69,7 +71,7 @@ export const mutations = {
 export const actions = {
 
 	// The login dispatch function.
-	// "data" needs to contain the Feathers JS "strategy", as well as the data to authenticate against
+	// "data" needs to contain the Feathers' "strategy", as well as the data to authenticate against
 	async Login( { commit }, data ) {
 
 		let obj = new Object()
@@ -140,13 +142,24 @@ export const actions = {
 	},
 
 	// The logout dispatch function
-	async Logout({ commit }) {
+	async Logout({ commit, state }) {
+
+		// Set the token as the previous token
+		Vue.app.service('users').patch( state.userId, { accessToken: state.accessToken, prevToken: state.accessToken } )
+			.then(data => {
+
+				console.log( data )
+
+			})
 
 		// Commmit to unset all the user state data
 		commit('UNSET_USER')
 
 		// Clear the localStorage
 		cookieStorage.clear()
+
+		// Display a message that they've successfully logged out
+		Vue.app.emit('success', 'You have been successfully logged out!')
 
 		Promise.resolve()
 
@@ -158,6 +171,21 @@ export const actions = {
 
 			Vue.app.passport.getJWT()
 				.then( jwt => {
+
+					// In case of the JWT that is trying to authenticate is the previous one
+					// then throw them an error.
+					Vue.app.service('users').get( state.userId )
+						.then( data => {
+
+							if( data.prevToken === cookieStorage.getItem('jwt') || data.prevToken === state.accessToken ) {
+
+								commit('UNSET_USER')
+
+								return Vue.app.emit('error', 'You cannot authenticate by using an old token.')
+
+							}
+
+						})
 
 					return Vue.app.passport.verifyJWT( jwt )
 
@@ -186,6 +214,7 @@ export const actions = {
 
 }
 
+// Getters
 export const getters = {
 
 	accessToken( state ) {

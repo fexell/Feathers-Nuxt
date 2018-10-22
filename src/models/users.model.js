@@ -46,6 +46,11 @@ module.exports = function (app) {
 			type: String
 		},
 
+		prevToken: {
+			type: String,
+			unique: true,
+		}
+
 
 	}, {
 		timestamps: true
