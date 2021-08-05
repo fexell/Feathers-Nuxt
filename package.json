@@ -55,7 +55,7 @@
     "lodash": "^4.17.11",
     "material-design-icons": "^3.0.1",
     "mongoose": "^5.3.4",
-    "node-sass": "^4.9.4",
+    "node-sass": "^5.0.0",
     "nuxt": "^1.4.4",
     "sass-loader": "^7.1.0",
     "serve-favicon": "^2.5.0",
