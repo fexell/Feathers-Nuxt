@@ -32,14 +32,14 @@
     "mocha": "mocha test/ --recursive --exit"
   },
   "dependencies": {
-    "@feathersjs/authentication": "^2.1.11",
+    "@feathersjs/authentication": "^5.0.0",
     "@feathersjs/authentication-client": "^1.0.6",
     "@feathersjs/authentication-jwt": "^2.0.5",
     "@feathersjs/authentication-local": "^1.2.5",
     "@feathersjs/configuration": "^2.0.4",
     "@feathersjs/express": "^1.2.7",
     "@feathersjs/feathers": "^3.2.3",
-    "@feathersjs/socketio": "^3.2.6",
+    "@feathersjs/socketio": "^5.0.0",
     "@feathersjs/socketio-client": "^1.1.4",
     "clone": "^2.1.2",
     "compression": "^1.7.3",
