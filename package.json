@@ -56,7 +56,7 @@
     "material-design-icons": "^3.0.1",
     "mongoose": "^5.3.4",
     "node-sass": "^4.9.4",
-    "nuxt": "^1.4.4",
+    "nuxt": "^3.4.3",
     "sass-loader": "^7.1.0",
     "serve-favicon": "^2.5.0",
     "socket.io-client": "^2.1.1",
@@ -75,7 +75,7 @@
     "eslint": "^5.7.0",
     "eslint-plugin-vue": "^5.0.0-beta.3",
     "jsdom": "^12.2.0",
-    "mocha": "^5.2.0",
+    "mocha": "^10.2.0",
     "nodemon": "^1.18.4",
     "request": "^2.88.0",
     "request-promise": "^4.2.2"
