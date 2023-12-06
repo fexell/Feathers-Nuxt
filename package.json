@@ -45,7 +45,7 @@
     "compression": "^1.7.3",
     "cookie-storage": "^3.2.0",
     "cors": "^2.8.4",
-    "debug": "^4.1.0",
+    "debug": "^4.3.1",
     "feathers-mongoose": "^6.2.0",
     "fs": "0.0.1-security",
     "helmet": "^3.14.0",
